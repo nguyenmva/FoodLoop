@@ -128,5 +128,38 @@
     <string name="btnAddItem"> +   Add Item Donation</string>
     <string name="btnCompleted1">Completed</string>
 
+    <!-- Donation Add Page    -->
+    <string name="txtAddItem1">Add Item</string>
+    <string name="edtItemNameHint">e.g. Rice, gluten free bread, canned tuna</string>
+    <string name="txtAvailTime1">Availability for Pickup</string>
+    <string name="edtQuantityHint">Enter a number</string>
+    <string name="edtCategory">Category</string>
+    <string name="txtExpiryDate1">Expiry Date</string>
+    <string name="txtQuantity1">Quantity</string>
+    <string name="txtItemName2">Food Item Name</string>
+    <string name="edtExpiryDateInfo">Enter mm/yyy</string>
+    <string name="rdbFree1">Free</string>
+    <string name="rdbDiscount1">Discount</string>
+    <string name="txtOfferType1">Offer Type</string>
+    <string name="edtPrice1">$ Set Price</string>
+    <string name="btnCancel1">Cancel</string>
+    <string name="btnSave1">Save</string>
+    <string-array name="Category_Options">
+        <item>Select a Category</item>
+        <item>Bakery</item>
+        <item>Produce</item>
+        <item>Meat</item>
+        <item>Dairy</item>
+        <item>Beverages</item>
+        <item>Frozen Goods</item>
+        <item>Canned Goods</item>
+    </string-array>
+    <string-array name="Avail_Pickup">
+        <item>Select a Time</item>
+        <item>Morning (9AM-11AM)</item>
+        <item>Afternoon (1PM-4PM)</item>
+        <item>Evening(5PM-7PM)</item>
+    </string-array>
+
 
 </resources>
