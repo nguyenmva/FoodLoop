@@ -92,6 +92,7 @@
 
     <!-- BELLE   -->
     <!--DONATION HOME PAGE    -->
+    <string name="txtWelcomeTitle">Welcome to FoodLoop!</string>
     <string name="btnDonateFood">DONATE FOOD</string>
     <string name="btnDDetails">Donation Details</string>
     <string name="btnEditDetails">Edit Donation Info</string>
