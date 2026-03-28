@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper foodLoopDB;
     EditText inputTestStatus, inputTestItemName, inputTestRecipient;
+    Button btnActDonations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         inputTestStatus = findViewById(R.id.inputTestStatus);
         inputTestItemName = findViewById(R.id.inputTestItemName);
         inputTestRecipient = findViewById(R.id.inputTestRecipient);
+        btnActDonations = findViewById(R.id.btnToManageDonations);
 
         foodLoopDB = new DatabaseHelper(this);
     }
@@ -98,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
     public void toEditPage(View view) {
         startActivity(new Intent(MainActivity.this, EditAccount.class));
     }
-////    public void toDonationHistoryPage(View view) {
-////        startActivity(new Intent(MainActivity.this, HistoryDonation.class));
-////    }
+//    public void toDonationHistoryPage(View view) {
+//        startActivity(new Intent(MainActivity.this, HistoryDonation.class));
+//    }
 //    public void toRequestHistoryPage(View view) {
 //        startActivity(new Intent(MainActivity.this, HistoryRequest.class));
 //    }
-//    public void toManageDonationsPage(View view) {
-//        startActivity(new Intent(MainActivity.this, ManageDonations.class));
-//    }
+    public void toManageDonationsPage(View view) {
+        startActivity(new Intent(MainActivity.this, ActiveDonations.class));
+    }
 }
