@@ -91,7 +91,7 @@
     <!-- Active Requests Tracking --><string name="txtRTTitleName">Request Tracker</string>
 
     <!-- BELLE   -->
-    <!--DONATION HOME PAGE    -->
+    <!--Donation Home Page    -->
     <string name="txtWelcomeTitle">Welcome to FoodLoop!</string>
     <string name="btnDonateFood">DONATE FOOD</string>
     <string name="btnDDetails">Donation Details</string>
@@ -102,6 +102,16 @@
     <string name="btnLogOut1">Log Out</string>
     <string name="imgFoodLoopLogo">FoodLoop logo</string>
     <string name="imgHeader">image header</string>
+    <string name="imgLogo">food loops logo</string>
+
+    <!-- Donor Page   -->
+    <string name="txtActiveDonations">Active Donations</string>
+    <string name="txtDPTitle">Donor\'s Page</string>
+    <string name="btnActive1">Active</string>
+    <string name="btnHome1">HOME</string>
+    <string name="btnAddItem"> +   Add Item Donation</string>
+    <string name="btnCompleted1">Completed</string>
+
 
 
 </resources>

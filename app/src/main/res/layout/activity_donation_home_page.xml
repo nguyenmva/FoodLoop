@@ -12,7 +12,7 @@
         android:id="@+id/imgFLLogo1"
         android:layout_width="287dp"
         android:layout_height="106dp"
-        android:contentDescription="@string/imgLogo1"
+        android:contentDescription="@string/imgLogo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
