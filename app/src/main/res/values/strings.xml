@@ -88,6 +88,20 @@
 
     <!-- Active Requests Tracking -->
     <string name="txtRTTitleName">Request Tracker</string>
+    <string name="imgLogo1">food loop logo</string>
+    <string name="txtWelcomeTitle">Welcome to Food Loop!</string>
+    
+    
+    <!--Belle-->
+    <!--Donation Home Page  -->
+    <string name="imgHeader">image header</string>
+    <string name="btnDonateFood">DONATE FOOD</string>
+    <string name="btnDDetails">Donation Details</string>
+    <string name="btnEditDetails">Edit Donation Info</string>
+    <string name="btnDonationStatus">Donation Status</string>
+    <string name="btnDonHistory">Donation History</string>
+    <string name="btnViewProfile">View Profile</string>
+    <string name="btnLogOut1">Log Out</string>
 
 
 </resources>
