@@ -5,7 +5,6 @@
     <string name="btnHomePage">Home</string>
     <string name="txtLogoDesc">FoodLoop</string>
 
-
     <!-- MICHAEL -->
     <!-- HEADERS -->
     <string name="txtTitleCreate">CREATE AN ACCOUNT</string>
@@ -61,7 +60,6 @@
     <string name="txtRequestHistory">Request History</string>
     <string name="txtSearchHint">Search</string>
     <string name="btnSearchDesc">Search Description</string>
-    <string name="btnHome">Home</string>
     <string name="txtDonateHistory">Donate History</string>
     <string name="btnCheckHistory">Check Number of History Records</string>
     <string name="imgDesc">An Image</string>
@@ -78,6 +76,14 @@
     <string name="RememberMe">Remember Me</string>
 
     <!-- GIA -->
+    <!-- Create Account Labels -->
+    <string name="txtLabelName">Account Name</string>
+    <string name="txtLabelAdd">Address </string>
+    <string name="txtLabelCNum">Contact Number</string>
+    <string name="txtLabelEmail">E-Mail </string>
+    <string name="txtLabelPW1">Password</string>
+    <string name="txtLabelPW2">Confirm Password</string>
+
     <!-- Column Headers -->
     <string name="txtStatus">Status</string>
     <string name="txtResponse">Response</string>
@@ -119,7 +125,6 @@
     <string name="txtActiveDonations">Active Donations</string>
     <string name="txtDPTitle">Donor\'s Page</string>
     <string name="btnActive1">Active</string>
-    <string name="btnHome1">HOME</string>
     <string name="btnAddItem"> +   Add Item Donation</string>
     <string name="btnCompleted1">Completed</string>
 
