@@ -11,15 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodLoop">
-<!--        <activity-->
-<!--            android:name=".ManageDonations"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".HistoryDonation"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".HistoryRequest"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".LogInScreen"
+            android:exported="false" />
+        <activity
+            android:name=".LogOutScreen"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".ManageDonations" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".HistoryDonation" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".HistoryRequest" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".Profile"
             android:exported="false" />

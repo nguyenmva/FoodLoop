@@ -76,4 +76,16 @@
     <string name="btnRT">To RT</string>
     <string name="btnMAD">To MAD</string>
     <string name="btnToManageDonations">Go to Manage Donations Page</string>
+
+    <!-- Nilesh -->
+    <string name="regTitle">Loop It. Like It. Save It.</string>
+    <string name="btnLogin">Log In</string>
+    <string name="FoodloopLogo">FoodLoop Logo</string>
+    <string name="txtEmail">Enter Your Email</string>
+    <string name="txtPassword">Enter Your Password\n</string>
+    <string name="txtLogin">Log in</string>
+    <string name="logoutMessage">"You Have successfully logged out.\nThank You for using FoodLoop! "</string>
+    <string name="btnRelogin">Log In Again</string>
+    <string name="RememberMe">Remember Me</string>
+
 </resources>
