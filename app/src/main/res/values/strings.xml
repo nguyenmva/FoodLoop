@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">FoodLoop</string>
+
+    <!-- HEADERS -->
+    <string name="txtTitleCreate">CREATE AN ACCOUNT</string>
+    <string name="txtTitleEdit">EDIT YOUR PROFILE</string>
+    <string name="txtTestAccount">Testing Account Pages</string>
+    <string name="txtTestHistory">Testing History Pages</string>
+    <!-- INPUT HINTS -->
+    <string name="hintAccountID">Enter Account ID</string>
+    <string name="hintName">Name</string>
+    <string name="hintItem">Enter Item</string>
+    <string name="hintStatus">Enter Status</string>
+    <string name="hintLastName">Last Name</string>
+    <string name="hintBirthDate">BirthDate: DD-MM-YYYY</string>
+    <string name="hintAddress">Address</string>
+    <string name="hintStreet">Street Address</string>
+    <string name="hintCity">City</string>
+    <string name="hintProvince">Province</string>
+    <string name="hintCountry">Country</string>
+    <string name="hintPostalCode">Postal Code</string>
+    <string name="hintPhone">Phone Number</string>
+    <string name="hintEmail">E-mail Address</string>
+    <string name="hintPassword">Password</string>
+    <string name="hintConfirmPass">Confirm Password</string>
+    <string name="hintOldPass">Current Password</string>
+    <string name="txtHintNewPass">New Password</string>
+    <string name="txtHintConfirmNewPass">Confirm New Password</string>
+    <string name="txtHintRequestStatus">Enter Request Status</string>
+    <!-- BUTTONS -->
+    <string name="btnShowAccounts">Show All Accounts</string>
+    <string name="btnCreateHistory">Create Donation History Record</string>
+    <string name="btnGoToAccountCreate">Go to Create Account</string>
+    <string name="btnGoToAccountProfile">Go to Account Profile</string>
+    <string name="btnGoToAccountEdit">Go to Edit Profile</string>
+    <string name="btnHistory">Go to Donation History Page</string>
+    <!-- SPINNER ARRAYS -->
+    <string-array name="CountryList">
+        <item>Canada</item>
+        <item>Not Canada</item>
+    </string-array>
+
+    <!-- CONTACT INFO -->
+
+    <!-- PASSWORD -->
+
+    <!-- Buttons -->
+    <string name="btnCreateAccount">Create Account</string>
+    <string name="btnEditAccount">Apply Edits</string>
+    <string name="btnGoToTest">Go to Testing Page</string>
+
+
+    <!-- HISTORY PAGES -->
+    <string name="txtLogoDesc">FoodLoop</string>
+    <string name="txtRequestHistory">Request History</string>
+    <string name="txtSearchHint">Search</string>
+    <string name="btnSearchDesc">Search Description</string>
+    <string name="btnHome">Home</string>
+    <string name="txtDonateHistory">Donate History</string>
+    <string name="btnCheckHistory">Check Number of History Records</string>
+    <string name="imgDesc">An Image</string>
+    <string name="btnRequest">Go to Request History Page</string>
+
+
+    <!-- General -->
+    <string name="imgLogoDesc">Food Loop Logo</string>
+    <string name="btnHomePage">Home</string>
+
+    <!-- Active Donations Tracking -->
+    <string name="txtMADTitleName">Manage Active Donations</string>
+
+    <!-- Active Requests Tracking -->
+    <string name="txtRTTitleName">Request Tracker</string>
+
+    <!-- Placeholders -->
+    <string name="btnRT">To RT</string>
+    <string name="btnMAD">To MAD</string>
+    <string name="btnToManageDonations">Go to Manage Donations Page</string>
+</resources>

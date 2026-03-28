@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#004aad"
+        android:textSize="15sp"
+        android:text="Status" />
+
+    <TextView
+        android:id="@+id/tvItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#004aad"
+        android:textSize="15sp"
+        android:text="Item" />
+
+    <TextView
+        android:id="@+id/tvRecipient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#004aad"
+        android:textSize="15sp"
+        android:text="Recipient" />
+
+    <Spinner
+        android:id="@+id/spinnerRequest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:textColor="#004aad"
+        android:textSize="15sp"
+        android:layout_weight="1.2" />
+
+</LinearLayout>
