@@ -39,6 +39,8 @@
     <string name="btnGoToAccountCreate">Go to Create Account</string>
     <string name="btnGoToAccountProfile">Go to Account Profile</string>
     <string name="btnGoToAccountEdit">Go to Edit Profile</string>
+    <string name="btnGoToManageDonations">Go to Manage Donations</string>
+    <string name="btnGoToRequestHist">Go to Edit Profile</string>
     <string name="btnHistory">Go to Donation History Page</string>
     <!-- SPINNER ARRAYS -->
     <string-array name="CountryList">

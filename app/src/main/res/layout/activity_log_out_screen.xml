@@ -14,12 +14,12 @@
         android:layout_height="0dp"
         android:layout_marginTop="45dp"
         android:layout_marginBottom="21dp"
-        android:contentDescription="@string/FoodloopLogo"
+        android:contentDescription="@string/txtLogoDesc"
+        android:src="@drawable/foodloop_logo"
         app:layout_constraintBottom_toTopOf="@+id/regTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/foodloop_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/regTitle"
