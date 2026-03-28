@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#ff193b"
-        android:text="@string/btnHome"
+        android:text="@string/btnHomePage"
         android:textColor="#fff6d7"
         android:textSize="20sp"
         android:textStyle="bold"
