@@ -39,6 +39,8 @@
     <string name="btnGoToAccountCreate">Go to Create Account</string>
     <string name="btnGoToAccountProfile">Go to Account Profile</string>
     <string name="btnGoToAccountEdit">Go to Edit Profile</string>
+    <string name="btnGoToManageDonations">Go to Manage Donations</string>
+    <string name="btnGoToRequestHist">Go to Edit Profile</string>
     <string name="btnHistory">Go to Donation History Page</string>
     <!-- SPINNER ARRAYS -->
     <string-array name="CountryList">
@@ -86,15 +88,10 @@
     <!-- Active Donations Tracking -->
     <string name="txtMADTitleName">Manage Active Donations</string>
 
-    <!-- Active Requests Tracking -->
-    <string name="txtRTTitleName">Request Tracker</string>
-    <string name="imgLogo1">food loop logo</string>
-    <string name="txtWelcomeTitle">Welcome to Food Loop!</string>
-    
-    
-    <!--Belle-->
-    <!--Donation Home Page  -->
-    <string name="imgHeader">image header</string>
+    <!-- Active Requests Tracking --><string name="txtRTTitleName">Request Tracker</string>
+
+    <!-- BELLE   -->
+    <!--DONATION HOME PAGE    -->
     <string name="btnDonateFood">DONATE FOOD</string>
     <string name="btnDDetails">Donation Details</string>
     <string name="btnEditDetails">Edit Donation Info</string>
@@ -102,6 +99,8 @@
     <string name="btnDonHistory">Donation History</string>
     <string name="btnViewProfile">View Profile</string>
     <string name="btnLogOut1">Log Out</string>
+    <string name="imgFoodLoopLogo">FoodLoop logo</string>
+    <string name="imgHeader">image header</string>
 
 
 </resources>

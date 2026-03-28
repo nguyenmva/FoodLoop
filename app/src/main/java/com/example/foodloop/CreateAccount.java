@@ -105,13 +105,6 @@ public class CreateAccount extends AppCompatActivity {
 //            startActivity(new Intent(CreateAccount.this, MainActivity.class));
         }
     }
-    public void showAllAccounts(View view){
-
-        Cursor result = foodLoopDB.getAllAccounts();
-        Toast.makeText(this, "Rows: " + result.getCount(), Toast.LENGTH_LONG).show();
-//        Toast.makeText(this, "List size: " + accountRows.size(), Toast.LENGTH_LONG).show();
-        result.close();
-    }
 
     // Page Links
     public void toTestPage(View view) {

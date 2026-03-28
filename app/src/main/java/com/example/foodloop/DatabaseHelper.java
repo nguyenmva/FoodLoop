@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // REQUEST HISTORY TABLE
-    public static final String REQUEST_HISTORY_TABLE = "DonationHistory";
+    public static final String REQUEST_HISTORY_TABLE = "RequestHistory";
     public static final String REQUEST_HISTORY_ID_FLD = "REQUEST_HISTORY_ID";
     public static final String REQUEST_DATE_FLD = "REQUEST_DATE";
     public static final String REQUEST_ITEM_NAME_FLD = "REQUEST_ITEM_NAME";
@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // FOR REQUEST HISTORY
         db.execSQL("CREATE TABLE " + REQUEST_HISTORY_TABLE +
                 " (REQUEST_HISTORY_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "REQUEST_DATE TEXT, REQUEST_ITEM_NAME TEXT, REQUEST_LOCATION)"
+                "REQUEST_DATE TEXT, REQUEST_ITEM_NAME TEXT, REQUEST_LOCATION TEXT)"
         );
     }
 
