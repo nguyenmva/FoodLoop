@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodLoop">
         <activity
+            android:name=".Donation_Add_Page"
+            android:exported="false" />
+        <activity
+            android:name=".Request_Home_Page"
+            android:exported="false" />
+        <activity
             android:name=".ActiveDonations"
             android:exported="false" />
         <activity

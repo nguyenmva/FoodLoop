@@ -88,7 +88,8 @@
     <!-- Active Donations Tracking -->
     <string name="txtMADTitleName">Manage Active Donations</string>
 
-    <!-- Active Requests Tracking --><string name="txtRTTitleName">Request Tracker</string>
+    <!-- Active Requests Tracking -->
+    <string name="txtRTTitleName">Request Tracker</string>
 
     <!-- BELLE   -->
     <!--Donation Home Page    -->
@@ -104,6 +105,16 @@
     <string name="imgHeader">image header</string>
     <string name="imgLogo">food loops logo</string>
 
+    <!-- Request Home Page -->
+    <string name="btnReqFd">REQUEST FOOD</string>
+    <string name="btnReqDetails">Request Details</string>
+    <string name="btnEdtReqInfo">Edit Request Info</string>
+    <string name="btnReqStatus">Request Status</string>
+    <string name="btnReqHist">Request History</string>
+    <string name="btnReqVP">View Profile</string>
+    <string name="btnReqLogOut">Log Out</string>
+
+
     <!-- Donor Page   -->
     <string name="txtActiveDonations">Active Donations</string>
     <string name="txtDPTitle">Donor\'s Page</string>
@@ -111,7 +122,6 @@
     <string name="btnHome1">HOME</string>
     <string name="btnAddItem"> +   Add Item Donation</string>
     <string name="btnCompleted1">Completed</string>
-
 
 
 </resources>
