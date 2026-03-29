@@ -11,8 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodLoop">
+<!--   GIA'S PAGES   -->
         <activity
             android:name=".ActiveRequests"
+            android:exported="false" />
+        <activity
+            android:name=".ActiveDonations"
+            android:exported="false" />
+        <activity
+            android:name=".DonorPage"
+            android:exported="false" />
+<!--   NILESH'S PAGES   -->
+        <activity
+            android:name=".LogInScreen"
+            android:exported="false" />
+        <activity
+            android:name=".LogOutScreen"
+            android:exported="false" />
+<!--   BELLE'S PAGES   -->
+        <activity
+            android:name=".DonationHomePage"
             android:exported="false" />
         <activity
             android:name=".Donation_Add_Page"
@@ -20,35 +38,29 @@
         <activity
             android:name=".Request_Home_Page"
             android:exported="false" />
+<!--  MICHAEL'S PAGES   -->
         <activity
-            android:name=".ActiveDonations"
-            android:exported="false" />
-        <activity
-            android:name=".LogInScreen"
-            android:exported="false" />
-        <activity
-            android:name=".LogOutScreen"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".ManageDonations" -->
-        <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".HistoryDonation" -->
-        <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".HistoryRequest" -->
-        <!-- android:exported="false" /> -->
-        <activity
-            android:name=".Profile"
+            android:name=".CreateAccount"
             android:exported="false" />
         <activity
             android:name=".EditAccount"
             android:exported="false" />
         <activity
-            android:name=".CreateAccount"
+            android:name=".Profile"
             android:exported="false" />
+         <activity
+             android:name=".HistoryDonation"
+             android:exported="false" />
+         <activity
+             android:name=".HistoryRequest"
+             android:exported="false" />
+        <activity
+            android:name=".TestingPage"
+            android:exported="false" />
+<!--  MAIN ACTIVITY   -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,5 +68,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

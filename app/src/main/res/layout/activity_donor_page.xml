@@ -55,6 +55,7 @@
         android:layout_width="131dp"
         android:layout_height="48dp"
         android:backgroundTint="#ff193b"
+        android:onClick="toHomePage"
         android:text="@string/btnHomePage"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
