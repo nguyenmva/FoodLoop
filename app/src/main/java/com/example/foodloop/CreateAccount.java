@@ -18,12 +18,12 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Objects;
 
 public class CreateAccount extends AppCompatActivity {
-    String name, street, city, province, country, postal,
+    private String name, street, city, province, country, postal,
             phone, email, password, confirmPass;
-    int countrySpinnerSelection;
-    EditText inputName, inputStreet, inputCity, inputProvince, inputPostal,
+    private int countrySpinnerSelection;
+    private EditText inputName, inputStreet, inputCity, inputProvince, inputPostal,
             inputPhone, inputEmail, inputPassword, inputConfirmPass;
-    Spinner inputCountry;
+    private Spinner inputCountry;
     private DatabaseHelper foodLoopDB;
 
     @Override
@@ -102,6 +102,7 @@ public class CreateAccount extends AppCompatActivity {
                 else
                     Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
             }
+            // DO WE FORCE THE USER TO LEAVE THE PAGE AFTER ACCOUNT CREATION?
 //            startActivity(new Intent(CreateAccount.this, MainActivity.class));
         }
     }

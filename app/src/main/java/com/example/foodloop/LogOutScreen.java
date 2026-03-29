@@ -26,7 +26,7 @@ public class LogOutScreen extends AppCompatActivity {
         Button btnRelogin = findViewById(R.id.btnRelogin);
 
         btnRelogin.setOnClickListener(v -> {
-            startActivity(new Intent(LogOutScreen.this, MainActivity.class));
+            startActivity(new Intent(LogOutScreen.this, LogInScreen.class));
         });
     }
 }

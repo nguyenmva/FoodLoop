@@ -77,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DONATION_HISTORY_TABLE);
         onCreate(db);
     }
+
     // ##################################################################################################################
     // FOR CREATING A NEW ACCOUNT RECORD
     public boolean createAccount(String name, String street, String city, String province, String country,
@@ -99,6 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return result != -1;
     }
+
     // ##################################################################################################################
     // FOR CREATING A DONATION HISTORY RECORD
     public boolean createDonationHistory(String status, String item, String recipient){
@@ -114,6 +116,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return result != -1;
     }
+
     // ##################################################################################################################
     // FOR CREATING A REQUEST HISTORY RECORD
     public boolean createRequestHistory(String date, String item, String location){
@@ -128,6 +131,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert(REQUEST_HISTORY_TABLE, null, contentValues);
         db.close();
         return result != -1;
+    }
+
+    // ##################################################################################################################
+    // FOR UPDATING AN ACCOUNT RECORD
+    public boolean updateAccount(String name, String street, String city, String province, String country,
+                                 String postal, String phone, String email, String password){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(NAME_FLD, name);
+        contentValues.put(STREET_FLD, street);
+        contentValues.put(CITY_FLD, city);
+        contentValues.put(PROVINCE_FLD, province);
+        contentValues.put(COUNTRY_FLD, country);
+        contentValues.put(PHONE_FLD, phone);
+        contentValues.put(POSTAL_FLD, postal);
+        contentValues.put(EMAIL_FLD, email);
+        contentValues.put(PASSWORD_FLD, password);
+
+        int result = db.update(ACCOUNTS_TABLE, contentValues, EMAIL_FLD + " = ?", new String[]{email});
+
+        return result != -1;
+    }
+
+    // ##################################################################################################################
+    // CHECKING STUFF
+     public boolean checkEmailExists(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + EMAIL_FLD + " = ?", new String[]{email});
+
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
+
+    public boolean checkLoginCredentials(String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE +
+                " WHERE " + EMAIL_FLD + "=? AND " + PASSWORD_FLD + "=?", new String[]{email, password});
+        boolean success = cursor.getCount() > 0;
+        cursor.close();
+        return success;
+    }
+
+    // ##################################################################################################################
+    // FINDING STUFF
+    public Cursor getUserDataByEmail(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + EMAIL_FLD + " = ?", new String[]{email});
     }
 
     public Cursor getAllAccounts(){

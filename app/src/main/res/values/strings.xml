@@ -41,6 +41,7 @@
     <string name="btnGoToManageDonations">Go to Manage Donations</string>
     <string name="btnGoToRequestHist">Go to Edit Profile</string>
     <string name="btnHistory">Go to Donation History Page</string>
+    <string name="btnTestDatabase">Go to Database Testing Page</string>
     <!-- SPINNER ARRAYS -->
     <string-array name="CountryList">
         <item>Canada</item>

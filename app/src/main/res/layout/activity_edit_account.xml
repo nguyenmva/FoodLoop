@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPass"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
@@ -174,27 +174,11 @@
         app:layout_constraintTop_toBottomOf="@+id/inputPhone"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <EditText
-        android:id="@+id/inputPass"
-        android:layout_width="360dp"
-        android:layout_height="48dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/hintOldPass"
-        android:importantForAutofill="no"
-        android:inputType="text|textPassword"
-        android:textColorHint="#757575"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <Button
         android:id="@+id/btnCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="updateProfile"
+        android:onClick="updateAccount"
         android:text="@string/btnEditAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

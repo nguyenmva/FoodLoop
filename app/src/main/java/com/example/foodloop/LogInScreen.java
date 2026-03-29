@@ -23,6 +23,11 @@ public class LogInScreen extends AppCompatActivity {
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
 
+
+    // DB STUFF
+    private DatabaseHelper foodLoopDB;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,7 @@ public class LogInScreen extends AppCompatActivity {
         CheckBox cbRememberMe = findViewById(R.id.cbRememberMe);
 
         sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        foodLoopDB = new DatabaseHelper(this);
 
         String savedEmail  = sharedPreference.getString("email", "");
         String savedPassword = sharedPreference.getString("password", "");
@@ -68,20 +74,31 @@ public class LogInScreen extends AppCompatActivity {
                 Toast.makeText(LogInScreen.this, "Please enter your password", Toast.LENGTH_LONG).show();
             }
             else{
+                boolean emailExists = foodLoopDB.checkEmailExists(userEmail);
 
-                SharedPreferences.Editor editor = sharedPreference.edit();
-
-                if (cbRememberMe.isChecked()){
-                    editor.putString("email", userEmail);
-                    editor.putString("password", userPass);
-                    editor.putBoolean("isChecked", true);
-                }else{
-                    editor.clear();
+                if (!emailExists) { // CHECK FOR EXISTING ACCOUNT THEN FOR MATCHING PASSWORD
+                    email.setError("This email isn't in the database.");
+                    Toast.makeText(this, "Account not found.", Toast.LENGTH_LONG).show();
                 }
-                editor.apply();
+                else if (!foodLoopDB.checkLoginCredentials(userEmail, userPass)) {
+                    password.setError("Wrong!");
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    SharedPreferences.Editor editor = sharedPreference.edit();
 
-                Toast.makeText(LogInScreen.this, "Log in Successful!!!", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(LogInScreen.this, LogOutScreen.class));
+                    if (cbRememberMe.isChecked()){
+                        editor.putString("email", userEmail);
+                        editor.putString("password", userPass);
+                        editor.putBoolean("isChecked", true);
+                    }else{
+                        editor.clear();
+                    }
+                    editor.apply();
+
+                    Toast.makeText(LogInScreen.this, "Log in Successful!!!", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LogInScreen.this, LogOutScreen.class));
+                }
             }
         });
     }
