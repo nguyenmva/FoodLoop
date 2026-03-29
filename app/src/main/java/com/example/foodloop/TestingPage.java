@@ -57,22 +57,22 @@ public class TestingPage extends AppCompatActivity {
     }
     public void addHistoryRecord(View view){
         // ERROR HANDLING, NO EMPTY FIELDS.
-        if (TextUtils.isEmpty(inputTestStatus.getText().toString())
-                || TextUtils.isEmpty(inputTestItemName.getText().toString())
-                || TextUtils.isEmpty(inputTestRecipient.getText().toString())) {
-            Toast.makeText(this, "All areas must be filled.", Toast.LENGTH_LONG).show();
-        }
-        else{
-            boolean inserted = foodLoopDB.createDonationHistory(
-                    inputTestStatus.getText().toString(),
-                    inputTestItemName.getText().toString(),
-                    inputTestRecipient.getText().toString()
-            );
-            if(inserted)
-                Toast.makeText(this,"Record Added",Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
-        }
+//        if (TextUtils.isEmpty(inputTestStatus.getText().toString())
+//                || TextUtils.isEmpty(inputTestItemName.getText().toString())
+//                || TextUtils.isEmpty(inputTestRecipient.getText().toString())) {
+//            Toast.makeText(this, "All areas must be filled.", Toast.LENGTH_LONG).show();
+//        }
+//        else{
+//            boolean inserted = foodLoopDB.createDonationHistory(
+//                    inputTestStatus.getText().toString(),
+//                    inputTestItemName.getText().toString(),
+//                    inputTestRecipient.getText().toString()
+//            );
+//            if(inserted)
+//                Toast.makeText(this,"Record Added",Toast.LENGTH_LONG).show();
+//            else
+//                Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
+//        }
     }
 
 

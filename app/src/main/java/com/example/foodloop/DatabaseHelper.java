@@ -15,26 +15,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // USER ACCOUNT TABLE
     public static final String ACCOUNTS_TABLE = "Accounts";
     public static final String USER_ID_FLD = "USER_ID";
-    public static final String NAME_FLD = "NAME";
-    public static final String STREET_FLD = "STREET";
-    public static final String CITY_FLD = "CITY";
-    public static final String PROVINCE_FLD = "PROVINCE";
-    public static final String COUNTRY_FLD = "COUNTRY";
-    public static final String POSTAL_FLD = "POSTAL";
-    public static final String PHONE_FLD = "PHONE";
-    public static final String EMAIL_FLD = "EMAIL";
-    public static final String PASSWORD_FLD = "PASSWORD";
+    public static final String USER_NAME_FLD = "NAME";
+    public static final String USER_STREET_FLD = "STREET";
+    public static final String USER_CITY_FLD = "CITY";
+    public static final String USER_PROVINCE_FLD = "PROVINCE";
+    public static final String USER_COUNTRY_FLD = "COUNTRY";
+    public static final String USER_POSTAL_FLD = "POSTAL";
+    public static final String USER_PHONE_FLD = "PHONE";
+    public static final String USER_EMAIL_FLD = "EMAIL";
+    public static final String USER_PASSWORD_FLD = "PASSWORD";
 
     // ##################################################################################################################
-    // DONATION HISTORY TABLE
-    public static final String DONATION_HISTORY_TABLE = "DonationHistory";
-    public static final String DONATION_HISTORY_ID_FLD = "DONATION_HISTORY_ID";
-    public static final String STATUS_FLD = "STATUS";
+    // DONATIONS TABLE
+    public static final String DONATION_TABLE = "Donations";
+    public static final String DONATION_ID_FLD = "DONATION_HISTORY_ID";
     public static final String DONATION_ITEM_NAME_FLD = "DONATION_ITEM_NAME";
+    public static final String DONATION_QUANTITY_FLD = "DONATION_QUANTITY";
+    public static final String DONATION_CATEGORY_FLD = "DONATION_CATEGORY";
+    public static final String DONATION_CATEGORY_SPINNER_FLD = "DONATION_CATEGORY_SPINNER";
+    public static final String DONATION_EXPIRY_DATE_FLD = "DONATION_EXPIRY_DATE";
+    public static final String DONATION_PICKUP_TIME_FLD = "DONATION_PICKUP_TIME";
+    public static final String DONATION_PICKUP_TIME_SPINNER_FLD = "DONATION_PICKUP_TIME_SPINNER";
+    public static final String DONATION_OFFER_TYPE_FLD = "DONATION_OFFER_TYPE";
+    public static final String DONATION_PRICE_FLD = "DONATION_PRICE";
+    public static final String DONATION_LOCATION_FLD = "DONATION_LOCATION";
+    public static final String DONATION_STATUS_FLD = "DONATION_STATUS";
     public static final String RECIPIENT_FLD = "RECIPIENT";
 
     // ##################################################################################################################
-    // REQUEST HISTORY TABLE
+    // REQUESTS TABLE
     public static final String REQUEST_HISTORY_TABLE = "RequestHistory";
     public static final String REQUEST_HISTORY_ID_FLD = "REQUEST_HISTORY_ID";
     public static final String REQUEST_DATE_FLD = "REQUEST_DATE";
@@ -42,7 +51,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REQUEST_LOCATION_FLD = "REQUEST_LOCATION";
 
     // ##################################################################################################################
-    // CONSTRUCTOR
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -53,22 +61,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         // #######################################################
         // FOR ACCOUNTS
-        db.execSQL("CREATE TABLE " + ACCOUNTS_TABLE +
-                " (USER_ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, STREET TEXT, CITY TEXT, PROVINCE TEXT, COUNTRY TEXT," +
-                "POSTAL TEXT, PHONE TEXT, EMAIL TEXT UNIQUE, PASSWORD TEXT)"
+        db.execSQL("CREATE TABLE " + ACCOUNTS_TABLE + " (" +
+                USER_ID_FLD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                USER_NAME_FLD + " TEXT, " +
+                USER_STREET_FLD + " TEXT, " +
+                USER_CITY_FLD + " TEXT, " +
+                USER_PROVINCE_FLD + " TEXT, " +
+                USER_COUNTRY_FLD + " TEXT," +
+                USER_POSTAL_FLD + " TEXT," +
+                USER_PHONE_FLD + " TEXT, " +
+                USER_EMAIL_FLD + " TEXT UNIQUE, " +
+                USER_PASSWORD_FLD + " TEXT)"
         );
         // #######################################################
-        // FOR DONATION HISTORY
-        db.execSQL("CREATE TABLE " + DONATION_HISTORY_TABLE +
-                " (DONATION_HISTORY_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "STATUS TEXT, DONATION_ITEM_NAME TEXT, RECIPIENT TEXT)"
+        // FOR DONATIONS
+        db.execSQL("CREATE TABLE " + DONATION_TABLE + " (" +
+                DONATION_ID_FLD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DONATION_ITEM_NAME_FLD + " TEXT, " +
+                DONATION_QUANTITY_FLD + " INTEGER, " +
+                DONATION_CATEGORY_FLD + " TEXT, " +
+                DONATION_CATEGORY_SPINNER_FLD + " INTEGER, " +
+                DONATION_EXPIRY_DATE_FLD + " DATE, " +
+                DONATION_PICKUP_TIME_FLD + " TEXT, " +
+                DONATION_PICKUP_TIME_SPINNER_FLD + " INTEGER, " +
+                DONATION_OFFER_TYPE_FLD + " TEXT, " +
+                DONATION_PRICE_FLD + " FLOAT(10, 2), " +
+                DONATION_LOCATION_FLD + " TEXT, " +
+                DONATION_STATUS_FLD + " TEXT, " +
+                RECIPIENT_FLD + " TEXT)" // That could be null until requested. Hope that doesn't break anything.
         );
         // #######################################################
-        // FOR REQUEST HISTORY
-        db.execSQL("CREATE TABLE " + REQUEST_HISTORY_TABLE +
-                " (REQUEST_HISTORY_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "REQUEST_DATE TEXT, REQUEST_ITEM_NAME TEXT, REQUEST_LOCATION TEXT)"
-        );
+        // FOR REQUESTS
+//        db.execSQL("CREATE TABLE " + REQUEST_HISTORY_TABLE + " (" +
+//                REQUEST_HISTORY_ID_FLD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                REQUEST_ITEM_NAME_FLD + " TEXT, " +
+//                REQUEST_DATE_FLD + " TEXT, " +
+//                REQUEST_LOCATION_FLD + " TEXT)"
+//        );
+
     }
 
     @Override
@@ -86,52 +116,60 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(NAME_FLD, name);
-        contentValues.put(STREET_FLD, street);
-        contentValues.put(CITY_FLD, city);
-        contentValues.put(PROVINCE_FLD, province);
-        contentValues.put(COUNTRY_FLD, country);
-        contentValues.put(PHONE_FLD, phone);
-        contentValues.put(POSTAL_FLD, postal);
-        contentValues.put(EMAIL_FLD, email);
-        contentValues.put(PASSWORD_FLD, password);
+        contentValues.put(USER_NAME_FLD, name);
+        contentValues.put(USER_STREET_FLD, street);
+        contentValues.put(USER_CITY_FLD, city);
+        contentValues.put(USER_PROVINCE_FLD, province);
+        contentValues.put(USER_COUNTRY_FLD, country);
+        contentValues.put(USER_PHONE_FLD, phone);
+        contentValues.put(USER_POSTAL_FLD, postal);
+        contentValues.put(USER_EMAIL_FLD, email);
+        contentValues.put(USER_PASSWORD_FLD, password);
 
         long result = db.insert(ACCOUNTS_TABLE, null, contentValues);
-
         return result != -1;
     }
 
     // ##################################################################################################################
-    // FOR CREATING A DONATION HISTORY RECORD
-    public boolean createDonationHistory(String status, String item, String recipient){
+    // FOR CREATING A DONATION RECORD
+    public boolean createDonation(String itemName, int quantity, String category, int categorySpinner,
+                                  String expiryDate, String pickupTime, int pickupTimeSpinner,
+                                  String offerType, float price, String location, String status, String recipient){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(STATUS_FLD, status);
-        contentValues.put(DONATION_ITEM_NAME_FLD, item);
+        contentValues.put(DONATION_ITEM_NAME_FLD, itemName);
+        contentValues.put(DONATION_QUANTITY_FLD, quantity);
+        contentValues.put(DONATION_CATEGORY_FLD, category);
+        contentValues.put(DONATION_CATEGORY_SPINNER_FLD, categorySpinner);
+        contentValues.put(DONATION_EXPIRY_DATE_FLD, expiryDate);
+        contentValues.put(DONATION_PICKUP_TIME_FLD, pickupTime);
+        contentValues.put(DONATION_PICKUP_TIME_SPINNER_FLD, pickupTimeSpinner);
+        contentValues.put(DONATION_OFFER_TYPE_FLD, offerType);
+        contentValues.put(DONATION_PRICE_FLD, price);
+        contentValues.put(DONATION_LOCATION_FLD, location);
+        contentValues.put(DONATION_STATUS_FLD, status);
         contentValues.put(RECIPIENT_FLD, recipient);
 
         long result = db.insert(DONATION_HISTORY_TABLE, null, contentValues);
-        db.close();
         return result != -1;
     }
 
     // ##################################################################################################################
-    // FOR CREATING A REQUEST HISTORY RECORD
-    public boolean createRequestHistory(String date, String item, String location){
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(REQUEST_DATE_FLD, date);
-        contentValues.put(REQUEST_ITEM_NAME_FLD, item);
-        contentValues.put(REQUEST_LOCATION_FLD, location);
-
-        long result = db.insert(REQUEST_HISTORY_TABLE, null, contentValues);
-        db.close();
-        return result != -1;
-    }
+    // FOR CREATING A REQUEST RECORD
+//    public boolean createRequestHistory(String date, String item, String location){
+//
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//
+//        contentValues.put(REQUEST_DATE_FLD, date);
+//        contentValues.put(REQUEST_ITEM_NAME_FLD, item);
+//        contentValues.put(REQUEST_LOCATION_FLD, location);
+//
+//        long result = db.insert(REQUEST_HISTORY_TABLE, null, contentValues);
+//        return result != -1;
+//    }
 
     // ##################################################################################################################
     // FOR UPDATING AN ACCOUNT RECORD
@@ -141,18 +179,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(NAME_FLD, name);
-        contentValues.put(STREET_FLD, street);
-        contentValues.put(CITY_FLD, city);
-        contentValues.put(PROVINCE_FLD, province);
-        contentValues.put(COUNTRY_FLD, country);
-        contentValues.put(PHONE_FLD, phone);
-        contentValues.put(POSTAL_FLD, postal);
-        contentValues.put(EMAIL_FLD, email);
-        contentValues.put(PASSWORD_FLD, password);
+        contentValues.put(USER_NAME_FLD, name);
+        contentValues.put(USER_STREET_FLD, street);
+        contentValues.put(USER_CITY_FLD, city);
+        contentValues.put(USER_PROVINCE_FLD, province);
+        contentValues.put(USER_COUNTRY_FLD, country);
+        contentValues.put(USER_PHONE_FLD, phone);
+        contentValues.put(USER_POSTAL_FLD, postal);
+        contentValues.put(USER_EMAIL_FLD, email);
+        contentValues.put(USER_PASSWORD_FLD, password);
 
-        int result = db.update(ACCOUNTS_TABLE, contentValues, EMAIL_FLD + " = ?", new String[]{email});
-
+        int result = db.update(ACCOUNTS_TABLE, contentValues, USER_EMAIL_FLD + " = ?", new String[]{email});
         return result != -1;
     }
 
@@ -160,7 +197,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // CHECKING STUFF
      public boolean checkEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + EMAIL_FLD + " = ?", new String[]{email});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
 
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
@@ -170,7 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean checkLoginCredentials(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE +
-                " WHERE " + EMAIL_FLD + "=? AND " + PASSWORD_FLD + "=?", new String[]{email, password});
+                " WHERE " + USER_EMAIL_FLD + "=? AND " + USER_PASSWORD_FLD + "=?", new String[]{email, password});
         boolean success = cursor.getCount() > 0;
         cursor.close();
         return success;
@@ -180,7 +217,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // FINDING STUFF
     public Cursor getUserDataByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + EMAIL_FLD + " = ?", new String[]{email});
+        return db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
     }
 
     public Cursor getAllAccounts(){

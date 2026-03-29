@@ -1,7 +1,6 @@
 package com.example.foodloop;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,9 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Objects;
 
 public class CreateAccount extends AppCompatActivity {
-    private String name, street, city, province, country, postal,
-            phone, email, password, confirmPass;
-    private int countrySpinnerSelection;
     private EditText inputName, inputStreet, inputCity, inputProvince, inputPostal,
             inputPhone, inputEmail, inputPassword, inputConfirmPass;
     private Spinner inputCountry;
@@ -69,17 +65,17 @@ public class CreateAccount extends AppCompatActivity {
         }
         else {
             // INITIALIZE USER INFO VARIABLES
-            name = inputName.getText().toString();
-            street = inputStreet.getText().toString();
-            city = inputCity.getText().toString();
-            province = inputProvince.getText().toString();
-            country = inputCountry.getSelectedItem().toString();
-            countrySpinnerSelection = inputCountry.getSelectedItemPosition();
-            postal = inputPostal.getText().toString();
-            phone = inputPhone.getText().toString();
-            email = inputEmail.getText().toString();
-            password = inputPassword.getText().toString();
-            confirmPass = inputConfirmPass.getText().toString();
+            String name = inputName.getText().toString();
+            String street = inputStreet.getText().toString();
+            String city = inputCity.getText().toString();
+            String province = inputProvince.getText().toString();
+            String country = inputCountry.getSelectedItem().toString();
+            int countrySpinnerSelection = inputCountry.getSelectedItemPosition();
+            String postal = inputPostal.getText().toString();
+            String phone = inputPhone.getText().toString();
+            String email = inputEmail.getText().toString();
+            String password = inputPassword.getText().toString();
+            String confirmPass = inputConfirmPass.getText().toString();
 
             // MORE ERROR HANDLING
             if (phone.length() != 10) { // MUST BE 10 DIGITS

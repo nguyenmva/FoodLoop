@@ -19,9 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Objects;
 
 public class EditAccount extends AppCompatActivity {
-    private String name, street, city, province, country, postal,
-            phone, email, newPass, confirmNewPass;
-    private int countrySpinnerSelection;
     private EditText inputName, inputStreet, inputCity, inputProvince, inputPostal,
             inputPhone, inputEmail, inputNewPass, inputConfirmNewPass;
     private Spinner inputCountry;
@@ -63,14 +60,14 @@ public class EditAccount extends AppCompatActivity {
             Cursor cursor = foodLoopDB.getUserDataByEmail(savedEmail);
 
             if (cursor != null && cursor.moveToFirst()) {
-                name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.NAME_FLD));
-                street = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.STREET_FLD));
-                city = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.CITY_FLD));
-                province = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.PROVINCE_FLD));
-                country = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COUNTRY_FLD));
-                postal = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.POSTAL_FLD));
-                phone = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.PHONE_FLD));
-                email = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.EMAIL_FLD));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_NAME_FLD));
+                String street = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_STREET_FLD));
+                String city = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_CITY_FLD));
+                String province = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_PROVINCE_FLD));
+                String country = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_COUNTRY_FLD));
+                String postal = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_POSTAL_FLD));
+                String phone = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_PHONE_FLD));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_EMAIL_FLD));
 
                 inputName.setText(name);
                 inputStreet.setText(street);
@@ -102,17 +99,17 @@ public class EditAccount extends AppCompatActivity {
         }
         else {
             // INITIALIZE USER INFO VARIABLES
-            name = inputName.getText().toString();
-            street = inputStreet.getText().toString();
-            city = inputCity.getText().toString();
-            province = inputProvince.getText().toString();
-            country = inputCountry.getSelectedItem().toString();
-            countrySpinnerSelection = inputCountry.getSelectedItemPosition();
-            postal = inputPostal.getText().toString();
-            phone = inputPhone.getText().toString();
-            email = inputEmail.getText().toString();
-            newPass = inputNewPass.getText().toString();
-            confirmNewPass = inputConfirmNewPass.getText().toString();
+            String name = inputName.getText().toString();
+            String street = inputStreet.getText().toString();
+            String city = inputCity.getText().toString();
+            String province = inputProvince.getText().toString();
+            String country = inputCountry.getSelectedItem().toString();
+            int countrySpinnerSelection = inputCountry.getSelectedItemPosition();
+            String postal = inputPostal.getText().toString();
+            String phone = inputPhone.getText().toString();
+            String email = inputEmail.getText().toString();
+            String newPass = inputNewPass.getText().toString();
+            String confirmNewPass = inputConfirmNewPass.getText().toString();
 
             // MORE ERROR HANDLING
             if (phone.length() != 10) { // MUST BE 10 DIGITS
