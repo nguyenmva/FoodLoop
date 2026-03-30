@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBC99A"
+    android:background="#fff6d7"
     tools:context=".LogOutScreen">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="227dp"
-        android:layout_height="0dp"
+        android:layout_width="319dp"
+        android:layout_height="350dp"
         android:layout_marginTop="45dp"
         android:layout_marginBottom="21dp"
         android:contentDescription="@string/txtLogoDesc"
@@ -28,6 +28,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginBottom="428dp"
         android:text="@string/regTitle"
+        android:textColor="#ff193b"
         android:textSize="34sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,19 +43,22 @@
         android:layout_marginTop="19dp"
         android:gravity="center"
         android:text="@string/logoutMessage"
-        android:textColor="#0277BD"
+        android:textColor="@color/black"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regTitle" />
 
     <Button
         android:id="@+id/btnRelogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="219dp"
+        android:layout_height="72dp"
         android:layout_marginTop="29dp"
+        android:backgroundTint="#ff193b"
         android:gravity="center"
         android:text="@string/btnRelogin"
-        android:textSize="24sp"
+        android:textSize="26sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lgMessage" />

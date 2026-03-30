@@ -68,12 +68,13 @@
 
     <!-- NILESH -->
     <string name="regTitle">Loop It. Like It. Save It.</string>
-    <string name="btnLogin">Log In</string>
+    <string name="regJoin">Join Now!</string>
+    <string name="btnLogin">LOG IN</string>
     <string name="txtEmail">Enter Your Email</string>
     <string name="txtPassword">Enter Your Password\n</string>
     <string name="txtLogin">Log in</string>
     <string name="logoutMessage">"You Have successfully logged out.\nThank You for using FoodLoop! "</string>
-    <string name="btnRelogin">Log In Again</string>
+    <string name="btnRelogin">LOG IN AGAIN</string>
     <string name="RememberMe">Remember Me</string>
 
     <!-- GIA -->
