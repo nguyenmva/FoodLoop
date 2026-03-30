@@ -1,6 +1,8 @@
 package com.example.foodloop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Profile extends AppCompatActivity {
+public class ProfilePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +22,11 @@ public class Profile extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+    public void toHomePage(View view) {
+        startActivity(new Intent(ProfilePage.this, MainActivity.class)); // Change this to the Home page when that's up.
+    }
+    public void toEditAccount(View view) {
+        startActivity(new Intent(ProfilePage.this, EditAccount.class));
     }
 }

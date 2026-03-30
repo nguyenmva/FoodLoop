@@ -46,7 +46,7 @@
             android:name=".EditAccount"
             android:exported="false" />
         <activity
-            android:name=".Profile"
+            android:name=".ProfilePage"
             android:exported="false" />
          <activity
              android:name=".HistoryDonation"

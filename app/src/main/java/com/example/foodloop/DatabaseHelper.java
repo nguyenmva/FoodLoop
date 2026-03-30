@@ -104,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + ACCOUNTS_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + DONATION_HISTORY_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + DONATION_TABLE);
         onCreate(db);
     }
 
@@ -152,7 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(DONATION_STATUS_FLD, status);
         contentValues.put(RECIPIENT_FLD, recipient);
 
-        long result = db.insert(DONATION_HISTORY_TABLE, null, contentValues);
+        long result = db.insert(DONATION_TABLE, null, contentValues);
         return result != -1;
     }
 
@@ -226,6 +226,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public Cursor getAllDonationHistory(){
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + DONATION_HISTORY_TABLE, null);
+        return db.rawQuery("SELECT * FROM " + DONATION_TABLE, null);
     }
 }
