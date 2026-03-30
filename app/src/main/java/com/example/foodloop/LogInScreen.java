@@ -73,17 +73,17 @@ public class LogInScreen extends AppCompatActivity {
                 password.setError("Password cannot be empty");
                 Toast.makeText(LogInScreen.this, "Please enter your password", Toast.LENGTH_LONG).show();
             }
-            else{
-                boolean emailExists = foodLoopDB.checkEmailExists(userEmail);
-
-                if (!emailExists) { // CHECK FOR EXISTING ACCOUNT THEN FOR MATCHING PASSWORD
-                    email.setError("This email isn't in the database.");
-                    Toast.makeText(this, "Account not found.", Toast.LENGTH_LONG).show();
-                }
-                else if (!foodLoopDB.checkLoginCredentials(userEmail, userPass)) {
-                    password.setError("Wrong!");
-                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }
+//            else{
+//                boolean emailExists = foodLoopDB.checkEmailExists(userEmail);
+//
+//                if (!emailExists) { // CHECK FOR EXISTING ACCOUNT THEN FOR MATCHING PASSWORD
+//                    email.setError("This email isn't in the database.");
+//                    Toast.makeText(this, "Account not found.", Toast.LENGTH_LONG).show();
+//                }
+//                else if (!foodLoopDB.checkLoginCredentials(userEmail, userPass)) {
+//                    password.setError("Wrong!");
+//                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+//                }
                 else {
                     SharedPreferences.Editor editor = sharedPreference.edit();
 
@@ -97,8 +97,8 @@ public class LogInScreen extends AppCompatActivity {
                     editor.apply();
 
                     Toast.makeText(LogInScreen.this, "Log in Successful!!!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(LogInScreen.this, LogOutScreen.class));
-                }
+                    startActivity(new Intent(LogInScreen.this, MainActivity.class)); // Change this to the Home page when that's up.
+//                }
             }
         });
     }
