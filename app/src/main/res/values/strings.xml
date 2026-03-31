@@ -14,6 +14,7 @@
     <string name="txtTitleEdit">EDIT YOUR PROFILE</string>
     <string name="txtTestAccount">Testing Account Pages</string>
     <string name="txtTestHistory">Testing History Pages</string>
+
     <!-- INPUT HINTS -->
     <string name="hintAccountID">Enter Account ID</string>
     <string name="hintName">Name</string>
@@ -35,6 +36,7 @@
     <string name="txtHintNewPass">New Password</string>
     <string name="txtHintConfirmNewPass">Confirm New Password</string>
     <string name="txtHintRequestStatus">Enter Request Status</string>
+
     <!-- BUTTONS -->
     <string name="btnShowAccounts">Show All Accounts</string>
     <string name="btnCreateHistory">Create Donation History Record</string>
@@ -45,6 +47,7 @@
     <string name="btnGoToRequestHist">Go to Edit Profile</string>
     <string name="btnHistory">Go to Donation History Page</string>
     <string name="btnTestDatabase">Go to Database Testing Page</string>
+
     <!-- SPINNER ARRAYS -->
     <string-array name="CountryList">
         <item>Canada</item>
@@ -93,6 +96,14 @@
     <string name="txtLabelEmail">E-Mail </string>
     <string name="txtLabelPW1">Password</string>
     <string name="txtLabelPW2">Confirm Password</string>
+
+    <!-- Profile Page -->
+    <string name="txtTitleProfile">Profile Page</string>
+    <string name="txtProfileName">Name from DB</string>
+    <string name="txtProfileAdd">Address from DB</string>
+    <string name="txtProfileContact">Number from DB</string>
+    <string name="txtProfileEmail">Email from SharedPref</string>
+    <string name="txtProfileEdit">Edit Profile</string>
 
     <!-- Column Headers -->
     <string name="txtStatus">Status</string>

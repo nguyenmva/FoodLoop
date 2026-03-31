@@ -38,7 +38,7 @@ public class ActiveRequests extends AppCompatActivity {
 
         btnHome = findViewById(R.id.btnRTtoHome);
         btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(ActiveRequests.this, MainActivity.class));
+            startActivity(new Intent(ActiveRequests.this, DonationHomePage.class));
         });
     }
 }

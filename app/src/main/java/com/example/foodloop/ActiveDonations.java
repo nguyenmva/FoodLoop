@@ -44,7 +44,7 @@ public class ActiveDonations extends AppCompatActivity {
 
         btnHome = findViewById(R.id.btnMADtoHome);
         btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(ActiveDonations.this, MainActivity.class));
+            startActivity(new Intent(ActiveDonations.this, DonationHomePage.class));
         });
     }
 }

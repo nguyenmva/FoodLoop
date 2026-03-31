@@ -1,6 +1,8 @@
 package com.example.foodloop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -27,5 +29,9 @@ public class EditDonation extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void toDonorHomePage(View view) {
+        startActivity(new Intent(EditDonation.this, DonationHomePage.class));
     }
 }
