@@ -61,29 +61,30 @@ public class LogInScreen extends AppCompatActivity {
         }
 
         // ##################################################################################################################
-        // ADDING USER AND DONATION RECORDS FOR TESTING
+        // ADD ACCOUNT ONLY IF THERE ARE NO ACCOUNT RECORDS.
         Cursor accountResult = foodLoopDB.getAllAccounts();
-        if(accountResult.getCount() == 0) { // ADD ACCOUNT ONLY IF THERE ARE NO ACCOUNT RECORDS.
+        if(accountResult.getCount() == 0) {
             foodLoopDB.createAccount("Belle Mercado", "11 West Street", "Vancouver",
                     "BC", "Canada", 1, "1A1A1A",
-                    "5551111", "belle@mercado.ca", "belle123");
+                    "6045551111", "belle@mercado.ca", "belle123");
 
             foodLoopDB.createAccount("Gia Supetran", "22 South Street", "Surrey",
-                    "BC", "Canada", 2, "2B2B2B",
-                    "5552222", "gia@supetran.ca", "gia123");
+                    "BC", "Philippines", 2, "2B2B2B",
+                    "6045552222", "gia@supetran.ca", "gia123");
 
             foodLoopDB.createAccount("Nilesh Kurbet", "33 East Street", "Coquitlam",
-                    "BC", "Canada", 3, "3C3C3C",
-                    "5553333", "nilesh@kurbet.ca", "nilesh123");
+                    "BC", "Pakistan", 3, "3C3C3C",
+                    "6045553333", "nilesh@kurbet.ca", "nilesh123");
 
             foodLoopDB.createAccount("Michael Nguyen", "44 North Street", "Burnaby",
-                    "BC", "Canada", 4, "4D4D4D",
-                    "5554444", "michael@nguyen.ca", "michael123");
+                    "BC", "India", 4, "4D4D4D",
+                    "6045554444", "michael@nguyen.ca", "michael123");
         }
         accountResult.close();
 
+        // ONLY DONATIONS ONLY IF THERE ARE NO DONATION RECORDS.
         Cursor donationResult = foodLoopDB.getAllDonations();
-        if(donationResult.getCount() == 0) { // ONLY DONATIONS ONLY IF THERE ARE NO DONATION RECORDS.
+        if(donationResult.getCount() == 0) {
             foodLoopDB.createDonationDemo("Muffin", 1, "Bakery", 1,
                     "2026-04-01", "Morning (9AM-11AM)", 1, "Free", 0,
                     "Vancouver", "Pending", 1, 2); // Belle to Gia
@@ -102,27 +103,40 @@ public class LogInScreen extends AppCompatActivity {
 
             foodLoopDB.createDonationDemo("Juice Boxes", 5, "Beverages", 5,
                     "2026-04-05", "Afternoon (1PM-4PM)", 2, "Discounted", 5.00,
-                    "Surrey", "Pending", 2, 3); // Gia to Nilesh
+                    "Surrey", "Pending", 2, 1); // Gia to Belle
+
+            foodLoopDB.createDonationDemo("Soda Cans", 15, "Beverages", 5,
+                    "2026-04-06", "Evening (5PM-7PM)", 3, "Discounted", 15.00,
+                    "Surrey", "Pending", 2, 1); // Gia to Belle
 
             foodLoopDB.createDonationDemo("Frozen Pizza", 6, "Frozen Goods", 6,
-                    "2026-04-06", "Evening (5PM-7PM)", 3, "Discounted", 600.00,
-                    "Coquitlam", "Pending", 3, 4); // Nilesh to Michael
+                    "2026-04-07", "Morning (9AM-11AM)", 1, "Discounted", 600.00,
+                    "Surrey", "Approved", 2, 3); // Gia to Nilesh
 
             foodLoopDB.createDonationDemo("Canned Peaches", 7, "Canned Goods", 7,
-                    "2026-04-07", "Morning (9AM-11AM)", 1, "Discounted", 999.99,
-                    "Coquitlam", "Pending", 3, 1); // Nilesh to Belle
+                    "2026-04-08", "Afternoon (1PM-4PM)", 2, "Discounted", 999.99,
+                    "Surrey", "Rejected", 2, 3); // Gia to Nilesh
+
+            foodLoopDB.createDonationDemo("Canned Tuna", 17, "Canned Goods", 7,
+                    "2026-04-09", "Evening (5PM-7PM)", 3, "Discounted", 1999.99,
+                    "Surrey", "Rejected", 2, 3); // Gia to Nilesh
 
             foodLoopDB.createDonationDemo("Cookies", 8, "Bakery", 1,
-                    "2026-04-08", "Afternoon (1PM-4PM)", 2, "Discounted", 2.00,
-                    "Burnaby", "Pending", 4, 2); // Michael to Gia
+                    "2026-04-10", "Morning (9AM-11AM)", 1, "Discounted", 2.00,
+                    "Surrey", "Approved", 2, 4); // Gia to Michael
 
             foodLoopDB.createDonationDemo("Grapes", 9, "Produce", 2,
-                    "2026-04-09", "Evening (5PM-7PM)", 3, "Discounted", 0.99,
-                    "Burnaby", "Pending", 4, 3); // Michael to Belle
+                    "2026-04-11", "Afternoon (1PM-4PM)", 2, "Discounted", 0.99,
+                    "Surrey", "Rejected", 2, 4); // Gia to Michael
+
+            foodLoopDB.createDonationDemo("Blueberries", 19, "Produce", 2,
+                    "2026-04-12", "Evening (5PM-7PM)", 3, "Discounted", 1.99,
+                    "Surrey", "Rejected", 2, 4); // Gia to Michael
         }
         donationResult.close();
     }
 
+    // ##################################################################################################################
     // Changed setOnClickListeners to methods for onClick attributes, to clean up onCreate before I mess it up more. - Michael
     public void login(View view) {
         String userEmail = email.getText().toString();
@@ -136,17 +150,17 @@ public class LogInScreen extends AppCompatActivity {
             password.setError("Password cannot be empty");
             Toast.makeText(LogInScreen.this, "Please enter your password", Toast.LENGTH_LONG).show();
         }
-//            else{
-//                boolean emailExists = foodLoopDB.checkEmailExists(userEmail);
-//
-//                if (!emailExists) { // CHECK FOR EXISTING ACCOUNT THEN FOR MATCHING PASSWORD
-//                    email.setError("This email isn't in the database.");
-//                    Toast.makeText(this, "Account not found.", Toast.LENGTH_LONG).show();
-//                }
-//                else if (!foodLoopDB.checkLoginCredentials(userEmail, userPass)) {
-//                    password.setError("Wrong!");
-//                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
-//                }
+            else{
+                boolean emailExists = foodLoopDB.checkEmailExists(userEmail);
+
+                if (!emailExists) { // CHECK FOR EXISTING ACCOUNT THEN FOR MATCHING PASSWORD
+                    email.setError("This email isn't in the database.");
+                    Toast.makeText(this, "Account not found.", Toast.LENGTH_LONG).show();
+                }
+                else if (!foodLoopDB.checkLoginCredentials(userEmail, userPass)) {
+                    password.setError("Wrong!");
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+                }
         else {
             SharedPreferences.Editor editor = sharedPreference.edit();
 
@@ -163,7 +177,7 @@ public class LogInScreen extends AppCompatActivity {
             startActivity(new Intent(LogInScreen.this, DonationHomePage.class));
             // As of 3/30, updated to Donation Home Page for now -Gia
             // Change this to the Home page when that's up.
-//                } // <- This extra bracket is from the commented-out emailExists validation.
+            }
         }
     }
 

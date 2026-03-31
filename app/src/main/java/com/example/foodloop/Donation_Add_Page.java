@@ -73,7 +73,7 @@ public class Donation_Add_Page extends AppCompatActivity {
             String offerType = rdbFree.isChecked() ? "Free" : "Discounted";
             String location = "Donor's Address?"; // WILL CHANGE IT TO GET FROM DB LATER.
             String status = "Pending"; // DEFAULT STRING?
-            int donor = 1; // WILL CHANGE IT TO GET FROM DB LATER.
+            int donor = 2; // WILL CHANGE IT TO GET FROM DB LATER.
 
             // NEEDS MORE ERROR HANDLING??
             boolean inserted = foodLoopDB.createDonation(

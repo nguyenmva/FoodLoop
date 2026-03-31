@@ -36,35 +36,33 @@
         app:layout_constraintVertical_bias="0.203" />
 
     <TextView
-        android:id="@+id/tvName4"
-        android:layout_width="206dp"
-        android:layout_height="61dp"
-        android:text="@string/txtProfileEmail"
-        android:textColor="#4D4747"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.965"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.446" />
-
-    <TextView
-        android:id="@+id/tvName3"
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtProfileContact"
         android:textColor="#4D4747"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.853"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toEndOf="@+id/labelEmail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#4D4747"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toEndOf="@+id/labelPhone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.383" />
 
     <TextView
-        android:id="@+id/labelName4"
+        android:id="@+id/labelEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtLabelEmail"
@@ -79,7 +77,7 @@
         app:layout_constraintVertical_bias="0.431" />
 
     <TextView
-        android:id="@+id/labelName3"
+        android:id="@+id/labelPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtLabelCNum"
@@ -94,21 +92,20 @@
         app:layout_constraintVertical_bias="0.383" />
 
     <TextView
-        android:id="@+id/tvName2"
+        android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtProfileAdd"
         android:textColor="#4D4747"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.864"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toEndOf="@+id/labelAddress"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.334" />
 
     <TextView
-        android:id="@+id/labelName2"
+        android:id="@+id/labelAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtLabelAdd"
@@ -141,13 +138,12 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtProfileName"
         android:textColor="#4D4747"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.779"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toEndOf="@+id/labelName"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.285" />
 

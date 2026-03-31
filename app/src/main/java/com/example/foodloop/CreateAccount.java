@@ -98,12 +98,10 @@ public class CreateAccount extends AppCompatActivity {
                 else
                     Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
             }
-            // DO WE FORCE THE USER TO LEAVE THE PAGE AFTER ACCOUNT CREATION?
-//            startActivity(new Intent(CreateAccount.this, MainActivity.class));
+            startActivity(new Intent(CreateAccount.this, DonationHomePage.class));
         }
     }
 
-    // Page Links
     public void toLogInPage(View view) {
         startActivity(new Intent(CreateAccount.this, LogInScreen.class));
     }

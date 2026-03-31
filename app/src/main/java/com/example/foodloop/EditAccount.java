@@ -64,7 +64,7 @@ public class EditAccount extends AppCompatActivity {
                 String street = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_STREET_FLD));
                 String city = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_CITY_FLD));
                 String province = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_PROVINCE_FLD));
-                String country = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_COUNTRY_FLD));
+                int countrySpinnerSelection = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_COUNTRY_SPINNER_FLD));
                 String postal = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_POSTAL_FLD));
                 String phone = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_PHONE_FLD));
                 String email = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_EMAIL_FLD));
@@ -73,13 +73,15 @@ public class EditAccount extends AppCompatActivity {
                 inputStreet.setText(street);
                 inputCity.setText(city);
                 inputProvince.setText(province);
+                inputCountry.setSelection(countrySpinnerSelection);
                 inputPostal.setText(postal);
                 inputPhone.setText(phone);
                 inputEmail.setText(email);
 
                 cursor.close();
             }
-        } else {
+        }
+        else {
             Toast.makeText(this, "No user logged in.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -104,7 +106,7 @@ public class EditAccount extends AppCompatActivity {
             String city = inputCity.getText().toString();
             String province = inputProvince.getText().toString();
             String country = inputCountry.getSelectedItem().toString();
-            int countrySpinnerSelection = inputCountry.getSelectedItemPosition();
+            int countrySpinner = inputCountry.getSelectedItemPosition();
             String postal = inputPostal.getText().toString();
             String phone = inputPhone.getText().toString();
             String email = inputEmail.getText().toString();
@@ -131,7 +133,7 @@ public class EditAccount extends AppCompatActivity {
                 else {
                     boolean updated = foodLoopDB.updateAccount( // UPDATE ACCOUNT
                             name, street, city, province, country,
-                            postal, phone, email, newPass
+                            countrySpinner, postal, phone, email, newPass
                     );
                     // PROVIDE CONFIRMATION TO THE USER
                     if (updated)
@@ -140,17 +142,12 @@ public class EditAccount extends AppCompatActivity {
                         Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
                 }
                 // DO WE FORCE THE USER TO LEAVE THE PAGE AFTER UPDATING?
-//            startActivity(new Intent(CreateAccount.this, MainActivity.class));
+            startActivity(new Intent(EditAccount.this, ProfilePage.class));
             }
         }
     }
 
-    // PAGE LINKS
-    public void toTestPage(View view) {
-        startActivity(new Intent(EditAccount.this, MainActivity.class));
+    public void toProfilePage(View view) {
+        startActivity(new Intent(EditAccount.this, ProfilePage.class));
     }
-
-//    public void toPrintPage(View view) {
-//        startActivity(new Intent(EditAccount.this, PrintActivity.class));
-//    }
 }

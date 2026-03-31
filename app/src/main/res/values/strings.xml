@@ -52,7 +52,9 @@
     <string-array name="CountryList">
         <item>Select a Country</item>
         <item>Canada</item>
-        <item>Not Canada</item>
+        <item>Philippines</item>
+        <item>Pakistan</item>
+        <item>India</item>
     </string-array>
 
     <!-- CONTACT INFO -->
@@ -100,10 +102,6 @@
 
     <!-- Profile Page -->
     <string name="txtTitleProfile">Profile Page</string>
-    <string name="txtProfileName">Name from DB</string>
-    <string name="txtProfileAdd">Address from DB</string>
-    <string name="txtProfileContact">Number from DB</string>
-    <string name="txtProfileEmail">Email from SharedPref</string>
     <string name="txtProfileEdit">Edit Profile</string>
 
     <!-- Column Headers -->
@@ -191,6 +189,7 @@
     <string name="txtEditItem">Edit Item</string>
     <string name="btnSaveEdit">Save Edit</string>
     <string name="btnCancelEdit">Cancel</string>
+    <string name="btnBackToProfile">Back to Profile</string>
     <!-- =================================================================  -->
 
 </resources>

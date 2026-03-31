@@ -166,7 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR CREATING A DONATION DEMO RECORD, ADDS RECIPIENT TO DONATION CREATION FOR TESTING.
-    public boolean createDonationDemo(String itemName, int quantity, String category, int categorySpinner,
+    public void createDonationDemo(String itemName, int quantity, String category, int categorySpinner,
                                   String expiryDate, String pickupTime, int pickupTimeSpinner, String offerType,
                                   double price, String location, String status, int donor, int recipient){
 
@@ -188,7 +188,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(RECIPIENT_ID_FLD, recipient);
 
         long result = db.insert(DONATION_TABLE, null, contentValues);
-        return result != -1;
     }
 
     // ##################################################################################################################
@@ -209,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ##################################################################################################################
     // FOR UPDATING AN ACCOUNT RECORD
     public boolean updateAccount(String name, String street, String city, String province, String country,
-                                 String postal, String phone, String email, String password){
+                                 int countrySpinner, String postal, String phone, String email, String password){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -219,6 +218,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(USER_CITY_FLD, city);
         contentValues.put(USER_PROVINCE_FLD, province);
         contentValues.put(USER_COUNTRY_FLD, country);
+        contentValues.put(USER_COUNTRY_SPINNER_FLD, countrySpinner);
         contentValues.put(USER_PHONE_FLD, phone);
         contentValues.put(USER_POSTAL_FLD, postal);
         contentValues.put(USER_EMAIL_FLD, email);
@@ -253,6 +253,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getUserDataByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
+    }
+    public Cursor getUserDataByID(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + USER_ID_FLD + " = ?", new String[]{id});
+    }
+    public Cursor getDonationDataByDonorID(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + DONATION_TABLE + " WHERE " + DONOR_ID_FLD + " = ?", new String[]{id});
     }
 
     public Cursor getAllAccounts(){
