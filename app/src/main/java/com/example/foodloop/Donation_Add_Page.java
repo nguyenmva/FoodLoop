@@ -69,17 +69,17 @@ public class Donation_Add_Page extends AppCompatActivity {
             String expiryDate = edtExpiryDate.getText().toString();
             String pickupTime = spAvailTime.getSelectedItem().toString();
             int pickupIndex = spAvailTime.getSelectedItemPosition();
-            float price = Float.parseFloat(edtPrice.getText().toString());
+            double price = Double.parseDouble(edtPrice.getText().toString());
             String offerType = rdbFree.isChecked() ? "Free" : "Discounted";
             String location = "Donor's Address?"; // WILL CHANGE IT TO GET FROM DB LATER.
-            String status = "I Can Has Cheezburger?"; // DEFAULT STRING?
-            String recipient = ""; // IS "" OR NULL BETTER?
+            String status = "Pending"; // DEFAULT STRING?
+            int donor = 1; // WILL CHANGE IT TO GET FROM DB LATER.
 
             // NEEDS MORE ERROR HANDLING??
             boolean inserted = foodLoopDB.createDonation(
                     itemName, quantity, category, categoryIndex,
                     expiryDate, pickupTime, pickupIndex,
-                    offerType, price, location, status, recipient
+                    offerType, price, location, status, donor
             );
                 // PROVIDE CONFIRMATION TO THE USER
             if(inserted)

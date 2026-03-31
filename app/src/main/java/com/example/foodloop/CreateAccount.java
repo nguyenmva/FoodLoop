@@ -89,7 +89,7 @@ public class CreateAccount extends AppCompatActivity {
             }
             else {
                 boolean inserted = foodLoopDB.createAccount(
-                        name, street, city, province, country,
+                        name, street, city, province, country, countrySpinnerSelection,
                         postal, phone, email, password
                 );
                 // PROVIDE CONFIRMATION TO THE USER

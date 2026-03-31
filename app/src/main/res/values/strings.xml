@@ -50,6 +50,7 @@
 
     <!-- SPINNER ARRAYS -->
     <string-array name="CountryList">
+        <item>Select a Country</item>
         <item>Canada</item>
         <item>Not Canada</item>
     </string-array>

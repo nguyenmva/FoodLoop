@@ -2,7 +2,6 @@ package com.example.foodloop;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -77,7 +76,7 @@ public class TestingPage extends AppCompatActivity {
 
 
     public void checkHistoryRecords(View view){
-        Cursor result = foodLoopDB.getAllDonationHistory();
+        Cursor result = foodLoopDB.getAllDonations();
         if(result.getCount() == 0){
             showMessage("Error", "No Data Found");
         }
