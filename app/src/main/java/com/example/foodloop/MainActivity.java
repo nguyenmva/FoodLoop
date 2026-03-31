@@ -55,10 +55,6 @@ public class MainActivity extends AppCompatActivity {
     public void toActiveRequestsPage(View view) {
         startActivity(new Intent(MainActivity.this, ActiveRequests.class));
     }
-    public void toDonorPage(View view) {
-        startActivity(new Intent(MainActivity.this, DonorPage.class));
-    }
-
     // #######################################################################################
     // NILESH'S PAGES
     public void toLoginPage(View view) {
@@ -78,4 +74,9 @@ public class MainActivity extends AppCompatActivity {
     public void toRequestHomePage(View view) {
         startActivity(new Intent(MainActivity.this, Request_Home_Page.class));
     }
+
+    public void toDonorPage(View view) {
+        startActivity(new Intent(MainActivity.this, DonorPage.class));
+    }
+
 }

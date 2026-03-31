@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ public class LogInScreen extends AppCompatActivity {
         EditText email = findViewById(R.id.userEmail);
         EditText password = findViewById(R.id.userPass);
         Button btnLogin = findViewById(R.id.btnLogin);
+        Button btnSignUp = findViewById(R.id.btnSignUp);
         TextView login = findViewById(R.id.txtLogin);
         ImageView imagelogo = findViewById(R.id.fdLogo);
         CheckBox cbRememberMe = findViewById(R.id.cbRememberMe);
@@ -60,6 +62,10 @@ public class LogInScreen extends AppCompatActivity {
             password.setText(savedPassword);
             cbRememberMe.setChecked(true);
         }
+
+        btnSignUp.setOnClickListener(v -> {
+            startActivity(new Intent(LogInScreen.this, CreateAccount.class));
+        });
 
         btnLogin.setOnClickListener(v->{
             String userEmail =  email.getText().toString();

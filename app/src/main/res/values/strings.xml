@@ -70,6 +70,7 @@
     <string name="regTitle">Loop It. Like It. Save It.</string>
     <string name="regJoin">Join Now!</string>
     <string name="btnLogin">LOG IN</string>
+    <string name="btnSignUp">SIGN UP</string>
     <string name="txtEmail">Enter Your Email</string>
     <string name="txtPassword">Enter Your Password\n</string>
     <string name="txtLogin">Log in</string>
