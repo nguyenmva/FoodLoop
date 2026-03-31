@@ -75,4 +75,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, Request_Home_Page.class));
     }
 
+    public void toDonorPage(View view) {
+        startActivity(new Intent(MainActivity.this, DonorPage.class));
+    }
+
 }
