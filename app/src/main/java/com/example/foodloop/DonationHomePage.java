@@ -54,6 +54,9 @@ public class DonationHomePage extends AppCompatActivity {
     public void toActiveRequestsPage(View view) {
         startActivity(new Intent(DonationHomePage.this, ActiveRequests.class));
     }
+    public void toRequestItemPage(View view) {
+        startActivity(new Intent(DonationHomePage.this, RequestAddItem.class));
+    }
 
     // #######################################################################################
     // NILESH'S PAGES

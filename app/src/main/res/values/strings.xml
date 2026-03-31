@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">FoodLoop</string>
 
+    <!-- =================================================================  -->
     <!-- GENERAL -->
     <string name="btnHomePage">Home</string>
     <string name="txtLogoDesc">FoodLoop</string>
+    <!-- =================================================================  -->
 
+    <!-- =================================================================  -->
     <!-- MICHAEL -->
     <!-- HEADERS -->
     <string name="txtTitleCreate">CREATE AN ACCOUNT</string>
@@ -65,7 +68,9 @@
     <string name="btnCheckHistory">Check Number of History Records</string>
     <string name="imgDesc">An Image</string>
     <string name="btnRequest">Go to Request History Page</string>
+    <!-- =================================================================  -->
 
+    <!-- =================================================================  -->
     <!-- NILESH -->
     <string name="regTitle">Loop It. Like It. Save It.</string>
     <string name="regJoin">Join Now!</string>
@@ -77,7 +82,9 @@
     <string name="logoutMessage">"You Have successfully logged out.\nThank You for using FoodLoop! "</string>
     <string name="btnRelogin">LOG IN AGAIN</string>
     <string name="RememberMe">Remember Me</string>
+    <!-- =================================================================  -->
 
+    <!-- =================================================================  -->
     <!-- GIA -->
     <!-- Create Account Labels -->
     <string name="txtLabelName">Account Name</string>
@@ -100,6 +107,11 @@
     <!-- Active Requests Tracking -->
     <string name="txtRTTitleName">Request Tracker</string>
 
+    <!-- Add Request Item -->
+    <string name="txtReqItemTitle">Food Request and Search</string>
+    <!-- =================================================================  -->
+
+    <!-- =================================================================  -->
     <!-- BELLE   -->
     <!--Donation Home Page    -->
     <string name="txtWelcomeTitle">Welcome to FoodLoop!</string>
@@ -167,7 +179,6 @@
     <!--Edit Donation Page -->
     <string name="btnSaveEdit">Save Edit</string>
     <string name="btnCancelEdit">Cancel</string>
-
-
+    <!-- =================================================================  -->
 
 </resources>

@@ -59,6 +59,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="84dp"
         android:backgroundTint="#004aad"
+        android:onClick="toRequestItemPage"
         android:text="@string/btnReqFd"
         android:textSize="24sp"
         android:textStyle="bold"
