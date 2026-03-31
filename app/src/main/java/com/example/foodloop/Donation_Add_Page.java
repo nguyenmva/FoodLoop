@@ -81,11 +81,13 @@ public class Donation_Add_Page extends AppCompatActivity {
                     expiryDate, pickupTime, pickupIndex,
                     offerType, price, location, status, donor
             );
-                // PROVIDE CONFIRMATION TO THE USER
-            if(inserted)
+            // PROVIDE CONFIRMATION TO THE USER
+            if (inserted) {
                 Toast.makeText(this, "Donation Listed!", Toast.LENGTH_LONG).show();
-            else
+                startActivity(new Intent(Donation_Add_Page.this, DonationHomePage.class));
+            } else {
                 Toast.makeText(this, "Error: Kill the Person who Wrote This Code", Toast.LENGTH_LONG).show();
+            }
         }
         // DO WE FORCE THE USER TO LEAVE THE PAGE AFTER LISTING A DONATION?
         // startActivity(new Intent(Donation_Add_Page.this, MainActivity.class));
