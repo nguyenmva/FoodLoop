@@ -1,5 +1,6 @@
 package com.example.foodloop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -45,5 +46,9 @@ public class EditDonation extends AppCompatActivity {
     }
     public void editDonation(View view){
 
+    }
+
+    public void toDonorHomePage(View view) {
+        startActivity(new Intent(EditDonation.this, DonationHomePage.class));
     }
 }

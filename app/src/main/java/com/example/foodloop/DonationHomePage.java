@@ -23,12 +23,6 @@ public class DonationHomePage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        //Donate Food button
-        Button btnDonateFood = findViewById(R.id.btnDonate);
-        btnDonateFood.setOnClickListener(view->{
-            startActivity(new Intent(DonationHomePage.this, DonorPage.class));
-        });
     }
 
     // #######################################################################################
@@ -42,9 +36,6 @@ public class DonationHomePage extends AppCompatActivity {
     public void toRequestHistoryPage(View view) {
         startActivity(new Intent(DonationHomePage.this, HistoryRequest.class));
     }
-//    public void toDatabaseTesting(View view) {
-//        startActivity(new Intent(DonationHomePage.this, TestingPage.class));
-//    }
 
     // #######################################################################################
     // GIA'S PAGES
@@ -54,12 +45,12 @@ public class DonationHomePage extends AppCompatActivity {
     public void toActiveRequestsPage(View view) {
         startActivity(new Intent(DonationHomePage.this, ActiveRequests.class));
     }
+    public void toRequestItemPage(View view) {
+        startActivity(new Intent(DonationHomePage.this, RequestAddItem.class));
+    }
 
     // #######################################################################################
     // NILESH'S PAGES
-//    public void toLoginPage(View view) {
-//        startActivity(new Intent(DonationHomePage.this, LogInScreen.class));
-//    }
     public void toLogoutPage(View view) {
         startActivity(new Intent(DonationHomePage.this, LogOutScreen.class));
     }
@@ -71,7 +62,7 @@ public class DonationHomePage extends AppCompatActivity {
     public void toDonationAddPage(View view) {
         startActivity(new Intent(DonationHomePage.this, Donation_Add_Page.class));
     }
-    public void toDonorPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, DonorPage.class));
+    public void toEditDonationPage(View view) {
+        startActivity(new Intent(DonationHomePage.this, EditDonation.class));
     }
 }
