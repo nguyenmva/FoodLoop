@@ -1,6 +1,7 @@
 package com.example.foodloop;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -27,5 +28,22 @@ public class EditDonation extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // INITIALIZE INTERFACE VARIABLES
+        edtFoodNameEdit = findViewById(R.id.edtFoodNameEdit);
+        edtQuantityEdit = findViewById(R.id.edtQuantityEdit);
+        edtExpiryDateEdit = findViewById(R.id.edtExpiryDateEdit);
+        edtPriceEdit = findViewById(R.id.edtPriceEdit);
+        spCategoryEdit = findViewById(R.id.spCategoryEdit);
+        spAvailTimeEdit = findViewById(R.id.spAvailTimeEdit);
+        rdbFreeEdit = findViewById(R.id.rdbFreeEdit);
+        rdbDiscountedEdit = findViewById(R.id.rdbDiscountedEdit);
+
+        // INITIALIZE DATABASE
+        foodLoopDB = new DatabaseHelper(this);
+
+    }
+    public void editDonation(View view){
+
     }
 }
