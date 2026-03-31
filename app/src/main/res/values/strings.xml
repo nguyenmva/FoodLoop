@@ -164,5 +164,10 @@
         <item>Evening (5PM-7PM)</item>
     </string-array>
 
+    <!--Edit Donation Page -->
+    <string name="btnSaveEdit">Save Edit</string>
+    <string name="btnCancelEdit">Cancel</string>
+
+
 
 </resources>

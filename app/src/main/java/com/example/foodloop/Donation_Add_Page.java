@@ -1,6 +1,5 @@
 package com.example.foodloop;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import java.util.Objects;
 
 public class Donation_Add_Page extends AppCompatActivity {
     private EditText edtFoodName, edtQuantity, edtExpiryDate, edtPrice;
