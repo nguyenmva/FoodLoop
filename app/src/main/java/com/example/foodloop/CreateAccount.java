@@ -104,7 +104,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     // Page Links
-    public void toTestPage(View view) {
-        startActivity(new Intent(CreateAccount.this, MainActivity.class));
+    public void toLogInPage(View view) {
+        startActivity(new Intent(CreateAccount.this, LogInScreen.class));
     }
 }

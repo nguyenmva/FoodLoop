@@ -1,6 +1,9 @@
 package com.example.foodloop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -40,23 +43,27 @@ public class HistoryDonation extends AppCompatActivity {
 
         // 4. Set up the Adapter and Layout Manager
         // Note: Make sure your Adapter constructor matches this
-        adapter = new RecyclerDonationsAdapter((ArrayList<RecyclerRowObject>) historyList);
-        rvHistory.setLayoutManager(new LinearLayoutManager(this));
-        rvHistory.setAdapter(adapter);
-
-        // 5. Load the data
-        loadHistoryData();
+//        adapter = new RecyclerDonationsAdapter((ArrayList<RecyclerRowObject>) historyList);
+//        rvHistory.setLayoutManager(new LinearLayoutManager(this));
+//        rvHistory.setAdapter(adapter);
+//
+//        // 5. Load the data
+//        loadHistoryData();
     }
 
-    private void loadHistoryData() {
-        // Add data to the existing list
-        historyList.add(new RecyclerRowObject("Completed", "Item A", "Person A"));
-        historyList.add(new RecyclerRowObject("Completed", "Canned Soup", "Red Cross"));
-        historyList.add(new RecyclerRowObject("Pending", "Bread", "Local Shelter"));
-        historyList.add(new RecyclerRowObject("Completed", "Bottled Water", "Community Center"));
-        historyList.add(new RecyclerRowObject("Cancelled", "Milk", "Food Bank"));
+//    private void loadHistoryData() {
+//        // Add data to the existing list
+//        historyList.add(new RecyclerRowObject("Completed", "Item A", "Person A"));
+//        historyList.add(new RecyclerRowObject("Completed", "Canned Soup", "Red Cross"));
+//        historyList.add(new RecyclerRowObject("Pending", "Bread", "Local Shelter"));
+//        historyList.add(new RecyclerRowObject("Completed", "Bottled Water", "Community Center"));
+//        historyList.add(new RecyclerRowObject("Cancelled", "Milk", "Food Bank"));
+//
+//        // Notify the adapter that data has changed to refresh the UI
+//        adapter.notifyDataSetChanged();
+//    }
 
-        // Notify the adapter that data has changed to refresh the UI
-        adapter.notifyDataSetChanged();
+    public void toDonorHomePage(View view) {
+        startActivity(new Intent(HistoryDonation.this, DonationHomePage.class));
     }
 }

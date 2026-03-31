@@ -175,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#ff193b"
-        android:onClick="toTestPage"
+        android:onClick="toLogInPage"
         android:text="@string/btnHomePage"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
