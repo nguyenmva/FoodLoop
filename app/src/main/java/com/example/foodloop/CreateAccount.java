@@ -93,12 +93,13 @@ public class CreateAccount extends AppCompatActivity {
                         postal, phone, email, password
                 );
                 // PROVIDE CONFIRMATION TO THE USER
-                if(inserted)
+                if (inserted)
                     Toast.makeText(this, "Account Created!", Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
+
+                startActivity(new Intent(CreateAccount.this, LogInScreen.class));
             }
-            startActivity(new Intent(CreateAccount.this, DonationHomePage.class));
         }
     }
 

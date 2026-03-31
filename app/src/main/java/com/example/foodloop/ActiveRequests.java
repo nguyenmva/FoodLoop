@@ -33,7 +33,7 @@ public class ActiveRequests extends AppCompatActivity {
 
         rv = findViewById(R.id.rvActiveRequest);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        GiaRequestAdapter adapter = new GiaRequestAdapter(ActiveRequests.donationList);
+        GiaRequestAdapter adapter = new GiaRequestAdapter(ActiveDonations.donationList);
         rv.setAdapter(adapter);
 
         btnHome = findViewById(R.id.btnRTtoHome);

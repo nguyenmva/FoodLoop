@@ -22,7 +22,7 @@ public class ActiveDonations extends AppCompatActivity {
 
     Button btnHome;
     RecyclerView rv;
-    List<String[]> donationList = new ArrayList<>();
+    static List<String[]> donationList = new ArrayList<>();
     private DatabaseHelper foodLoopDB;
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
