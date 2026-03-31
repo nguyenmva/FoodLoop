@@ -12,7 +12,7 @@
         android:id="@+id/txtAddItemEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtAddItem1"
+        android:text="@string/txtEditItem"
         android:textColor="#014BAD"
         android:textSize="20sp"
         android:textStyle="bold"

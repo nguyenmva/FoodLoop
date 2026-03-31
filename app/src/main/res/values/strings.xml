@@ -135,7 +135,6 @@
     <string name="btnReqVP">View Profile</string>
     <string name="btnReqLogOut">Log Out</string>
 
-
     <!-- Donor Page   -->
     <string name="txtActiveDonations">Active Donations</string>
     <string name="txtDPTitle">Donor\'s Page</string>
@@ -177,6 +176,7 @@
     </string-array>
 
     <!--Edit Donation Page -->
+    <string name="txtEditItem">Edit Item</string>
     <string name="btnSaveEdit">Save Edit</string>
     <string name="btnCancelEdit">Cancel</string>
     <!-- =================================================================  -->
