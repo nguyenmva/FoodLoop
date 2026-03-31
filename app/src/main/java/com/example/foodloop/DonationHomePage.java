@@ -77,4 +77,7 @@ public class DonationHomePage extends AppCompatActivity {
     public void toDonorPage(View view) {
         startActivity(new Intent(DonationHomePage.this, DonorPage.class));
     }
+    public void toEditDonationPage(View view) {
+        startActivity(new Intent(DonationHomePage.this, EditDonation.class));
+    }
 }

@@ -9,9 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActiveRequests extends AppCompatActivity {
     Button btnHome;
+    RecyclerView rv;
+    public static List<String[]> donationList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +30,11 @@ public class ActiveRequests extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        rv = findViewById(R.id.rvActiveRequest);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        GiaRequestAdapter adapter = new GiaRequestAdapter(ActiveDonations.donationList);
+        rv.setAdapter(adapter);
 
         btnHome = findViewById(R.id.btnRTtoHome);
         btnHome.setOnClickListener(v -> {
