@@ -1,20 +1,16 @@
 <resources>
     <string name="app_name">FoodLoop</string>
 
-    <!-- =================================================================  -->
     <!-- GENERAL -->
     <string name="btnHomePage">Home</string>
     <string name="txtLogoDesc">FoodLoop</string>
-    <!-- =================================================================  -->
 
-    <!-- =================================================================  -->
     <!-- MICHAEL -->
     <!-- HEADERS -->
     <string name="txtTitleCreate">CREATE AN ACCOUNT</string>
     <string name="txtTitleEdit">EDIT YOUR PROFILE</string>
     <string name="txtTestAccount">Testing Account Pages</string>
     <string name="txtTestHistory">Testing History Pages</string>
-
     <!-- INPUT HINTS -->
     <string name="hintAccountID">Enter Account ID</string>
     <string name="hintName">Name</string>
@@ -36,7 +32,6 @@
     <string name="txtHintNewPass">New Password</string>
     <string name="txtHintConfirmNewPass">Confirm New Password</string>
     <string name="txtHintRequestStatus">Enter Request Status</string>
-
     <!-- BUTTONS -->
     <string name="btnShowAccounts">Show All Accounts</string>
     <string name="btnCreateHistory">Create Donation History Record</string>
@@ -47,7 +42,6 @@
     <string name="btnGoToRequestHist">Go to Edit Profile</string>
     <string name="btnHistory">Go to Donation History Page</string>
     <string name="btnTestDatabase">Go to Database Testing Page</string>
-
     <!-- SPINNER ARRAYS -->
     <string-array name="CountryList">
         <item>Canada</item>
@@ -71,9 +65,7 @@
     <string name="btnCheckHistory">Check Number of History Records</string>
     <string name="imgDesc">An Image</string>
     <string name="btnRequest">Go to Request History Page</string>
-    <!-- =================================================================  -->
 
-    <!-- =================================================================  -->
     <!-- NILESH -->
     <string name="regTitle">Loop It. Like It. Save It.</string>
     <string name="regJoin">Join Now!</string>
@@ -85,9 +77,7 @@
     <string name="logoutMessage">"You Have successfully logged out.\nThank You for using FoodLoop! "</string>
     <string name="btnRelogin">LOG IN AGAIN</string>
     <string name="RememberMe">Remember Me</string>
-    <!-- =================================================================  -->
 
-    <!-- =================================================================  -->
     <!-- GIA -->
     <!-- Create Account Labels -->
     <string name="txtLabelName">Account Name</string>
@@ -96,14 +86,6 @@
     <string name="txtLabelEmail">E-Mail </string>
     <string name="txtLabelPW1">Password</string>
     <string name="txtLabelPW2">Confirm Password</string>
-
-    <!-- Profile Page -->
-    <string name="txtTitleProfile">Profile Page</string>
-    <string name="txtProfileName">Name from DB</string>
-    <string name="txtProfileAdd">Address from DB</string>
-    <string name="txtProfileContact">Number from DB</string>
-    <string name="txtProfileEmail">Email from SharedPref</string>
-    <string name="txtProfileEdit">Edit Profile</string>
 
     <!-- Column Headers -->
     <string name="txtStatus">Status</string>
@@ -118,11 +100,6 @@
     <!-- Active Requests Tracking -->
     <string name="txtRTTitleName">Request Tracker</string>
 
-    <!-- Add Request Item -->
-    <string name="txtReqItemTitle">Food Request and Search</string>
-    <!-- =================================================================  -->
-
-    <!-- =================================================================  -->
     <!-- BELLE   -->
     <!--Donation Home Page    -->
     <string name="txtWelcomeTitle">Welcome to FoodLoop!</string>
@@ -145,6 +122,7 @@
     <string name="btnReqHist">Request History</string>
     <string name="btnReqVP">View Profile</string>
     <string name="btnReqLogOut">Log Out</string>
+
 
     <!-- Donor Page   -->
     <string name="txtActiveDonations">Active Donations</string>
@@ -187,9 +165,9 @@
     </string-array>
 
     <!--Edit Donation Page -->
-    <string name="txtEditItem">Edit Item</string>
     <string name="btnSaveEdit">Save Edit</string>
     <string name="btnCancelEdit">Cancel</string>
-    <!-- =================================================================  -->
+
+
 
 </resources>

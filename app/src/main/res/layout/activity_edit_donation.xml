@@ -5,14 +5,29 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff6d7"
+    android:background="@color/white"
     tools:context=".EditDonation">
+
+    <TextView
+        android:id="@+id/txtFoodNameEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtItemName2"
+        android:textColor="#af1313"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.144" />
 
     <TextView
         android:id="@+id/txtAddItemEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtEditItem"
+        android:text="@string/txtAddItem1"
         android:textColor="#014BAD"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -113,7 +128,7 @@
         app:layout_constraintVertical_bias="0.234" />
 
     <EditText
-        android:id="@+id/edtQuantity"
+        android:id="@+id/edtQuantityEdit"
         android:layout_width="319dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -127,21 +142,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.269" />
-
-    <TextView
-        android:id="@+id/txtFoodName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txtItemName2"
-        android:textColor="#af1313"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.144" />
 
     <Spinner
         android:id="@+id/spCategoryEdit"
@@ -237,7 +237,6 @@
         android:layout_width="157dp"
         android:layout_height="72dp"
         android:backgroundTint="#ff193b"
-        android:onClick="toDonorHomePage"
         android:text="@string/btnCancelEdit"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -253,6 +252,7 @@
         android:layout_width="157dp"
         android:layout_height="72dp"
         android:backgroundTint="#004aad"
+        android:onClick="editDonation"
         android:text="@string/btnSaveEdit"
         android:textSize="24sp"
         android:textStyle="bold"
