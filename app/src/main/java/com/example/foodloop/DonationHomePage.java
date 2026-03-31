@@ -33,14 +33,8 @@ public class DonationHomePage extends AppCompatActivity {
 
     // #######################################################################################
     // MICHAEL'S PAGES
-    public void toCreatePage(View view) {
-        startActivity(new Intent(DonationHomePage.this, CreateAccount.class));
-    }
     public void toProfilePage(View view) {
         startActivity(new Intent(DonationHomePage.this, ProfilePage.class));
-    }
-    public void toEditPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, EditAccount.class));
     }
     public void toDonationHistoryPage(View view) {
         startActivity(new Intent(DonationHomePage.this, HistoryDonation.class));
@@ -48,9 +42,10 @@ public class DonationHomePage extends AppCompatActivity {
     public void toRequestHistoryPage(View view) {
         startActivity(new Intent(DonationHomePage.this, HistoryRequest.class));
     }
-    public void toDatabaseTesting(View view) {
-        startActivity(new Intent(DonationHomePage.this, TestingPage.class));
-    }
+//    public void toDatabaseTesting(View view) {
+//        startActivity(new Intent(DonationHomePage.this, TestingPage.class));
+//    }
+
     // #######################################################################################
     // GIA'S PAGES
     public void toActiveDonationsPage(View view) {
@@ -62,9 +57,9 @@ public class DonationHomePage extends AppCompatActivity {
 
     // #######################################################################################
     // NILESH'S PAGES
-    public void toLoginPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, LogInScreen.class));
-    }
+//    public void toLoginPage(View view) {
+//        startActivity(new Intent(DonationHomePage.this, LogInScreen.class));
+//    }
     public void toLogoutPage(View view) {
         startActivity(new Intent(DonationHomePage.this, LogOutScreen.class));
     }
