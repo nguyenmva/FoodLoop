@@ -16,6 +16,10 @@
             android:exported="false" />
         <!-- GIA'S PAGES -->
         <activity
+            android:name=".RequestAddItem"
+            android:exported="false" />
+        <!-- GIA'S PAGES -->
+        <activity
             android:name=".ActiveRequests"
             android:exported="false" />
         <activity
@@ -23,10 +27,11 @@
             android:exported="false" />
         <activity
             android:name=".DonorPage"
-            android:exported="false" /> <!-- NILESH'S PAGES -->
+            android:exported="false" />
+<!--   NILESH'S PAGES   -->
         <activity
             android:name=".LogInScreen"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +40,8 @@
         </activity>
         <activity
             android:name=".LogOutScreen"
-            android:exported="false" /> <!-- BELLE'S PAGES -->
+            android:exported="false" />
+<!--   BELLE'S PAGES   -->
         <activity
             android:name=".DonationHomePage"
             android:exported="false" />
@@ -44,7 +50,8 @@
             android:exported="false" />
         <activity
             android:name=".Request_Home_Page"
-            android:exported="false" /> <!-- MICHAEL'S PAGES -->
+            android:exported="false" />
+<!--  MICHAEL'S PAGES   -->
         <activity
             android:name=".CreateAccount"
             android:exported="false" />
@@ -54,18 +61,18 @@
         <activity
             android:name=".ProfilePage"
             android:exported="false" />
-        <activity
-            android:name=".HistoryDonation"
-            android:exported="false" />
-        <activity
-            android:name=".HistoryRequest"
-            android:exported="false" />
+         <activity
+             android:name=".HistoryDonation"
+             android:exported="false" />
+         <activity
+             android:name=".HistoryRequest"
+             android:exported="false" />
         <activity
             android:name=".TestingPage"
-            android:exported="false" /> <!-- MAIN ACTIVITY -->
+            android:exported="false" />
+<!--  MAIN ACTIVITY   -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
     </application>
-
 </manifest>
