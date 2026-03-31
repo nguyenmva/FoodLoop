@@ -97,7 +97,9 @@ public class LogInScreen extends AppCompatActivity {
                     editor.apply();
 
                     Toast.makeText(LogInScreen.this, "Log in Successful!!!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(LogInScreen.this, MainActivity.class)); // Change this to the Home page when that's up.
+                    startActivity(new Intent(LogInScreen.this, DonationHomePage.class));
+                        // As of 3/30, updated to Donation Home Page for now -Gia
+                        // Change this to the Home page when that's up.
 //                }
             }
         });
