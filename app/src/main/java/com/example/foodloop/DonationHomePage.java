@@ -42,9 +42,6 @@ public class DonationHomePage extends AppCompatActivity {
     public void toRequestHistoryPage(View view) {
         startActivity(new Intent(DonationHomePage.this, HistoryRequest.class));
     }
-//    public void toDatabaseTesting(View view) {
-//        startActivity(new Intent(DonationHomePage.this, TestingPage.class));
-//    }
 
     // #######################################################################################
     // GIA'S PAGES
@@ -60,9 +57,6 @@ public class DonationHomePage extends AppCompatActivity {
 
     // #######################################################################################
     // NILESH'S PAGES
-//    public void toLoginPage(View view) {
-//        startActivity(new Intent(DonationHomePage.this, LogInScreen.class));
-//    }
     public void toLogoutPage(View view) {
         startActivity(new Intent(DonationHomePage.this, LogOutScreen.class));
     }
