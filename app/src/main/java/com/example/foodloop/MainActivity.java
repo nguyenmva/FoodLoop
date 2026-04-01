@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
     public void toRequestHistoryPage(View view) {
         startActivity(new Intent(MainActivity.this, HistoryRequest.class));
     }
-    public void toDatabaseTesting(View view) {
-        startActivity(new Intent(MainActivity.this, TestingPage.class));
-    }
     // #######################################################################################
     // GIA'S PAGES
     public void toActiveDonationsPage(View view) {

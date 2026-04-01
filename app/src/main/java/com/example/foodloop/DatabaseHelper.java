@@ -258,10 +258,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + ACCOUNTS_TABLE + " WHERE " + USER_ID_FLD + " = ?", new String[]{id});
     }
-    public Cursor getDonationDataByDonorID(String id) {
+    public Cursor getDonationByDonorID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + DONATION_TABLE + " WHERE " + DONOR_ID_FLD + " = ?", new String[]{id});
     }
+    public Cursor getDonationByItemSearch(String itemSearch) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + DONATION_TABLE + " WHERE " + DONATION_ITEM_NAME_FLD + " LIKE ?", new String[]{"%" + itemSearch + "%"});
+    }
+    public Cursor getDonationByLocationSearch(String locationSearch) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + DONATION_TABLE + " WHERE " + DONATION_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
+    }
+
 
     public Cursor getAllAccounts(){
         SQLiteDatabase db = this.getReadableDatabase();

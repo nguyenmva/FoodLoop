@@ -57,7 +57,7 @@ public class ActiveDonations extends AppCompatActivity {
             }
 
             // USE DONOR ID TO FIND ALL DONATIONS THE DONOR HAS MADE
-            donationCursor = foodLoopDB.getDonationDataByDonorID(userID);
+            donationCursor = foodLoopDB.getDonationByDonorID(userID);
             if (donationCursor != null) {
                 while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
                     String status = donationCursor.getString(donationCursor.getColumnIndexOrThrow

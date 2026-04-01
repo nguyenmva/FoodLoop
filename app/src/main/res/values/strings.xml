@@ -5,15 +5,17 @@
     <!-- GENERAL -->
     <string name="btnHomePage">Home</string>
     <string name="txtLogoDesc">FoodLoop</string>
-    <!-- =================================================================  -->
 
     <!-- =================================================================  -->
     <!-- MICHAEL -->
+    <!-- =================================================================  -->
     <!-- HEADERS -->
     <string name="txtTitleCreate">CREATE AN ACCOUNT</string>
     <string name="txtTitleEdit">EDIT YOUR PROFILE</string>
     <string name="txtTestAccount">Testing Account Pages</string>
     <string name="txtTestHistory">Testing History Pages</string>
+    <string name="txtRequestHistory">Request History</string>
+    <string name="txtDonateHistory">Donate History</string>
 
     <!-- INPUT HINTS -->
     <string name="hintAccountID">Enter Account ID</string>
@@ -36,6 +38,7 @@
     <string name="txtHintNewPass">New Password</string>
     <string name="txtHintConfirmNewPass">Confirm New Password</string>
     <string name="txtHintRequestStatus">Enter Request Status</string>
+    <string name="txtSearchHint">Search</string>
 
     <!-- BUTTONS -->
     <string name="btnShowAccounts">Show All Accounts</string>
@@ -47,37 +50,30 @@
     <string name="btnGoToRequestHist">Go to Edit Profile</string>
     <string name="btnHistory">Go to Donation History Page</string>
     <string name="btnTestDatabase">Go to Database Testing Page</string>
+    <string name="btnCreateAccount">Create Account</string>
+    <string name="btnEditAccount">Apply Edits</string>
+    <string name="btnGoToTest">Go to Testing Page</string>
+    <string name="btnSearchDesc">Search Description</string>
+    <string name="btnCheckHistory">Check Number of History Records</string>
+    <string name="btnRequest">Go to Request History Page</string>
 
     <!-- SPINNER ARRAYS -->
     <string-array name="CountryList">
         <item>Select a Country</item>
         <item>Canada</item>
+        <item>USA</item>
+        <item>Mexico</item>
         <item>Philippines</item>
         <item>Pakistan</item>
         <item>India</item>
     </string-array>
 
-    <!-- CONTACT INFO -->
-
-    <!-- PASSWORD -->
-
-    <!-- Buttons -->
-    <string name="btnCreateAccount">Create Account</string>
-    <string name="btnEditAccount">Apply Edits</string>
-    <string name="btnGoToTest">Go to Testing Page</string>
-
-    <!-- HISTORY PAGES -->
-    <string name="txtRequestHistory">Request History</string>
-    <string name="txtSearchHint">Search</string>
-    <string name="btnSearchDesc">Search Description</string>
-    <string name="txtDonateHistory">Donate History</string>
-    <string name="btnCheckHistory">Check Number of History Records</string>
+    <!-- CONTENT DESCRIPTIONS -->
     <string name="imgDesc">An Image</string>
-    <string name="btnRequest">Go to Request History Page</string>
-    <!-- =================================================================  -->
 
     <!-- =================================================================  -->
     <!-- NILESH -->
+    <!-- =================================================================  -->
     <string name="regTitle">Loop It. Like It. Save It.</string>
     <string name="regJoin">Join Now!</string>
     <string name="btnLogin">LOG IN</string>
@@ -88,10 +84,10 @@
     <string name="logoutMessage">"You Have successfully logged out.\nThank You for using FoodLoop! "</string>
     <string name="btnRelogin">LOG IN AGAIN</string>
     <string name="RememberMe">Remember Me</string>
-    <!-- =================================================================  -->
 
     <!-- =================================================================  -->
     <!-- GIA -->
+    <!-- =================================================================  -->
     <!-- Create Account Labels -->
     <string name="txtLabelName">Account Name</string>
     <string name="txtLabelAdd">Address </string>
@@ -119,10 +115,10 @@
 
     <!-- Add Request Item -->
     <string name="txtReqItemTitle">Food Request and Search</string>
-    <!-- =================================================================  -->
 
     <!-- =================================================================  -->
     <!-- BELLE   -->
+    <!-- =================================================================  -->
     <!--Donation Home Page    -->
     <string name="txtWelcomeTitle">Welcome to FoodLoop!</string>
     <string name="btnDonateFood">DONATE FOOD</string>
