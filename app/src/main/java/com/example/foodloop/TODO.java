@@ -13,8 +13,8 @@ TODO: Recyclers
 
 TODO: Add search function for request items
 -DatabaseHelper.java
-    -Add new query for getDonationByItemSearch [done]
-    -Add new query for getDonationByLocationSearch [done]
+    -[done] Add new query for getDonationByItemSearch
+    -[done] Add new query for getDonationByLocationSearch
 -ActiveRequests.java
 
 TODO: Add location field for donation ( so we can search it on food request)
@@ -22,7 +22,7 @@ TODO: Add location field for donation ( so we can search it on food request)
 -activity_donation_add_page.xml
 
 TODO: Remove Donor name, add Location for Active Requests
--ActiveRequests.java
+-[done] ActiveRequests.java
 -activity_active_requests.xml
 
 TODO: Set up notifications (plus points)

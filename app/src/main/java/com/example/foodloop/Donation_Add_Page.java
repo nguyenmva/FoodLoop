@@ -71,7 +71,7 @@ public class Donation_Add_Page extends AppCompatActivity {
             int pickupIndex = spAvailTime.getSelectedItemPosition();
             double price = Double.parseDouble(edtPrice.getText().toString());
             String offerType = rdbFree.isChecked() ? "Free" : "Discounted";
-            String location = "Donor's Address?"; // WILL CHANGE IT TO GET FROM DB LATER.
+            String location = "Pickup or Delivery Address (City)"; // WILL CHANGE IT TO GET FROM DB LATER.
             String status = "Pending"; // DEFAULT STRING?
             int donor = 2; // WILL CHANGE IT TO GET FROM DB LATER.
 

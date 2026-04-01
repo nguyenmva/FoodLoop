@@ -64,21 +64,27 @@ public class ActiveDonations extends AppCompatActivity {
                             (DatabaseHelper.DONATION_STATUS_FLD));
                     String itemName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
                             (DatabaseHelper.DONATION_ITEM_NAME_FLD));
-                    String recipientID = donationCursor.getString(donationCursor.getColumnIndexOrThrow
-                            (DatabaseHelper.RECIPIENT_ID_FLD)); // WE NEED THE NAME, NOT THE ID
+                    String location = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+                            (DatabaseHelper.DONATION_LOCATION_FLD));
+                            // PICKUP = DONOR'S ADDRESS (CITY, PROVINCE)
+                            // DELIVERY = RECIPIENT'S ADDRESS (CITY, PROVINCE)
 
-                    recipientName = "No Takers"; // DEFAULT FOR WHEN NO ONE HAS REQUESTED THE ITEM
-                    if (recipientID != null) {
-                        recipientCursor = foodLoopDB.getUserDataByID(recipientID); // USE RECIPIENT ID TO FIND RECIPIENT NAME
-                        if (recipientCursor != null && recipientCursor.moveToFirst()) {
-                            recipientName = recipientCursor.getString(recipientCursor.getColumnIndexOrThrow
-                                    (DatabaseHelper.USER_NAME_FLD));
-                        }
-                        if (recipientCursor != null) {
-                            recipientCursor.close();
-                        }
-                    }
-                    donationList.add(new String[]{status, itemName, recipientName});
+//                    String recipientID = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+//                            (DatabaseHelper.RECIPIENT_ID_FLD)); // WE NEED THE NAME, NOT THE ID
+//
+//                    recipientName = "No Takers"; // DEFAULT FOR WHEN NO ONE HAS REQUESTED THE ITEM
+//                    if (recipientID != null) {
+//                        recipientCursor = foodLoopDB.getUserDataByID(recipientID); // USE RECIPIENT ID TO FIND RECIPIENT NAME
+//                        if (recipientCursor != null && recipientCursor.moveToFirst()) {
+//                            recipientName = recipientCursor.getString(recipientCursor.getColumnIndexOrThrow
+//                                    (DatabaseHelper.USER_NAME_FLD));
+//                        }
+//                        if (recipientCursor != null) {
+//                            recipientCursor.close();
+//                        }
+//                    } // DON'T DELETE THIS COMMENTED-OUT CODE, IT TOOK ME A LONG TIME TO FIGURE OUT
+
+                    donationList.add(new String[]{status, itemName, location});
                 }
             }
             if (donationCursor != null) {
@@ -94,9 +100,10 @@ public class ActiveDonations extends AppCompatActivity {
         // ##################################################################################################################
         // SCARY RECYCLER STUFF
         donationList.add(new String[]{"Pending", "Canned Soup", "Surrey Food Bank"});
-        donationList.add(new String[]{"Pending", "Fresh Bread", "John Doe"});
+        donationList.add(new String[]{"Pending", "Fresh Bread", "Bob's Bakery"});
         donationList.add(new String[]{"Pending", "Bottled Water", "City Shelter"});
-        donationList.add(new String[]{"Pending", "Apple Bag", "Jane Smith"});
+        donationList.add(new String[]{"Pending", "Apple Bag", "Apple Jack's"});
+        // {Status, Item Name, Location}
 
         rv = findViewById(R.id.rvActiveDonations);
         rv.setLayoutManager(new LinearLayoutManager(this));

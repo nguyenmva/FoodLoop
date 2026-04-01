@@ -157,6 +157,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(DONATION_OFFER_TYPE_FLD, offerType);
         contentValues.put(DONATION_PRICE_FLD, price);
         contentValues.put(DONATION_LOCATION_FLD, location);
+            // PICKUP = DONOR'S CITY
+            // DELIVERY = RECIPIENT'S CITY
         contentValues.put(DONATION_STATUS_FLD, status);
         contentValues.put(DONOR_ID_FLD, donor);
 
@@ -165,7 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // ##################################################################################################################
-    // FOR CREATING A DONATION DEMO RECORD, ADDS RECIPIENT TO DONATION CREATION FOR TESTING.
+    // FOR CREATING A DONATION DEMO RECORD, ADDS A RECIPIENT TO DONATION CREATION FOR TESTING.
     public void createDonationDemo(String itemName, int quantity, String category, int categorySpinner,
                                   String expiryDate, String pickupTime, int pickupTimeSpinner, String offerType,
                                   double price, String location, String status, int donor, int recipient){
