@@ -2,8 +2,8 @@ package com.example.foodloop;
 public class TODO {
 }
 /*
-Just a to-do list and other notes. Attached to nothing. Does nothing.
-Add new ones. Delete finished ones.
+Just a project-wide overview to-do stuff and other notes. Attached to nothing. Does nothing.
+Add new ones. Delete finished ones. Or ignore it all.
 
 TODO: Recyclers
 -HistoryDonation.java (Donation History)
@@ -52,7 +52,7 @@ TODO: Finish request pages
 TODO: Make item class
 
 
-
+TODO: Fix ActiveRequests to show only what has been requested, not what has been donated.
 
 
 

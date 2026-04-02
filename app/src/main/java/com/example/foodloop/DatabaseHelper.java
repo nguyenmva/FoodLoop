@@ -42,7 +42,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DONATION_LOCATION_FLD = "Location";
     public static final String DONATION_STATUS_FLD = "Status";
     public static final String DONOR_ID_FLD = "Donor";
+    // ##################################################################################################################
+    // REQUESTS TABLE
+    public static final String REQUESTS_TABLE = "Requests";
+    public static final String REQUEST_ID_FLD = "RequestID";
     public static final String RECIPIENT_ID_FLD = "Recipient";
+
+    // Reuse DONATION_ID from above for the foreign key.
 
     // ##################################################################################################################
     // HISTORY TABLE
@@ -92,8 +98,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DONATION_LOCATION_FLD + " TEXT, " +
                 DONATION_STATUS_FLD + " TEXT, " +
                 DONOR_ID_FLD + " INTEGER, " +
-                RECIPIENT_ID_FLD + " INTEGER, " + // That could be null until requested. Hope that doesn't break anything.
                 "FOREIGN KEY (" + DONOR_ID_FLD + ") REFERENCES " + ACCOUNTS_TABLE + "(" + USER_ID_FLD + "), " +
+                "FOREIGN KEY (" + RECIPIENT_ID_FLD + ") REFERENCES " + ACCOUNTS_TABLE + "(" + USER_ID_FLD + ")" +
+                ")"
+        );
+        // #######################################################
+        // FOR REQUESTS OF DONATIONS
+        db.execSQL("CREATE TABLE " + REQUESTS_TABLE + " (" +
+                REQUEST_ID_FLD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DONATION_ID_FLD + " INTEGER, " +
+                RECIPIENT_ID_FLD + " INTEGER, " +
+                "FOREIGN KEY (" + DONATION_ID_FLD + ") REFERENCES " + DONATION_TABLE + "(" + DONATION_ID_FLD + "), " +
                 "FOREIGN KEY (" + RECIPIENT_ID_FLD + ") REFERENCES " + ACCOUNTS_TABLE + "(" + USER_ID_FLD + ")" +
                 ")"
         );
@@ -190,6 +205,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(RECIPIENT_ID_FLD, recipient);
 
         long result = db.insert(DONATION_TABLE, null, contentValues);
+    }
+
+    // ##################################################################################################################
+    // FOR CREATING A REQUEST CHILD FOR A DONATION RECORD
+    public boolean createRequestHistory(int donationID, int recipientID){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(DONATION_ID_FLD, donationID);
+        contentValues.put(RECIPIENT_ID_FLD, recipientID);
+
+        long result = db.insert(DONATION_TABLE, null, contentValues);
+        return result != -1;
     }
 
     // ##################################################################################################################
