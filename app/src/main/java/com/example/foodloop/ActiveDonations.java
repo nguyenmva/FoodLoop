@@ -26,8 +26,8 @@ public class ActiveDonations extends AppCompatActivity {
     private DatabaseHelper foodLoopDB;
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
-    String userID, recipientName;
-    Cursor emailCursor, donationCursor, recipientCursor;
+    String userID, requestorName;
+    Cursor emailCursor, donationCursor, requestorCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,19 @@ public class ActiveDonations extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        btnHome = findViewById(R.id.btnMADtoHome);
+        btnHome.setOnClickListener(v -> {
+            startActivity(new Intent(ActiveDonations.this, DonationHomePage.class));
+        });
 
         // INITIALIZE DATABASE AND SHARED PREFERENCES
         foodLoopDB = new DatabaseHelper(this);
         sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
+        populateDonationList();
+    }
+
+    public void populateDonationList() {
         // POPULATE FIELDS WITH EXISTING ACCOUNT INFO
         String savedEmail = sharedPreference.getString("email", "");
 
@@ -56,7 +64,7 @@ public class ActiveDonations extends AppCompatActivity {
                 userID = emailCursor.getString(emailCursor.getColumnIndexOrThrow(DatabaseHelper.USER_ID_FLD));
             }
 
-            // USE DONOR ID TO FIND ALL DONATIONS THE DONOR HAS MADE
+            // USE DONOR ID TO FIND ALL DONATIONS THAT THE DONOR HAS MADE
             donationCursor = foodLoopDB.getDonationByDonorID(userID);
             if (donationCursor != null) {
                 while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
@@ -66,23 +74,8 @@ public class ActiveDonations extends AppCompatActivity {
                             (DatabaseHelper.DONATION_ITEM_NAME_FLD));
                     String location = donationCursor.getString(donationCursor.getColumnIndexOrThrow
                             (DatabaseHelper.DONATION_LOCATION_FLD));
-                            // PICKUP = DONOR'S ADDRESS (CITY, PROVINCE)
-                            // DELIVERY = RECIPIENT'S ADDRESS (CITY, PROVINCE)
-
-//                    String recipientID = donationCursor.getString(donationCursor.getColumnIndexOrThrow
-//                            (DatabaseHelper.RECIPIENT_ID_FLD)); // WE NEED THE NAME, NOT THE ID
-//
-//                    recipientName = "No Takers"; // DEFAULT FOR WHEN NO ONE HAS REQUESTED THE ITEM
-//                    if (recipientID != null) {
-//                        recipientCursor = foodLoopDB.getUserDataByID(recipientID); // USE RECIPIENT ID TO FIND RECIPIENT NAME
-//                        if (recipientCursor != null && recipientCursor.moveToFirst()) {
-//                            recipientName = recipientCursor.getString(recipientCursor.getColumnIndexOrThrow
-//                                    (DatabaseHelper.USER_NAME_FLD));
-//                        }
-//                        if (recipientCursor != null) {
-//                            recipientCursor.close();
-//                        }
-//                    } // DON'T DELETE THIS COMMENTED-OUT CODE, IT TOOK ME A LONG TIME TO FIGURE OUT
+                    // PICKUP = DONOR'S ADDRESS (CITY, PROVINCE)
+                    // DELIVERY = REQUESTOR'S ADDRESS (CITY, PROVINCE)
 
                     donationList.add(new String[]{status, itemName, location});
                 }
@@ -99,20 +92,15 @@ public class ActiveDonations extends AppCompatActivity {
         }
         // ##################################################################################################################
         // SCARY RECYCLER STUFF
-        donationList.add(new String[]{"Pending", "Canned Soup", "Surrey Food Bank"});
-        donationList.add(new String[]{"Pending", "Fresh Bread", "Bob's Bakery"});
-        donationList.add(new String[]{"Pending", "Bottled Water", "City Shelter"});
-        donationList.add(new String[]{"Pending", "Apple Bag", "Apple Jack's"});
+//        donationList.add(new String[]{"Pending", "Canned Soup", "Surrey Food Bank"});
+//        donationList.add(new String[]{"Pending", "Fresh Bread", "Bob's Bakery"});
+//        donationList.add(new String[]{"Pending", "Bottled Water", "City Shelter"});
+//        donationList.add(new String[]{"Pending", "Apple Bag", "Apple Jack's"});
         // {Status, Item Name, Location}
 
         rv = findViewById(R.id.rvActiveDonations);
         rv.setLayoutManager(new LinearLayoutManager(this));
         GiaDonateAdapter adapter = new GiaDonateAdapter(donationList);
         rv.setAdapter(adapter);
-
-        btnHome = findViewById(R.id.btnMADtoHome);
-        btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(ActiveDonations.this, DonationHomePage.class));
-        });
     }
 }
