@@ -47,16 +47,6 @@ public class ActiveRequests extends AppCompatActivity {
         foodLoopDB = new DatabaseHelper(this);
         sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-//        rv = findViewById(R.id.rvActiveRequest);
-//        rv.setLayoutManager(new LinearLayoutManager(this));
-//        GiaRequestAdapter adapter = new GiaRequestAdapter(ActiveDonations.donationList);
-//        rv.setAdapter(adapter);
-//
-//        btnHome = findViewById(R.id.btnRTtoHome);
-//        btnHome.setOnClickListener(v -> {
-//            startActivity(new Intent(ActiveRequests.this, DonationHomePage.class));
-//        });
-
         populateRequestList();
     }
 

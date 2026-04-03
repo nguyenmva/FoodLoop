@@ -54,49 +54,29 @@ public class ActiveDonations extends AppCompatActivity {
     public void populateDonationList() {
         // POPULATE FIELDS WITH EXISTING ACCOUNT INFO
         String savedEmail = sharedPreference.getString("email", "");
+        if (savedEmail.isEmpty()) {
+            Toast.makeText(this, "Nothing in the sharedPreference", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        donationList.clear();
 
-        if (!savedEmail.isEmpty()) {
-            donationList.clear();
-
-            // USE EMAIL TO FIND DONOR ID
-            emailCursor = foodLoopDB.getUserDataByEmail(savedEmail);
-            if (emailCursor != null && emailCursor.moveToFirst()) {
-                userID = emailCursor.getString(emailCursor.getColumnIndexOrThrow(DatabaseHelper.USER_ID_FLD));
-            }
-
-            // USE DONOR ID TO FIND ALL DONATIONS THAT THE DONOR HAS MADE
-            donationCursor = foodLoopDB.getDonationByDonorID(userID);
-            if (donationCursor != null) {
-                while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
-                    String status = donationCursor.getString(donationCursor.getColumnIndexOrThrow
-                            (DatabaseHelper.DONATION_STATUS_FLD));
-                    String itemName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
-                            (DatabaseHelper.DONATION_ITEM_NAME_FLD));
-                    String location = donationCursor.getString(donationCursor.getColumnIndexOrThrow
-                            (DatabaseHelper.DONATION_LOCATION_FLD));
+        Cursor donationCursor = foodLoopDB.getActiveDonations(savedEmail);
+        if (donationCursor != null) {
+            while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
+                String status = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+                        (DatabaseHelper.DONATION_STATUS_FLD));
+                String itemName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+                        (DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                String requestorName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+                        ("RequestorName"));
+                // Need to add location?
                     // PICKUP = DONOR'S ADDRESS (CITY, PROVINCE)
                     // DELIVERY = REQUESTOR'S ADDRESS (CITY, PROVINCE)
 
-                    donationList.add(new String[]{status, itemName, location});
-                }
+                donationList.add(new String[]{status, itemName, requestorName});
             }
-            if (donationCursor != null) {
-                donationCursor.close();
-            }
+            donationCursor.close();
         }
-        if (emailCursor != null) {
-            emailCursor.close();
-        }
-        else {
-            Toast.makeText(this, "No user logged in.", Toast.LENGTH_SHORT).show();
-        }
-        // ##################################################################################################################
-        // SCARY RECYCLER STUFF
-//        donationList.add(new String[]{"Pending", "Canned Soup", "Surrey Food Bank"});
-//        donationList.add(new String[]{"Pending", "Fresh Bread", "Bob's Bakery"});
-//        donationList.add(new String[]{"Pending", "Bottled Water", "City Shelter"});
-//        donationList.add(new String[]{"Pending", "Apple Bag", "Apple Jack's"});
-        // {Status, Item Name, Location}
 
         rv = findViewById(R.id.rvActiveDonations);
         rv.setLayoutManager(new LinearLayoutManager(this));

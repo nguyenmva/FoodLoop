@@ -248,7 +248,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // FOR CHECKING STUFF
      public boolean checkEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + USERS_TABLE + " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
+        Cursor cursor = db.rawQuery(
+        "SELECT *" +
+                " FROM " + USERS_TABLE +
+                " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
 
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
@@ -257,7 +260,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean checkLoginCredentials(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + USERS_TABLE +
+        Cursor cursor = db.rawQuery(
+        "SELECT *" +
+                " FROM " + USERS_TABLE +
                 " WHERE " + USER_EMAIL_FLD + "=? AND " + USER_PASSWORD_FLD + "=?", new String[]{email, password});
         boolean success = cursor.getCount() > 0;
         cursor.close();
@@ -269,46 +274,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getUserDataByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + USERS_TABLE +
-                        " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
+        "SELECT *" +
+                " FROM " + USERS_TABLE +
+                " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
     }
     public Cursor getUserDataByUserID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + USERS_TABLE +
-                        " WHERE " + USER_ID_FLD + " = ?", new String[]{id});
+        "SELECT *" +
+                " FROM " + USERS_TABLE +
+                " WHERE " + USER_ID_FLD + " = ?", new String[]{id});
     }
     public Cursor getDonationByDonorID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + DONATION_TABLE +
-                        " WHERE " + DONOR_ID_FLD + " = ?", new String[]{id});
+        "SELECT *" +
+                " FROM " + DONATION_TABLE +
+                " WHERE " + DONOR_ID_FLD + " = ?", new String[]{id});
     }
     public Cursor getDonationByRequestorID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + REQUEST_TABLE +
-                        " WHERE " + REQUESTOR_ID_FLD + " = ?", new String[]{id});
+        "SELECT *" +
+                " FROM " + REQUEST_TABLE +
+                " WHERE " + REQUESTOR_ID_FLD + " = ?", new String[]{id});
     }
     public Cursor getDonationByDonationID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + DONATION_TABLE +
-                        " WHERE " + DONATION_ID_FLD + " = ?", new String[]{id});
+        "SELECT *" +
+                " FROM " + DONATION_TABLE +
+                " WHERE " + DONATION_ID_FLD + " = ?", new String[]{id});
+    }
+    public Cursor getActiveDonations(String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Requestor." + USER_NAME_FLD + " AS RequestorName " +
+                " FROM " + DONATION_TABLE +
+                " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +      // What got requested?
+                " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + // Who requested it?
+                " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +            // Who donated it (the one who's logged in)?
+                " WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+        /*
+        SELECT Donations.Status, Donations.ItemName, Requestor.Name (Using ALIAS "RequestorName")
+        FROM Donations
+        JOIN Requests ON Donations.DonationID = Requests.DonationID
+        JOIN Users Requestor ON Requests.RequestorID = Requestor.UserID
+        JOIN Users Donor ON Donations.DonorID = Donor.UserID
+        WHERE Donor.EmailAddress = ?
+         */
     }
     public Cursor getActiveRequests(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Donations." + DONATION_LOCATION_FLD +
-                    " FROM " + REQUEST_TABLE +
-                    " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
-                    " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                    " WHERE Users." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Donations." + DONATION_LOCATION_FLD +
+                " FROM " + REQUEST_TABLE +
+                " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
+                " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
+                " WHERE Users." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
         /*
         SELECT Donations.Status, Donations.ItemName, Donations.Location
         FROM Requests
@@ -325,33 +348,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getDonationByItemSearch(String itemSearch) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + DONATION_TABLE +
-                        " WHERE " + DONATION_ITEM_NAME_FLD + " LIKE ?", new String[]{"%" + itemSearch + "%"});
+        "SELECT *" +
+                " FROM " + DONATION_TABLE +
+                " WHERE " + DONATION_ITEM_NAME_FLD + " LIKE ?", new String[]{"%" + itemSearch + "%"});
     }
     public Cursor getDonationByLocationSearch(String locationSearch) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + DONATION_TABLE +
-                        " WHERE " + DONATION_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
+        "SELECT *" +
+                " FROM " + DONATION_TABLE +
+                " WHERE " + DONATION_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
     }
     public Cursor getAllAccounts(){
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + USERS_TABLE, null);
+        "SELECT *" +
+                " FROM " + USERS_TABLE, null);
     }
     public Cursor getAllDonations(){
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + DONATION_TABLE, null);
+        "SELECT *" +
+                " FROM " + DONATION_TABLE, null);
     }
     public Cursor getAllRequests(){
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *" +
-                        " FROM " + REQUEST_TABLE, null);
+        "SELECT *" +
+                " FROM " + REQUEST_TABLE, null);
     }
 }
