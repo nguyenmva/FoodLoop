@@ -35,11 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DONATION_CATEGORY_FLD = "Category";
     public static final String DONATION_CATEGORY_SPINNER_FLD = "CategorySpinnerIndex";
     public static final String DONATION_EXPIRY_DATE_FLD = "ExpiryDate";
-    public static final String DONATION_PICKUP_TIME_FLD = "PickupTime";
-    public static final String DONATION_PICKUP_TIME_SPINNER_FLD = "PickupTimeSpinnerIndex";
     public static final String DONATION_OFFER_TYPE_FLD = "OfferType";
     public static final String DONATION_PRICE_FLD = "Price";
-    public static final String DONATION_LOCATION_FLD = "Location";
     public static final String DONATION_STATUS_FLD = "Status";
     public static final String DONOR_ID_FLD = "Donor";
     // ##################################################################################################################
@@ -47,8 +44,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REQUEST_TABLE = "Requests";
     public static final String REQUEST_ID_FLD = "RequestID";
     public static final String REQUESTOR_ID_FLD = "Requestor";
+    public static final String REQUEST_PICKUP_TIME_FLD = "PickupTime";
+    public static final String REQUEST_PICKUP_TIME_SPINNER_FLD = "PickupTimeSpinnerIndex";
+    public static final String REQUEST_PICKUP_DATE_FLD = "PickupDate";
+    public static final String REQUEST_LOCATION_FLD = "Location";
 
-    // Reuse DONATION_ID from above for the foreign key.
+    // MOVE LOCATION FROM THE DONATION_TABLE TO THE REQUEST_TABLE?
+    // MOVE PICKUP TIME FROM THE DONATION_TABLE TO THE REQUEST_TABLE?
 
     // ##################################################################################################################
     // HISTORY TABLE
@@ -91,11 +93,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DONATION_CATEGORY_FLD + " TEXT, " +
                 DONATION_CATEGORY_SPINNER_FLD + " INTEGER, " +
                 DONATION_EXPIRY_DATE_FLD + " DATE, " +
-                DONATION_PICKUP_TIME_FLD + " TEXT, " +
-                DONATION_PICKUP_TIME_SPINNER_FLD + " INTEGER, " +
                 DONATION_OFFER_TYPE_FLD + " TEXT, " +
                 DONATION_PRICE_FLD + " DOUBLE, " +
-                DONATION_LOCATION_FLD + " TEXT, " +
                 DONATION_STATUS_FLD + " TEXT, " +
                 DONOR_ID_FLD + " INTEGER, " +
                 "FOREIGN KEY (" + DONOR_ID_FLD + ") REFERENCES " + USERS_TABLE + "(" + USER_ID_FLD + ") " +
@@ -107,6 +106,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 REQUEST_ID_FLD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DONATION_ID_FLD + " INTEGER, " +
                 REQUESTOR_ID_FLD + " INTEGER, " +
+                REQUEST_PICKUP_TIME_FLD + " TEXT, " +
+                REQUEST_PICKUP_TIME_SPINNER_FLD + " INTEGER, " +
+                REQUEST_PICKUP_DATE_FLD + " DATE, " +
+                REQUEST_LOCATION_FLD + " TEXT, " +
                 "FOREIGN KEY (" + DONATION_ID_FLD + ") REFERENCES " + DONATION_TABLE + "(" + DONATION_ID_FLD + "), " +
                 "FOREIGN KEY (" + REQUESTOR_ID_FLD + ") REFERENCES " + USERS_TABLE + "(" + USER_ID_FLD + ")" +
                 ")"
@@ -126,6 +129,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + USERS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + DONATION_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + REQUEST_TABLE);
         onCreate(db);
     }
 
@@ -155,8 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ##################################################################################################################
     // FOR CREATING A DONATION RECORD
     public boolean createDonation(String itemName, int quantity, String category, int categorySpinner,
-                                  String expiryDate, String pickupTime, int pickupTimeSpinner, String offerType,
-                                   double price, String location, String status, int donor){
+                                  String expiryDate, String offerType, double price, String status, int donor){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -166,13 +169,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(DONATION_CATEGORY_FLD, category);
         contentValues.put(DONATION_CATEGORY_SPINNER_FLD, categorySpinner);
         contentValues.put(DONATION_EXPIRY_DATE_FLD, expiryDate);
-        contentValues.put(DONATION_PICKUP_TIME_FLD, pickupTime);
-        contentValues.put(DONATION_PICKUP_TIME_SPINNER_FLD, pickupTimeSpinner);
         contentValues.put(DONATION_OFFER_TYPE_FLD, offerType);
         contentValues.put(DONATION_PRICE_FLD, price);
-        contentValues.put(DONATION_LOCATION_FLD, location);
-            // PICKUP = DONOR'S CITY
-            // DELIVERY = RECIPIENT'S CITY
         contentValues.put(DONATION_STATUS_FLD, status);
         contentValues.put(DONOR_ID_FLD, donor);
 
@@ -182,13 +180,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR CREATING A REQUEST RECORD
-    public boolean createRequest(int donationID, int requestorID){
+    public boolean createRequest(int donationID, int requestorID, String pickupTime, int pickupTimeSpinner, String location){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(DONATION_ID_FLD, donationID);
         contentValues.put(REQUESTOR_ID_FLD, requestorID);
+        contentValues.put(REQUEST_PICKUP_TIME_FLD, pickupTime);
+        contentValues.put(REQUEST_PICKUP_TIME_SPINNER_FLD, pickupTimeSpinner);
+        contentValues.put(REQUEST_LOCATION_FLD, location);
+        // PICKUP = DONOR'S CITY
+        // DELIVERY = RECIPIENT'S CITY
 
         long result = db.insert(REQUEST_TABLE, null, contentValues);
         return result != -1;
@@ -306,7 +309,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " FROM " + DONATION_TABLE +
                 " WHERE " + DONATION_ID_FLD + " = ?", new String[]{id});
     }
-    public Cursor getActiveDonations(String userEmail) {
+    public Cursor getActiveDonations(String userEmail) { // Shows only donations that have a request.
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
         "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Requestor." + USER_NAME_FLD + " AS RequestorName " +
@@ -324,10 +327,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         WHERE Donor.EmailAddress = ?
          */
     }
-    public Cursor getActiveRequests(String userEmail) {
+    public Cursor getActiveRequests(String userEmail) { //
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Donations." + DONATION_LOCATION_FLD +
+        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Donations." + REQUEST_LOCATION_FLD +
                 " FROM " + REQUEST_TABLE +
                 " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
                 " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
@@ -357,7 +360,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(
         "SELECT *" +
                 " FROM " + DONATION_TABLE +
-                " WHERE " + DONATION_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
+                " WHERE " + REQUEST_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
     }
     public Cursor getAllAccounts(){
         SQLiteDatabase db = this.getReadableDatabase();

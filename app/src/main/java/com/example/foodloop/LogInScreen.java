@@ -91,76 +91,58 @@ public class LogInScreen extends AppCompatActivity {
             if (donationResult.getCount() == 0) {
 
                 foodLoopDB.createDonation("Gia's Yogourt", 4, "Dairy", 4,
-                        "2026-04-04", "Morning (9AM-11AM)", 1, "Discounted", 8.00,
-                        "Surrey, BC", "Pending", 2);
+                        "2026-06-04", "Discounted", 8.00, "Pending", 2);
 
                 foodLoopDB.createDonation("Gia's Juice Boxes", 5, "Beverages", 5,
-                        "2026-04-05", "Afternoon (1PM-4PM)", 2, "Discounted", 5.00,
-                        "Surrey, BC", "Pending", 2);
+                        "2026-06-05", "Discounted", 5.00, "Pending", 2);
 
                 foodLoopDB.createDonation("Gia's Soda Cans", 15, "Beverages", 5,
-                        "2026-04-06", "Evening (5PM-7PM)", 3, "Discounted", 15.00,
-                        "Surrey, BC", "Pending", 2);
+                        "2026-06-06", "Discounted", 15.00, "Pending", 2);
 
                 foodLoopDB.createDonation("Gia's Frozen Pizza", 6, "Frozen Goods", 6,
-                        "2026-04-07", "Morning (9AM-11AM)", 1, "Discounted", 600.00,
-                        "Surrey, BC", "Approved", 2);
+                        "2026-06-07", "Discounted", 600.00, "Approved", 2);
 
                 foodLoopDB.createDonation("Gia's Canned Peaches", 7, "Canned Goods", 7,
-                        "2026-04-08", "Afternoon (1PM-4PM)", 2, "Discounted", 999.99,
-                        "Surrey, BC", "Rejected", 2);
+                        "2026-06-08", "Discounted", 999.99, "Rejected", 2);
 
                 foodLoopDB.createDonation("Gia's Canned Tuna", 17, "Canned Goods", 7,
-                        "2026-04-09", "Evening (5PM-7PM)", 3, "Discounted", 1999.99,
-                        "Surrey, BC", "Rejected", 2);
+                        "2026-06-09", "Discounted", 1999.99, "Rejected", 2);
 
                 foodLoopDB.createDonation("Gia's Cookies", 8, "Bakery", 1,
-                        "2026-04-10", "Morning (9AM-11AM)", 1, "Discounted", 2.00,
-                        "Surrey, BC", "Approved", 2);
+                        "2026-06-10", "Discounted", 2.00, "Approved", 2);
 
                 foodLoopDB.createDonation("Gia's Grapes", 9, "Produce", 2,
-                        "2026-04-11", "Afternoon (1PM-4PM)", 2, "Discounted", 0.99,
-                        "Surrey, BC", "Rejected", 2);
+                        "2026-06-11", "Discounted", 0.99, "Rejected", 2);
 
                 foodLoopDB.createDonation("Gia's Blueberries", 19, "Produce", 2,
-                        "2026-04-12", "Evening (5PM-7PM)", 3, "Discounted", 1.99,
-                        "Surrey, BC", "Rejected", 2);
+                        "2026-06-12", "Discounted", 1.99, "Rejected", 2);
 
                 foodLoopDB.createDonation("Belle's Donut", 1, "Bakery", 1,
-                        "2026-04-01", "Morning (9AM-11AM)", 1, "Free", 0,
-                        "Vancouver, BC", "Pending", 1);
+                        "2026-06-01", "Free", 0, "Pending", 1);
 
                 foodLoopDB.createDonation("Belle's Apples", 2, "Produce", 2,
-                        "2026-04-02", "Afternoon (1PM-4PM)", 2, "Free", 0,
-                        "Vancouver, BC", "Pending", 1);
+                        "2026-06-02", "Free", 0, "Pending", 1);
 
                 foodLoopDB.createDonation("Belle's Chicken Nuggets", 3, "Meat", 3,
-                        "2026-04-03", "Evening (5PM-7PM)", 3, "Free", 0,
-                        "Vancouver, BC", "Pending", 1);
+                        "2026-06-03", "Free", 0, "Pending", 1);
 
                 foodLoopDB.createDonation("Michael's Bread", 1, "Bakery", 1,
-                        "2026-04-01", "Morning (9AM-11AM)", 1, "Free", 0,
-                        "Coquitlam, BC", "Pending", 4);
+                        "2026-06-01", "Free", 0, "Pending", 4);
 
                 foodLoopDB.createDonation("Michael's Oranges", 2, "Produce", 2,
-                        "2026-04-02", "Afternoon (1PM-4PM)", 2, "Free", 0,
-                        "Coquitlam, BC", "Pending", 4);
+                        "2026-06-02", "Free", 0, "Pending", 4);
 
                 foodLoopDB.createDonation("Michael's Bacon", 3, "Meat", 3,
-                        "2026-04-03", "Evening (5PM-7PM)", 3, "Free", 0,
-                        "Coquitlam, BC", "Pending", 4);
+                        "2026-06-03", "Free", 0, "Pending", 4);
 
                 foodLoopDB.createDonation("Nilesh's Naan", 1, "Bakery", 1,
-                        "2026-04-01", "Morning (9AM-11AM)", 1, "Free", 0,
-                        "Burnaby, BC", "Pending", 3);
+                        "2026-06-01", "Free", 0, "Pending", 3);
 
                 foodLoopDB.createDonation("Nilesh's Pears", 2, "Produce", 2,
-                        "2026-04-02", "Afternoon (1PM-4PM)", 2, "Free", 0,
-                        "Burnaby, BC", "Pending", 3);
+                        "2026-06-02", "Free", 0, "Pending", 3);
 
                 foodLoopDB.createDonation("Nilesh's Steak", 3, "Meat", 3,
-                        "2026-04-03", "Evening (5PM-7PM)", 3, "Free", 0,
-                        "Burnaby, BC", "Pending", 3);
+                        "2026-06-03", "Free", 0, "Pending", 3);
             }
             donationResult.close();
         }
@@ -171,28 +153,28 @@ public class LogInScreen extends AppCompatActivity {
             if (requestResult.getCount() == 0) {
                 // Belle = 1, Gia = 2, Nilesh = 3, Michael = 4
                 // Requests for Gia's donations.
-                foodLoopDB.createRequest(1, 1);
-                foodLoopDB.createRequest(2, 3);
-                foodLoopDB.createRequest(3, 4);
-                foodLoopDB.createRequest(4, 1);
-                foodLoopDB.createRequest(5, 3);
-                foodLoopDB.createRequest(6, 4);
-                foodLoopDB.createRequest(7, 4); // Testing multiple requests.
-                foodLoopDB.createRequest(7, 1); // Everyone wants Gia's cookies.
-                foodLoopDB.createRequest(7, 3);
+                foodLoopDB.createRequest(1, 1, "Evening (5PM-7PM)", 3, "Burnaby, BC");
+                foodLoopDB.createRequest(2, 3, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
+                foodLoopDB.createRequest(3, 4, "Morning (9AM-11AM)", 1, "Vancouver, BC");
+                foodLoopDB.createRequest(4, 1, "Morning (9AM-11AM)", 1, "Surrey, BC");
+                foodLoopDB.createRequest(5, 3, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
+                foodLoopDB.createRequest(6, 4, "Evening (5PM-7PM)", 3, "Burnaby, BC");
+                foodLoopDB.createRequest(7, 4, "Morning (9AM-11AM)", 1, "Surrey, BC");
+                foodLoopDB.createRequest(7, 1, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
+                foodLoopDB.createRequest(7, 3, "Evening (5PM-7PM)", 3, "Burnaby, BC");
                 // No requests for items 8 and 9.
                 // Requests for Belle's donations.
-                foodLoopDB.createRequest(10, 2);
+                foodLoopDB.createRequest(10, 2, "Morning (9AM-11AM)", 1, "Surrey, BC");
                 // No requests for item 11.
-                foodLoopDB.createRequest(12, 3);
+                foodLoopDB.createRequest(12, 3, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
                 // Requests for Michael's donations.
-                foodLoopDB.createRequest(13, 1);
+                foodLoopDB.createRequest(13, 1, "Evening (5PM-7PM)", 3, "Burnaby, BC");
                 // No requests for item 14.
-                foodLoopDB.createRequest(15, 2);
+                foodLoopDB.createRequest(15, 2, "Morning (9AM-11AM)", 1, "Surrey, BC");
                 // Requests for Nilesh's donations.
-                foodLoopDB.createRequest(16, 4);
+                foodLoopDB.createRequest(16, 4, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
                 // No requests for item 17.
-                foodLoopDB.createRequest(18, 1);
+                foodLoopDB.createRequest(18, 1, "Evening (5PM-7PM)", 3, "Burnaby, BC");
             }
             requestResult.close();
         }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -63,7 +62,7 @@ public class ActiveRequests extends AppCompatActivity {
             while (requestCursor.moveToNext()) {
                 String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
-                String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_LOCATION_FLD));
+                String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD));
 
                 requestList.add(new String[]{status, itemName, location});
 
