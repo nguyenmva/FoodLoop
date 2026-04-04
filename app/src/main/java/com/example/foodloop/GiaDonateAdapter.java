@@ -16,6 +16,7 @@ import java.util.List;
 public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.ViewHolder> {
 
     final List<String[]> data;
+    private DatabaseHelper foodLoopDB;
     private static final String[] options = {"Select", "Approved", "Rejected"};
 
     public GiaDonateAdapter(List<String[]> data) {

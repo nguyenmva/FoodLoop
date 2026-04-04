@@ -109,6 +109,10 @@
     <string name="btnMADReqDon">Requested Donations</string>
     <string name="btnNotif">Send Notification</string>
 
+    <!-- Item_Donation XML -->
+    <string name="btnEdit">Edit</string>
+    <string name="btnRemove">Delete</string>
+
     <!-- Active Requests Tracking -->
     <string name="txtRTTitleName">Request Tracker</string>
 
@@ -174,8 +178,6 @@
         <item>Canned Goods</item>
         <item>Dry Goods</item>
     </string-array>
-
-
 
     <!--Edit Donation Page -->
     <string name="txtEditItem">Edit Item</string>

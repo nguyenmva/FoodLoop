@@ -41,11 +41,13 @@ public class ActiveDonations extends AppCompatActivity {
             return insets;
         });
 
+        //Set buttons and recycler view
         btnAllDonations = findViewById(R.id.btnMADAllDon);
         btnReqDonations = findViewById(R.id.btnMADReqDon);
         rv = findViewById(R.id.rvActiveDonations);
-
         btnHome = findViewById(R.id.btnMADtoHome);
+
+        //Assign Home button function
         btnHome.setOnClickListener(v -> {
             startActivity(new Intent(ActiveDonations.this, DonationHomePage.class));
         });
@@ -54,6 +56,7 @@ public class ActiveDonations extends AppCompatActivity {
         foodLoopDB = new DatabaseHelper(this);
         sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
+        //Show all donations upon loading page
         showAllDonations(rv);
     }
 
@@ -75,16 +78,11 @@ public class ActiveDonations extends AppCompatActivity {
                         (DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String requestorName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
                         ("RequestorName"));
-                // Need to add location?
-                // PICKUP = DONOR'S ADDRESS (CITY, PROVINCE)
-                // DELIVERY = REQUESTOR'S ADDRESS (CITY, PROVINCE)
-
                 donationList.add(new String[]{status, itemName, requestorName});
             }
             donationCursor.close();
         }
 
-//        rv = findViewById(R.id.rvActiveDonations);
         rv.setLayoutManager(new LinearLayoutManager(this));
         GiaDonateAdapter adapter = new GiaDonateAdapter(donationList);
         rv.setAdapter(adapter);
@@ -108,16 +106,11 @@ public class ActiveDonations extends AppCompatActivity {
                         (DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String requestorName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
                         ("RequestorName"));
-                // Need to add location?
-                    // PICKUP = DONOR'S ADDRESS (CITY, PROVINCE)
-                    // DELIVERY = REQUESTOR'S ADDRESS (CITY, PROVINCE)
-
                 donationList.add(new String[]{status, itemName, requestorName});
             }
             donationCursor.close();
         }
 
-//        rv = findViewById(R.id.rvActiveDonations);
         rv.setLayoutManager(new LinearLayoutManager(this));
         GiaDonateAdapter adapter = new GiaDonateAdapter(donationList);
         rv.setAdapter(adapter);
