@@ -78,8 +78,7 @@ public class Donation_Add_Page extends AppCompatActivity {
             // NEEDS MORE ERROR HANDLING??
             boolean inserted = foodLoopDB.createDonation(
                     itemName, quantity, category, categoryIndex,
-                    expiryDate, pickupTime, pickupIndex,
-                    offerType, price, location, status, donor
+                    expiryDate, offerType, price, status, donor
             );
             // PROVIDE CONFIRMATION TO THE USER
             if (inserted) {
