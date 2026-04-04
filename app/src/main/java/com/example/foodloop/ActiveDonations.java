@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class ActiveDonations extends AppCompatActivity {
 
-    Button btnHome;
+    Button btnHome, btnAllDonations, btnReqDonations;
     RecyclerView rv;
     static List<String[]> donationList = new ArrayList<>();
     private DatabaseHelper foodLoopDB;
@@ -39,6 +40,11 @@ public class ActiveDonations extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        btnAllDonations = findViewById(R.id.btnMADAllDon);
+        btnReqDonations = findViewById(R.id.btnMADReqDon);
+        rv = findViewById(R.id.rvActiveDonations);
+
         btnHome = findViewById(R.id.btnMADtoHome);
         btnHome.setOnClickListener(v -> {
             startActivity(new Intent(ActiveDonations.this, DonationHomePage.class));
@@ -48,10 +54,43 @@ public class ActiveDonations extends AppCompatActivity {
         foodLoopDB = new DatabaseHelper(this);
         sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-        populateDonationList();
+        showAllDonations(rv);
     }
 
-    public void populateDonationList() {
+    public void showAllDonations(View v) {
+        // POPULATE FIELDS WITH EXISTING ACCOUNT INFO
+        String savedEmail = sharedPreference.getString("email", "");
+        if (savedEmail.isEmpty()) {
+            Toast.makeText(this, "Nothing in the sharedPreference", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        donationList.clear();
+
+        Cursor donationCursor = foodLoopDB.getAllDonationsWithRequestors();
+        if (donationCursor != null) {
+            while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
+                String status = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+                        (DatabaseHelper.DONATION_STATUS_FLD));
+                String itemName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+                        (DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                String requestorName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
+                        ("RequestorName"));
+                // Need to add location?
+                // PICKUP = DONOR'S ADDRESS (CITY, PROVINCE)
+                // DELIVERY = REQUESTOR'S ADDRESS (CITY, PROVINCE)
+
+                donationList.add(new String[]{status, itemName, requestorName});
+            }
+            donationCursor.close();
+        }
+
+//        rv = findViewById(R.id.rvActiveDonations);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        GiaDonateAdapter adapter = new GiaDonateAdapter(donationList);
+        rv.setAdapter(adapter);
+    }
+
+    public void showRequestedDonations(View v) {
         // POPULATE FIELDS WITH EXISTING ACCOUNT INFO
         String savedEmail = sharedPreference.getString("email", "");
         if (savedEmail.isEmpty()) {
@@ -78,7 +117,7 @@ public class ActiveDonations extends AppCompatActivity {
             donationCursor.close();
         }
 
-        rv = findViewById(R.id.rvActiveDonations);
+//        rv = findViewById(R.id.rvActiveDonations);
         rv.setLayoutManager(new LinearLayoutManager(this));
         GiaDonateAdapter adapter = new GiaDonateAdapter(donationList);
         rv.setAdapter(adapter);
