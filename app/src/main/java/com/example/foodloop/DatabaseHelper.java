@@ -47,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REQUEST_PICKUP_TIME_FLD = "PickupTime";
     public static final String REQUEST_PICKUP_TIME_SPINNER_FLD = "PickupTimeSpinnerIndex";
     public static final String REQUEST_PICKUP_DATE_FLD = "PickupDate";
+    public static final String REQUEST_COLLECTION_TYPE_FLD = "CollectionType";
     public static final String REQUEST_LOCATION_FLD = "Location";
 
     // MOVE LOCATION FROM THE DONATION_TABLE TO THE REQUEST_TABLE?
@@ -109,6 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 REQUEST_PICKUP_TIME_FLD + " TEXT, " +
                 REQUEST_PICKUP_TIME_SPINNER_FLD + " INTEGER, " +
                 REQUEST_PICKUP_DATE_FLD + " DATE, " +
+                REQUEST_COLLECTION_TYPE_FLD + " TEXT, " +
                 REQUEST_LOCATION_FLD + " TEXT, " +
                 "FOREIGN KEY (" + DONATION_ID_FLD + ") REFERENCES " + DONATION_TABLE + "(" + DONATION_ID_FLD + "), " +
                 "FOREIGN KEY (" + REQUESTOR_ID_FLD + ") REFERENCES " + USERS_TABLE + "(" + USER_ID_FLD + ")" +
@@ -180,7 +182,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR CREATING A REQUEST RECORD
-    public boolean createRequest(int donationID, int requestorID, String pickupTime, int pickupTimeSpinner, String location){
+    public boolean createRequest(int donationID, int requestorID, String pickupTime, int pickupTimeSpinner, String collectionType,String location){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -189,6 +191,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(REQUESTOR_ID_FLD, requestorID);
         contentValues.put(REQUEST_PICKUP_TIME_FLD, pickupTime);
         contentValues.put(REQUEST_PICKUP_TIME_SPINNER_FLD, pickupTimeSpinner);
+        contentValues.put(REQUEST_PICKUP_DATE_FLD, "2026-06-01");
+        contentValues.put(REQUEST_COLLECTION_TYPE_FLD, collectionType);
         contentValues.put(REQUEST_LOCATION_FLD, location);
         // PICKUP = DONOR'S CITY
         // DELIVERY = RECIPIENT'S CITY

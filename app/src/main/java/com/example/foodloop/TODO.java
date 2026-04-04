@@ -29,6 +29,7 @@ TODO: Make item class
 TODO: Figure out JOIN to simplify the queries.
 TODO: Update GiaDonateAdapter.java to write status updates to the DB.
 TODO: Move the donation's location data from the donation table to the request table.
+TODO: Edit class names for better name cohesion.
 
 
 

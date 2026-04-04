@@ -17,7 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Donation_Add_Page extends AppCompatActivity {
     private EditText edtFoodName, edtQuantity, edtExpiryDate, edtPrice;
-    private Spinner spCategory, spAvailTime;
+    private Spinner spCategory;
+//    spAvailTime;
     private RadioButton rdbFree, rdbDiscounted;
     private DatabaseHelper foodLoopDB;
 
@@ -39,7 +40,7 @@ public class Donation_Add_Page extends AppCompatActivity {
         edtExpiryDate = findViewById(R.id.edtExpiryDate);
         edtPrice = findViewById(R.id.edtPrice);
         spCategory = findViewById(R.id.spCategory);
-        spAvailTime = findViewById(R.id.spAvailTime);
+//        spAvailTime = findViewById(R.id.spAvailTime);
         rdbFree = findViewById(R.id.rdbFree);
         rdbDiscounted = findViewById(R.id.rdbDiscounted);
 
@@ -53,7 +54,6 @@ public class Donation_Add_Page extends AppCompatActivity {
                 edtPrice.setText("0");
             }
         });
-
         rdbDiscounted.setOnClickListener(view ->{
             if(rdbDiscounted.isChecked()){
                 edtPrice.setVisibility(View.VISIBLE);
@@ -76,12 +76,13 @@ public class Donation_Add_Page extends AppCompatActivity {
                 || TextUtils.isEmpty(edtExpiryDate.getText().toString())
 //                || TextUtils.isEmpty(edtPrice.getText().toString())
                 || (withPrice && emptyPrice) //Throws an error if Discounted is chosen and there is no price indicated
-                || (!rdbDiscounted.isChecked() && !rdbFree.isChecked())
+                || (!rdbDiscounted.isChecked() && !rdbFree.isChecked()) //User must pick or it will throw an error
                 || TextUtils.isEmpty(spCategory.getSelectedItem().toString())
-                || TextUtils.isEmpty(spAvailTime.getSelectedItem().toString())
+//                || TextUtils.isEmpty(spAvailTime.getSelectedItem().toString())
                 || (!rdbFree.isChecked() && !rdbDiscounted.isChecked())
-                || (spCategory.getSelectedItemPosition() == 0)
-                || (spAvailTime.getSelectedItemPosition() == 0)) {
+                || (spCategory.getSelectedItemPosition() == 0))
+//                || (spAvailTime.getSelectedItemPosition() == 0))
+        {
             Toast.makeText(Donation_Add_Page.this, "All areas must be filled or selected.", Toast.LENGTH_LONG).show();
         }
         else {
@@ -91,8 +92,8 @@ public class Donation_Add_Page extends AppCompatActivity {
             String category = spCategory.getSelectedItem().toString();
             int categoryIndex = spCategory.getSelectedItemPosition();
             String expiryDate = edtExpiryDate.getText().toString();
-            String pickupTime = spAvailTime.getSelectedItem().toString();
-            int pickupIndex = spAvailTime.getSelectedItemPosition();
+//            String pickupTime = spAvailTime.getSelectedItem().toString();
+//            int pickupIndex = spAvailTime.getSelectedItemPosition();
 
             double price;
             if (rdbFree.isChecked()) {
@@ -102,7 +103,7 @@ public class Donation_Add_Page extends AppCompatActivity {
             }
 
             String offerType = rdbFree.isChecked() ? "Free" : "Discounted";
-            String location = "Pickup or Delivery Address (City)"; // WILL CHANGE IT TO GET FROM DB LATER.
+//            String location = "Pickup or Delivery Address (City)"; // WILL CHANGE IT TO GET FROM DB LATER.
             String status = "Pending"; // DEFAULT STRING?
             int donor = 2; // WILL CHANGE IT TO GET FROM DB LATER.
 
