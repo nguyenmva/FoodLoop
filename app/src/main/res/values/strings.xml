@@ -105,6 +105,8 @@
 
     <!-- Active Donations Tracking -->
     <string name="txtMADTitleName">Manage Active Donations</string>
+    <string name="btnMADAllDon">All Donations</string>
+    <string name="btnMADReqDon">Requested Donations</string>
 
     <!-- Active Requests Tracking -->
     <string name="txtRTTitleName">Request Tracker</string>
@@ -148,7 +150,6 @@
     <!-- Donation Add Page    -->
     <string name="txtAddItem1">Add Item</string>
     <string name="edtItemNameHint">e.g. Rice, gluten free bread, canned tuna</string>
-    <string name="txtAvailTime1">Availability for Pickup</string>
     <string name="edtQuantityHint">Enter a number</string>
     <string name="edtCategory">Category</string>
     <string name="txtExpiryDate1">Expiry Date</string>
@@ -170,13 +171,10 @@
         <item>Beverages</item>
         <item>Frozen Goods</item>
         <item>Canned Goods</item>
+        <item>Dry Goods</item>
     </string-array>
-    <string-array name="Avail_Pickup">
-        <item>Select a Time</item>
-        <item>Morning (9AM-11AM)</item>
-        <item>Afternoon (1PM-4PM)</item>
-        <item>Evening (5PM-7PM)</item>
-    </string-array>
+
+
 
     <!--Edit Donation Page -->
     <string name="txtEditItem">Edit Item</string>
@@ -185,4 +183,19 @@
     <string name="btnBackToProfile">Back to Profile</string>
     <!-- =================================================================  -->
 
+<!--  Requestor Collection Options -->
+    <string name="txtAvailTime1">Time Slot</string>
+    <string name="txtCollection">Collection Type</string>
+    <string-array name="Collection_Options">
+        <item>Pick Up</item>
+        <item>Delivery</item>
+        <item>Both</item>
+    </string-array>
+    <string-array name="Avail_Pickup">
+        <item>Select a Time</item>
+        <item>Morning (9AM-11AM)</item>
+        <item>Afternoon (1PM-4PM)</item>
+        <item>Evening (5PM-7PM)</item>
+    </string-array>
+    <string name="txtDate">Date Preferred</string>
 </resources>

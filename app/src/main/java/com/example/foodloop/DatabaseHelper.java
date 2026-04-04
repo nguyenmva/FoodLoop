@@ -384,4 +384,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         "SELECT *" +
                 " FROM " + REQUEST_TABLE, null);
     }
+
+    public Cursor getAllDonationsWithRequestors() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT D." + DONATION_STATUS_FLD + ", D." + DONATION_ITEM_NAME_FLD +
+                        ", U." + USER_NAME_FLD + " AS RequestorName " + "FROM " + DONATION_TABLE + " D " +
+                        "LEFT JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
+                        "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD, null);
+    }
 }
