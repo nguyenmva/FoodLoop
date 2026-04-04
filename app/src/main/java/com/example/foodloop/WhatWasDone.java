@@ -11,6 +11,10 @@ public class WhatWasDone {
 -Moved the Remember Me function to another sharedPreference to solve a bug. We're reading the email from the the sharedPreference to see who's logged in. If Remember Me is never checked, nothing gets saved/updated to sharedPreferences. Then either "no one" is logged in or the last email saved is still logged in. Now email and password are always saved and checkbox state is saved separately.
 -Deleted AdapterAccounts.java, it's not needed.
 
+2026/04/04
+-Added filters for ActiveDonations -- all Donations vs Donations with Request
+-Added NOTIF button for ActiveDonations -- still need to code
+
 
 
 

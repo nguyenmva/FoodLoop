@@ -34,24 +34,32 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String[] item = data.get(position);
 
+        //Set text views
         holder.tvStatus.setText(item[0]);
         holder.tvItem.setText(item[1]);
         holder.tvRecipient.setText(item[2]);
 
+        //Start bind
         holder.isBinding = true;
 
-        if (holder.spinnerRequest.getAdapter() == null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                    holder.itemView.getContext(),
-                    android.R.layout.simple_spinner_item,
-                    options
-            );
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            holder.spinnerRequest.setAdapter(adapter);
+        //Condition to show spinner control
+        if (item[2] == null) {
+            //No requestor = no approval/rejection
+            holder.spinnerRequest.setVisibility(View.GONE);
+        } else {
+            //Requestor = can approve/reject
+            holder.spinnerRequest.setVisibility(View.VISIBLE);
+
+            //Approve/reject possibilities
+            if (holder.spinnerRequest.getAdapter() == null) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(holder.itemView.getContext(),
+                        android.R.layout.simple_spinner_item, options);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                holder.spinnerRequest.setAdapter(adapter);
+            }
         }
 
-        holder.spinnerRequest.setSelection(0, false);
-
+        //End bind
         holder.isBinding = false;
     }
 
