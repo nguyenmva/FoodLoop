@@ -2,43 +2,80 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#004aad"
-        android:textSize="15sp"
-        android:text="Status" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Status"
+            android:textColor="#004aad"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvItem"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#004aad"
-        android:textSize="15sp"
-        android:text="Item" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Item:"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/tvItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Item"
+            android:textColor="#004aad"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvRecipient"
-        android:layout_width="0dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#004aad"
-        android:textSize="15sp"
-        android:text="Recipient" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Requestor:"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/tvRecipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Recipient"
+            android:textColor="#004aad"
+            android:textSize="15sp" />
+    </LinearLayout>
+
 
     <Spinner
         android:id="@+id/spinnerRequest"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:textColor="#004aad"
-        android:textSize="15sp"
-        android:layout_weight="1.2" />
+        android:layout_weight="1.2"
+        android:background="#D2EEF8"
+        android:minHeight="48dp" />
 
 </LinearLayout>

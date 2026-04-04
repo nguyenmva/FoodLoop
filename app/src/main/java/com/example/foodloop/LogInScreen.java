@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class LogInScreen extends AppCompatActivity {
     private SharedPreferences sharedPreference, sharedPreferenceRememberMe;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS"; // FOR CHECKING WHO IS SIGNED IN THE REST OF THE APP.
     private static final String SHARED_PREF_REMEMBER_ME = "REMEMBER_ME"; // FOR REMEMBER ME CHECKBOX.
+
 
 
     // DB STUFF
@@ -153,28 +155,28 @@ public class LogInScreen extends AppCompatActivity {
             if (requestResult.getCount() == 0) {
                 // Belle = 1, Gia = 2, Nilesh = 3, Michael = 4
                 // Requests for Gia's donations.
-                foodLoopDB.createRequest(1, 1, "Evening (5PM-7PM)", 3, "Burnaby, BC");
-                foodLoopDB.createRequest(2, 3, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
-                foodLoopDB.createRequest(3, 4, "Morning (9AM-11AM)", 1, "Vancouver, BC");
-                foodLoopDB.createRequest(4, 1, "Morning (9AM-11AM)", 1, "Surrey, BC");
-                foodLoopDB.createRequest(5, 3, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
-                foodLoopDB.createRequest(6, 4, "Evening (5PM-7PM)", 3, "Burnaby, BC");
-                foodLoopDB.createRequest(7, 4, "Morning (9AM-11AM)", 1, "Surrey, BC");
-                foodLoopDB.createRequest(7, 1, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
-                foodLoopDB.createRequest(7, 3, "Evening (5PM-7PM)", 3, "Burnaby, BC");
+                foodLoopDB.createRequest(1, 1, "Evening (5PM-7PM)", 3, "Delivery", "Burnaby, BC");
+                foodLoopDB.createRequest(2, 3, "Afternoon (1PM-4PM)", 2, "Pick up", "Coquitlam, BC");
+                foodLoopDB.createRequest(3, 4, "Morning (9AM-11AM)", 1, "Pick up", "Vancouver, BC");
+                foodLoopDB.createRequest(4, 1, "Morning (9AM-11AM)", 1, "Delivery", "Surrey, BC");
+                foodLoopDB.createRequest(5, 3, "Afternoon (1PM-4PM)", 2, "Pick up", "Coquitlam, BC");
+                foodLoopDB.createRequest(6, 4, "Evening (5PM-7PM)", 3, "Delivery", "Burnaby, BC");
+                foodLoopDB.createRequest(7, 4, "Morning (9AM-11AM)", 1, "Pick up", "Surrey, BC");
+                foodLoopDB.createRequest(7, 1, "Afternoon (1PM-4PM)", 2, "Delivery", "Coquitlam, BC");
+                foodLoopDB.createRequest(7, 3, "Evening (5PM-7PM)", 3, "Pick up", "Burnaby, BC");
                 // No requests for items 8 and 9.
                 // Requests for Belle's donations.
-                foodLoopDB.createRequest(10, 2, "Morning (9AM-11AM)", 1, "Surrey, BC");
+                foodLoopDB.createRequest(10, 2, "Morning (9AM-11AM)", 1, "Delivery", "Surrey, BC");
                 // No requests for item 11.
-                foodLoopDB.createRequest(12, 3, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
+                foodLoopDB.createRequest(12, 3, "Afternoon (1PM-4PM)", 2, "Pick up", "Coquitlam, BC");
                 // Requests for Michael's donations.
-                foodLoopDB.createRequest(13, 1, "Evening (5PM-7PM)", 3, "Burnaby, BC");
+                foodLoopDB.createRequest(13, 1, "Evening (5PM-7PM)", 3, "Delivery", "Burnaby, BC");
                 // No requests for item 14.
-                foodLoopDB.createRequest(15, 2, "Morning (9AM-11AM)", 1, "Surrey, BC");
+                foodLoopDB.createRequest(15, 2, "Morning (9AM-11AM)", 1, "Pick up", "Surrey, BC");
                 // Requests for Nilesh's donations.
-                foodLoopDB.createRequest(16, 4, "Afternoon (1PM-4PM)", 2, "Coquitlam, BC");
+                foodLoopDB.createRequest(16, 4, "Afternoon (1PM-4PM)", 2, "Delivery", "Coquitlam, BC");
                 // No requests for item 17.
-                foodLoopDB.createRequest(18, 1, "Evening (5PM-7PM)", 3, "Burnaby, BC");
+                foodLoopDB.createRequest(18, 1, "Evening (5PM-7PM)", 3, "Pick up", "Burnaby, BC");
             }
             requestResult.close();
         }
@@ -217,6 +219,28 @@ public class LogInScreen extends AppCompatActivity {
                 editorRememberMe.apply();
 
                 Toast.makeText(LogInScreen.this, "Log in Successful!!!", Toast.LENGTH_LONG).show();
+                Cursor userTypeCursor = foodLoopDB.getUserDataByEmail(userEmail);
+//                if (userTypeCursor != null) {
+//                    if (userTypeCursor.moveToFirst()) {
+//                        int type = userType.getInt(userTypeCursor.getColumnIndexOrThrow // TODO: Add a user entry in the CreateAccount page.
+//                                (DatabaseHelper.USER_TYPE_FLD)); // TODO: Add a user type column to the User table in the DatabaseHelper.
+//                        switch (type) {
+//                            case 1:
+//                                startActivity(new Intent(LogInScreen.this, DonationHomePage.class));
+//                                break;
+//                            case 2:
+//                                startActivity(new Intent(LogInScreen.this, Request_Home_Page.class));
+//                                break;
+//                            case 3:
+//                                startActivity(new Intent(LogInScreen.this, Both_Pages.class)); // TODO: Make this page.
+//                                break;
+//                            default:
+//                                break;
+//                        }
+//                        finish();
+//                    }
+//                    userTypeCursor.close();
+//                }
                 startActivity(new Intent(LogInScreen.this, DonationHomePage.class));
                 // As of 3/30, updated to Donation Home Page for now -Gia
                 // Change this to the Home page when that's up.

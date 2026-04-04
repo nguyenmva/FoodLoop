@@ -109,6 +109,7 @@
     <string name="txtMADTitleName">Manage Active Donations</string>
     <string name="btnMADAllDon">All Donations</string>
     <string name="btnMADReqDon">Requested Donations</string>
+    <string name="btnNotif">Send Notification</string>
 
     <!-- Active Requests Tracking -->
     <string name="txtRTTitleName">Request Tracker</string>
