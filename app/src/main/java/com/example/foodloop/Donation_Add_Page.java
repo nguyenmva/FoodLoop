@@ -53,7 +53,6 @@ public class Donation_Add_Page extends AppCompatActivity {
                 edtPrice.setText("0");
             }
         });
-
         rdbDiscounted.setOnClickListener(view ->{
             if(rdbDiscounted.isChecked()){
                 edtPrice.setVisibility(View.VISIBLE);
@@ -76,7 +75,7 @@ public class Donation_Add_Page extends AppCompatActivity {
                 || TextUtils.isEmpty(edtExpiryDate.getText().toString())
 //                || TextUtils.isEmpty(edtPrice.getText().toString())
                 || (withPrice && emptyPrice) //Throws an error if Discounted is chosen and there is no price indicated
-                || (!rdbDiscounted.isChecked() && !rdbFree.isChecked())
+                || (!rdbDiscounted.isChecked() && !rdbFree.isChecked()) //User must pick or it will throw an error
                 || TextUtils.isEmpty(spCategory.getSelectedItem().toString())
                 || TextUtils.isEmpty(spAvailTime.getSelectedItem().toString())
                 || (!rdbFree.isChecked() && !rdbDiscounted.isChecked())
