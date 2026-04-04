@@ -37,47 +37,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.244" />
 
-    <EditText
-        android:id="@+id/inputReqHistItem"
-        android:layout_width="220dp"
-        android:layout_height="54dp"
-        android:ems="10"
-        android:hint="@string/txtSearchHint"
-        android:inputType="text"
-        android:textColorHint="#004aad"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
-
-    <ImageView
-        android:id="@+id/imgMagGlass3"
-        android:layout_width="44dp"
-        android:layout_height="45dp"
-        android:contentDescription="@string/btnSearchDesc"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.667"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373"
-        app:srcCompat="@drawable/magnifying_glass" />
-
-    <ImageView
-        android:id="@+id/imgFilterIcon3"
-        android:layout_width="91dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375"
-        app:srcCompat="@drawable/filter_icon" />
-
     <Button
         android:id="@+id/btnRHToHome"
         android:layout_width="wrap_content"

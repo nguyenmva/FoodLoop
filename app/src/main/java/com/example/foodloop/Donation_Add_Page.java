@@ -45,14 +45,38 @@ public class Donation_Add_Page extends AppCompatActivity {
 
         // INITIALIZE DATABASE
         foodLoopDB = new DatabaseHelper(this);
+
+        //IF USER PICKS rdbFree, THE PRICE PART WILL BE HIDDEN
+        rdbFree.setOnClickListener(view ->{
+            if(rdbFree.isChecked()){
+                edtPrice.setVisibility(View.GONE);
+                edtPrice.setText("0");
+            }
+        });
+
+        rdbDiscounted.setOnClickListener(view ->{
+            if(rdbDiscounted.isChecked()){
+                edtPrice.setVisibility(View.VISIBLE);
+                edtPrice.setText("");
+            }
+        });
+
     }
 
     public void createDonation(View view) {
+        String priceInput = edtPrice.getText().toString();
+
+        //CHECK IF FREE OR DISCOUNT PRICE
+        boolean withPrice = rdbDiscounted.isChecked();
+        boolean emptyPrice = TextUtils.isEmpty(priceInput);
+
         // ERROR HANDLING, NO EMPTY FIELDS.
         if (TextUtils.isEmpty(edtFoodName.getText().toString())
                 || TextUtils.isEmpty(edtQuantity.getText().toString())
                 || TextUtils.isEmpty(edtExpiryDate.getText().toString())
-                || TextUtils.isEmpty(edtPrice.getText().toString())
+//                || TextUtils.isEmpty(edtPrice.getText().toString())
+                || (withPrice && emptyPrice) //Throws an error if Discounted is chosen and there is no price indicated
+                || (!rdbDiscounted.isChecked() && !rdbFree.isChecked())
                 || TextUtils.isEmpty(spCategory.getSelectedItem().toString())
                 || TextUtils.isEmpty(spAvailTime.getSelectedItem().toString())
                 || (!rdbFree.isChecked() && !rdbDiscounted.isChecked())
@@ -69,7 +93,14 @@ public class Donation_Add_Page extends AppCompatActivity {
             String expiryDate = edtExpiryDate.getText().toString();
             String pickupTime = spAvailTime.getSelectedItem().toString();
             int pickupIndex = spAvailTime.getSelectedItemPosition();
-            double price = Double.parseDouble(edtPrice.getText().toString());
+
+            double price;
+            if (rdbFree.isChecked()) {
+               price = 0.0;
+            } else {
+                price = Double.parseDouble(edtPrice.getText().toString());
+            }
+
             String offerType = rdbFree.isChecked() ? "Free" : "Discounted";
             String location = "Pickup or Delivery Address (City)"; // WILL CHANGE IT TO GET FROM DB LATER.
             String status = "Pending"; // DEFAULT STRING?
@@ -78,16 +109,17 @@ public class Donation_Add_Page extends AppCompatActivity {
             // NEEDS MORE ERROR HANDLING??
             boolean inserted = foodLoopDB.createDonation(
                     itemName, quantity, category, categoryIndex,
-                    expiryDate, pickupTime, pickupIndex,
-                    offerType, price, location, status, donor
+                    expiryDate, offerType, price, status, donor
             );
             // PROVIDE CONFIRMATION TO THE USER
             if (inserted) {
                 Toast.makeText(this, "Donation Listed!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Donation_Add_Page.this, DonationHomePage.class));
             } else {
-                Toast.makeText(this, "Error: Kill the Person who Wrote This Code", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error!", Toast.LENGTH_LONG).show();
             }
+
+
         }
         // DO WE FORCE THE USER TO LEAVE THE PAGE AFTER LISTING A DONATION?
         // startActivity(new Intent(Donation_Add_Page.this, MainActivity.class));

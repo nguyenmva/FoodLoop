@@ -148,7 +148,8 @@
     <!-- Donation Add Page    -->
     <string name="txtAddItem1">Add Item</string>
     <string name="edtItemNameHint">e.g. Rice, gluten free bread, canned tuna</string>
-    <string name="txtAvailTime1">Availability for Pickup</string>
+    <string name="txtAvailTime1">Time Slot</string>
+    <string name="txtCollection">Collection Type</string>
     <string name="edtQuantityHint">Enter a number</string>
     <string name="edtCategory">Category</string>
     <string name="txtExpiryDate1">Expiry Date</string>
@@ -176,6 +177,10 @@
         <item>Morning (9AM-11AM)</item>
         <item>Afternoon (1PM-4PM)</item>
         <item>Evening (5PM-7PM)</item>
+    </string-array>
+    <string-array name="Collection_Options">
+        <item>Pick Up</item>
+        <item>Delivery</item>
     </string-array>
 
     <!--Edit Donation Page -->
