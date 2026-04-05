@@ -239,6 +239,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
     // ##################################################################################################################
+    // FOR EDITING A DONATION THAT IS ALREADY LISTED
+    public boolean updateDonation(int id, String itemName, int quantity, String category, int categorySpinner,
+                                String expiryDate, String offerType, double price, String status, int donor ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(DONATION_ITEM_NAME_FLD, itemName);
+        contentValues.put(DONATION_QUANTITY_FLD, quantity);
+        contentValues.put(DONATION_CATEGORY_FLD, category);
+        contentValues.put(DONATION_CATEGORY_SPINNER_FLD, categorySpinner);
+        contentValues.put(DONATION_EXPIRY_DATE_FLD, expiryDate);
+        contentValues.put(DONATION_OFFER_TYPE_FLD, offerType);
+        contentValues.put(DONATION_PRICE_FLD, price);
+        contentValues.put(DONATION_STATUS_FLD, status);
+        contentValues.put(DONOR_ID_FLD, donor);
+
+        long result = db.update(DONATION_TABLE, contentValues, DONATION_ID_FLD + " = ? ", new String[]{String.valueOf(id)});
+
+        return result > 0; //This will return true if at least 1 row was edited
+    }
+
+    // ##################################################################################################################
     // FOR UPDATING A DONATION'S STATUS
     public boolean updateDonationStatus(String donationID, String status) {
 
@@ -306,12 +329,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " FROM " + REQUEST_TABLE +
                 " WHERE " + REQUESTOR_ID_FLD + " = ?", new String[]{id});
     }
-    public Cursor getDonationByDonationID(String id) {
+    public Cursor getDonationByDonationID(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
         "SELECT *" +
                 " FROM " + DONATION_TABLE +
-                " WHERE " + DONATION_ID_FLD + " = ?", new String[]{id});
+                " WHERE " + DONATION_ID_FLD + " = ?", new String[]{String.valueOf(id)});
     }
     public Cursor getActiveDonations(String userEmail) { // Shows only donations that have a request.
         SQLiteDatabase db = this.getReadableDatabase();

@@ -1,7 +1,10 @@
 package com.example.foodloop;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,6 +106,11 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
             btnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                        SharedPreferences preferences = adapter.context.getSharedPreferences("savedDonationID", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt("id_Donation", 1); //Edit Donations page
+                        editor.apply();
+
                     Intent intent = new Intent(adapter.context, EditDonation.class);
                     adapter.context.startActivity(intent);
                 }

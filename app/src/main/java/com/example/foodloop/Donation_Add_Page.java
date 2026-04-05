@@ -122,8 +122,7 @@ public class Donation_Add_Page extends AppCompatActivity {
 
 
         }
-        // DO WE FORCE THE USER TO LEAVE THE PAGE AFTER LISTING A DONATION?
-        // startActivity(new Intent(Donation_Add_Page.this, MainActivity.class));
+
     }
 
     public void toDonorHomePage(View view) {

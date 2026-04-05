@@ -72,13 +72,15 @@ public class ActiveDonations extends AppCompatActivity {
         Cursor donationCursor = foodLoopDB.getAllDonationsWithRequestors();
         if (donationCursor != null) {
             while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
+                //ADDING
+                int id = donationCursor.getInt(donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
                 String status = donationCursor.getString(donationCursor.getColumnIndexOrThrow
                         (DatabaseHelper.DONATION_STATUS_FLD));
                 String itemName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
                         (DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String requestorName = donationCursor.getString(donationCursor.getColumnIndexOrThrow
                         ("RequestorName"));
-                donationList.add(new String[]{status, itemName, requestorName});
+                donationList.add(new String[]{status, itemName, requestorName, String.valueOf(id)});
             }
             donationCursor.close();
         }
