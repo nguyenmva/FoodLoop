@@ -50,7 +50,7 @@
             android:name=".LogOutScreen"
             android:exported="false" /> <!-- BELLE'S PAGES -->
         <activity
-            android:name=".DonationHomePage"
+            android:name=".Donation_Home_Page"
             android:exported="false" />
         <activity
             android:name=".Donation_Add_Page"

@@ -115,7 +115,7 @@ public class Donation_Add_Page extends AppCompatActivity {
             // PROVIDE CONFIRMATION TO THE USER
             if (inserted) {
                 Toast.makeText(this, "Donation Listed!", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(Donation_Add_Page.this, DonationHomePage.class));
+                startActivity(new Intent(Donation_Add_Page.this, Donation_Home_Page.class));
             } else {
                 Toast.makeText(this, "Error!", Toast.LENGTH_LONG).show();
             }
@@ -126,6 +126,6 @@ public class Donation_Add_Page extends AppCompatActivity {
     }
 
     public void toDonorHomePage(View view) {
-        startActivity(new Intent(Donation_Add_Page.this, DonationHomePage.class));
+        startActivity(new Intent(Donation_Add_Page.this, Donation_Home_Page.class));
     }
 }

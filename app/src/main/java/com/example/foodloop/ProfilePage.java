@@ -69,7 +69,7 @@ public class ProfilePage extends AppCompatActivity {
 
     }
     public void toHomePage(View view) {
-        startActivity(new Intent(ProfilePage.this, DonationHomePage.class)); // Change this to the Home page when that's up.
+        startActivity(new Intent(ProfilePage.this, Donation_Home_Page.class)); // Change this to the Home page when that's up.
     }
     public void toEditAccount(View view) {
         startActivity(new Intent(ProfilePage.this, EditAccount.class));

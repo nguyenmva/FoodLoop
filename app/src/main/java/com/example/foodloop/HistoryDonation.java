@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -64,6 +63,6 @@ public class HistoryDonation extends AppCompatActivity {
 //    }
 
     public void toDonorHomePage(View view) {
-        startActivity(new Intent(HistoryDonation.this, DonationHomePage.class));
+        startActivity(new Intent(HistoryDonation.this, Donation_Home_Page.class));
     }
 }

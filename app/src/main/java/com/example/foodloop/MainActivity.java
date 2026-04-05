@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     // #######################################################################################
     // BELLE'S PAGES
     public void toDonorHomePage(View view) {
-        startActivity(new Intent(MainActivity.this, DonationHomePage.class));
+        startActivity(new Intent(MainActivity.this, Donation_Home_Page.class));
     }
     public void toDonationAddPage(View view) {
         startActivity(new Intent(MainActivity.this, Donation_Add_Page.class));
