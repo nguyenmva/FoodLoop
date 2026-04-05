@@ -366,7 +366,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getActiveRequests(String userEmail) { //
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Donations." + REQUEST_LOCATION_FLD +
+        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", " + REQUEST_LOCATION_FLD +
                 " FROM " + REQUEST_TABLE +
                 " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
                 " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
