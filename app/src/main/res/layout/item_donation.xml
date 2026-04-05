@@ -87,14 +87,18 @@
 
         <Button
             android:id="@+id/btnNotify"
-            android:layout_width="196dp"
+            android:layout_width="190dp"
             android:layout_height="match_parent"
+            android:backgroundTint="#AB1212"
+            android:textColor="#fff6d7"
             android:text="Notify" />
 
         <Button
             android:id="@+id/btnEdit"
-            android:layout_width="185dp"
+            android:layout_width="190dp"
             android:layout_height="match_parent"
+            android:backgroundTint="#AB1212"
+            android:textColor="#fff6d7"
             android:text="@string/btnEdit" />
     </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.example.foodloop;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class GiaRequestAdapter extends RecyclerView.Adapter<GiaRequestAdapter.Vi
         holder.tvRecipient.setText(item[2]);
 
         holder.spinnerRequest.setVisibility(View.GONE);
+        holder.btnNotify.setVisibility(View.GONE);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class GiaRequestAdapter extends RecyclerView.Adapter<GiaRequestAdapter.Vi
 
         TextView tvStatus, tvItem, tvRecipient;
         Spinner spinnerRequest;
+        Button btnNotify, btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +58,8 @@ public class GiaRequestAdapter extends RecyclerView.Adapter<GiaRequestAdapter.Vi
             tvItem = itemView.findViewById(R.id.tvItem);
             tvRecipient = itemView.findViewById(R.id.tvRecipient);
             spinnerRequest = itemView.findViewById(R.id.spinnerRequest);
+            btnNotify = itemView.findViewById(R.id.btnNotify);
+            btnEdit = itemView.findViewById(R.id.btnEdit);
         }
     }
 }

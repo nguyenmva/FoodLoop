@@ -1,12 +1,16 @@
 package com.example.foodloop;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,13 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.ViewHolder> {
-
+    Context context;
     final List<String[]> data;
     private DatabaseHelper foodLoopDB;
     private static final String[] options = {"Select", "Approved", "Rejected"};
 
-    public GiaDonateAdapter(List<String[]> data) {
+    public GiaDonateAdapter(List<String[]> data, Context context) {
         this.data = data;
+        this.context = context;
     }
 
     @NonNull
@@ -73,7 +78,9 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
 
         TextView tvStatus, tvItem, tvRecipient;
         Spinner spinnerRequest;
+        Button btnNotify, btnEdit;
         boolean isBinding = false;
+
 
         private final GiaDonateAdapter adapter;
 
@@ -85,6 +92,21 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
             tvItem = itemView.findViewById(R.id.tvItem);
             tvRecipient = itemView.findViewById(R.id.tvRecipient);
             spinnerRequest = itemView.findViewById(R.id.spinnerRequest);
+            btnNotify = itemView.findViewById(R.id.btnNotify);
+            btnEdit = itemView.findViewById(R.id.btnEdit);
+
+            btnNotify.setOnClickListener(v -> {
+                Toast.makeText(v.getContext(), "Reminder Sent!", Toast.LENGTH_SHORT).show();
+            });
+
+            /*-- FIX THISSSSS --*/
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(adapter.context, EditDonation.class);
+                    adapter.context.startActivity(intent);
+                }
+            });
 
             spinnerRequest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

@@ -84,7 +84,7 @@ public class ActiveDonations extends AppCompatActivity {
         }
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        GiaDonateAdapter adapter = new GiaDonateAdapter(donationList);
+        GiaDonateAdapter adapter = new GiaDonateAdapter(donationList, this);
         rv.setAdapter(adapter);
     }
 
@@ -112,7 +112,7 @@ public class ActiveDonations extends AppCompatActivity {
         }
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        GiaDonateAdapter adapter = new GiaDonateAdapter(donationList);
+        GiaDonateAdapter adapter = new GiaDonateAdapter(donationList, this);
         rv.setAdapter(adapter);
     }
 }
