@@ -133,11 +133,9 @@ public class EditDonation extends AppCompatActivity {
                 price = Double.parseDouble(edtPriceEdit.getText().toString());
             }
 
-
             // NEEDS MORE ERROR HANDLING??
-            boolean updated = foodLoopDB.editDonation( // UPDATE DONATION
-                    donationID, itemName, quantity, category, categoryIndex,
-                    expiryDate, offerType, price);
+            boolean updated = foodLoopDB.editDonation(donationID, itemName, quantity, category,
+                                                      categoryIndex, expiryDate, offerType, price);
             // PROVIDE CONFIRMATION TO THE USER
             if (updated) {
                 Toast.makeText(this, "Donation Updated", Toast.LENGTH_LONG).show();

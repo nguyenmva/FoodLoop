@@ -87,7 +87,7 @@
 
         <Button
             android:id="@+id/btnNotify"
-            android:layout_width="190dp"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
             android:backgroundTint="#AB1212"
             android:textColor="#fff6d7"
@@ -95,7 +95,7 @@
 
         <Button
             android:id="@+id/btnEdit"
-            android:layout_width="190dp"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
             android:backgroundTint="#AB1212"
             android:textColor="#fff6d7"

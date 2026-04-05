@@ -16,6 +16,11 @@ public class WhatWasDone {
 -Added NOTIF button for ActiveDonations -- still need to code
 -Update GiaDonateAdapter.java to write status updates to the DB.
 -Add "Edit" buttons to donation and request recyclers.
+-Recyclers:, HistoryDonation.java (Donation History), ActiveRequests.java (Request Status), HistoryRequest.java (Request History) -- Gia
+-Recycler: RequestAddItem.java (Request Food) -- Nilesh
+-Search function for request items: DatabaseHelper.java [done] Add new query for getDonationByItemSearch, [done] Add new query for getDonationByLocationSearch
+-Search Function for ActiveRequests.java
+-Connection: Managed Active Donations to Edit Donations
 
 
 
