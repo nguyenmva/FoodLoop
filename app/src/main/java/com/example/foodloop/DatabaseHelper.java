@@ -267,8 +267,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     // ##################################################################################################################
     // FOR EDITING A DONATION THAT IS ALREADY LISTED
-    public boolean updateDonation(int id, String itemName, int quantity, String category, int categorySpinner,
-                                String expiryDate, String offerType, double price, String status, int donor ){
+    public boolean editDonation(int donationID, String itemName, int quantity, String category, int categorySpinner,
+                                String expiryDate, String offerType, double price){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -280,10 +280,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(DONATION_EXPIRY_DATE_FLD, expiryDate);
         contentValues.put(DONATION_OFFER_TYPE_FLD, offerType);
         contentValues.put(DONATION_PRICE_FLD, price);
-        contentValues.put(DONATION_STATUS_FLD, status);
-        contentValues.put(DONOR_ID_FLD, donor);
 
-        long result = db.update(DONATION_TABLE, contentValues, DONATION_ID_FLD + " = ? ", new String[]{String.valueOf(id)});
+        long result = db.update(DONATION_TABLE, contentValues, DONATION_ID_FLD + " = ? ", new String[]{String.valueOf(donationID)});
 
         return result > 0; //This will return true if at least 1 row was edited
     }
@@ -366,7 +364,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getActiveDonations(String userEmail) { // Shows only donations that have a request.
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT Donations." + DONATION_ID_FLD + ", " + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Requestor." + USER_NAME_FLD + " AS RequestorName " +
+        "SELECT Donations." + DONATION_ID_FLD + ", " + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD +
+                ", Requestor." + USER_NAME_FLD + " AS RequestorName " + ", Donor." + USER_CITY_FLD + " AS DonorLocation" +
                 " FROM " + DONATION_TABLE +
                 " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +      // What got requested?
                 " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + // Who requested it?

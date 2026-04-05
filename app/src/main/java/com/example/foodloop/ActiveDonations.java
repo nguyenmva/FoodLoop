@@ -110,7 +110,10 @@ public class ActiveDonations extends AppCompatActivity {
                         donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD)); // Adapter Index [2]
                 String requestorName = donationCursor.getString(
                         donationCursor.getColumnIndexOrThrow("RequestorName")); // Adapter Index [3]
-                donationList.add(new String[]{donationID, status, itemName, requestorName}); // Adapter Indices {1, 2, 3, 4}
+                String location = donationCursor.getString(
+                        donationCursor.getColumnIndexOrThrow("DonorLocation"));
+                donationList.add(new String[]{donationID, status, itemName, requestorName}); // Adapter Indices {0, 1, 2, 3}
+                // Add location to the list one the new adapter is running.
             }
             donationCursor.close();
         }
