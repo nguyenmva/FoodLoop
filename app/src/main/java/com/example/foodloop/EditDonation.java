@@ -49,12 +49,16 @@ public class EditDonation extends AppCompatActivity {
         // INITIALIZE DATABASE
         foodLoopDB = new DatabaseHelper(this);
 
-        //INITIALIZE SHARED PREFERENCE
-        savedDonationID = getSharedPreferences("savedDonationID", MODE_PRIVATE);
+        //INITIALIZE SHARED PREFERENCE, OR NOT...
+//        savedDonationID = getSharedPreferences("savedDonationID", MODE_PRIVATE);
+//        int selectedID = savedDonationID.getInt("id_Donation", 0);
 
-        int selectedID = savedDonationID.getInt("id_Donation", 0);
+        int selectedID = getIntent().getIntExtra("extraDonationID", -99);
+        // Get the data attached to the keyword
+        // Keyword/name must be the same as the one used in the intent.putExtra
+        // Default value is set to any impossible value to represent NULL, like -99 but usually just -1
 
-        Cursor cursor = foodLoopDB.getDonationByDonationID(selectedID); //selectedID is that data that i got from SharedPref
+        Cursor cursor = foodLoopDB.getDonationByDonationID(selectedID); // selectedID is that data that i got from intent.putExtra/intent.getExtra
 
         if(cursor != null && cursor.moveToFirst()){
             String foodName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
@@ -69,7 +73,7 @@ public class EditDonation extends AppCompatActivity {
             int donorID = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.DONOR_ID_FLD));
 
             edtFoodNameEdit.setText(foodName);
-            edtQuantityEdit.setText(quantityFood);
+            edtQuantityEdit.setText(String.valueOf(quantityFood));
             edtExpiryDateEdit.setText(expiryDate);
             edtPriceEdit.setText(price);
             spCategoryEdit.setSelection(categorySpinner);

@@ -103,14 +103,14 @@ public class ActiveDonations extends AppCompatActivity {
         if (donationCursor != null) {
             while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
                 String donationID = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
+                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD)); // Adapter Index [0]
                 String status = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
+                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD)); // Adapter Index [1]
                 String itemName = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD)); // Adapter Index [2]
                 String requestorName = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow("RequestorName"));
-                donationList.add(new String[]{donationID, status, itemName, requestorName});
+                        donationCursor.getColumnIndexOrThrow("RequestorName")); // Adapter Index [3]
+                donationList.add(new String[]{donationID, status, itemName, requestorName}); // Adapter Indices {1, 2, 3, 4}
             }
             donationCursor.close();
         }

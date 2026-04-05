@@ -344,4 +344,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.306" />
 
+    <Spinner
+        android:id="@+id/inputUserType"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/white"
+        android:entries="@array/UserTypeList"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,6 +63,12 @@
         <item>Canada</item>
         <item>USA</item>
     </string-array>
+    <string-array name="UserTypeList">
+        <item>Select an Account Type</item>
+        <item>Donor</item>
+        <item>Requestor</item>
+        <item>Donor and Requestor</item>
+    </string-array>
 
     <!-- CONTENT DESCRIPTIONS -->
     <string name="imgDesc">An Image</string>

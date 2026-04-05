@@ -112,15 +112,26 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
             btnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        SharedPreferences preferences = adapter.context.getSharedPreferences("savedDonationID", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putInt("id_Donation", 1); //Edit Donations page
-                        editor.apply();
+                    int currentPos = getAbsoluteAdapterPosition();
+                    // Find the row that the button belongs to.
 
-                    Intent intent = new Intent(adapter.context, EditDonation.class);
-                    adapter.context.startActivity(intent);
+                    if (currentPos != RecyclerView.NO_POSITION) {
+                        String donationIDPos = adapter.data.get(currentPos)[0];
+                        // Get data from List<String[]> data by index. (CTRL-F "Adapter Index" on ActiveDonations.java to see index values)
+                        int donationID = Integer.parseInt(donationIDPos);
+
+                        Intent intent = new Intent(adapter.context, EditDonation.class);
+                        intent.putExtra("extraDonationID", donationID);
+                        adapter.context.startActivity(intent);
+                    }
                 }
             });
+
+
+//                    SharedPreferences preferences = adapter.context.getSharedPreferences("savedDonationID", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putInt("id_Donation", 1); //Edit Donations page
+//                    editor.apply();
 
             spinnerRequest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
