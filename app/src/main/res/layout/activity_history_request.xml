@@ -27,7 +27,7 @@
         android:layout_height="88dp"
         android:gravity="center"
         android:text="@string/txtRequestHistory"
-        android:textColor="#ff193b"
+        android:textColor="#004aad"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
         android:id="@+id/btnRHToHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ff193b"
+        android:backgroundTint="#004aad"
         android:onClick="toDonorHomePage"
         android:text="@string/btnHomePage"
         android:textColor="#fff6d7"
@@ -56,12 +56,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvReqHistTrack"
-        android:layout_width="355dp"
-        android:layout_height="249dp"
+        android:layout_width="365dp"
+        android:layout_height="424dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.639" />
 </androidx.constraintlayout.widget.ConstraintLayout>

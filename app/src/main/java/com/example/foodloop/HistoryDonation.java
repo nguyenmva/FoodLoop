@@ -1,14 +1,18 @@
 package com.example.foodloop;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,10 +20,11 @@ import java.util.List;
 
 public class HistoryDonation extends AppCompatActivity {
 
-    // 1. Declare variables once at the top
-    private List<RecyclerRowObject> historyList;
-    private RecyclerDonationsAdapter adapter;
-    private RecyclerView rvHistory;
+    RecyclerView rv;
+    public static ArrayList<String[]> donationHistory = new ArrayList<>();
+    private DatabaseHelper foodLoopDB;
+    private SharedPreferences sharedPreference;
+    private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,33 +39,38 @@ public class HistoryDonation extends AppCompatActivity {
             return insets;
         });
 
-        // 2. Initialize the View
-        rvHistory = findViewById(R.id.rvDonHistTrack);
+        // INITIALIZE DATABASE AND SHARED PREFERENCES
+        foodLoopDB = new DatabaseHelper(this);
+        sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-        // 3. Initialize the Data List
-        historyList = new ArrayList<>();
-
-        // 4. Set up the Adapter and Layout Manager
-        // Note: Make sure your Adapter constructor matches this
-//        adapter = new RecyclerDonationsAdapter((ArrayList<RecyclerRowObject>) historyList);
-//        rvHistory.setLayoutManager(new LinearLayoutManager(this));
-//        rvHistory.setAdapter(adapter);
-//
-//        // 5. Load the data
-//        loadHistoryData();
+        loadHistoryData();
     }
 
-//    private void loadHistoryData() {
-//        // Add data to the existing list
-//        historyList.add(new RecyclerRowObject("Completed", "Item A", "Person A"));
-//        historyList.add(new RecyclerRowObject("Completed", "Canned Soup", "Red Cross"));
-//        historyList.add(new RecyclerRowObject("Pending", "Bread", "Local Shelter"));
-//        historyList.add(new RecyclerRowObject("Completed", "Bottled Water", "Community Center"));
-//        historyList.add(new RecyclerRowObject("Cancelled", "Milk", "Food Bank"));
-//
-//        // Notify the adapter that data has changed to refresh the UI
-//        adapter.notifyDataSetChanged();
-//    }
+    private void loadHistoryData() {
+        String savedEmail = sharedPreference.getString("email", "");
+        if (savedEmail.isEmpty()) {
+            Toast.makeText(this, "Nothing in the sharedPreference", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        donationHistory.clear();
+
+        Cursor requestCursor = foodLoopDB.getDonationHistory(savedEmail);
+        if (requestCursor != null) {
+            while (requestCursor.moveToNext()) {
+                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
+                String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                String requestor = requestCursor.getString(requestCursor.getColumnIndexOrThrow("RequestorName"));
+
+                donationHistory.add(new String[]{status, itemName, requestor});
+            }
+            requestCursor.close();
+        }
+
+        rv = findViewById(R.id.rvDonHistTrack);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        UniversalAdapter adapter = new UniversalAdapter(donationHistory, this, "DonationHistory");
+        rv.setAdapter(adapter);
+    }
 
     public void toDonorHomePage(View view) {
         startActivity(new Intent(HistoryDonation.this, Donation_Home_Page.class));

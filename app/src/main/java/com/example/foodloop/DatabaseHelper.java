@@ -216,6 +216,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        return result != -1;
 //    }
 
+    // GET REQUEST HISTORY - Gia
+    public Cursor getRequestHistory(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT Donations." + DONATION_EXPIRY_DATE_FLD + ", " +
+                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
+                        "Requests." + REQUEST_LOCATION_FLD +
+                        " FROM " + REQUEST_TABLE +
+                        " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
+                        " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
+                        " WHERE Users." + USER_EMAIL_FLD + " = ?", new String[]{email});
+    }
+
+    // GET DONATION HISTORY - Gia
+    public Cursor getDonationHistory(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT Donations." + DONATION_STATUS_FLD + ", " +
+                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
+                        "Requestor." + USER_NAME_FLD + " AS RequestorName" +
+                        " FROM " + DONATION_TABLE +
+                        " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +
+                        " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD +
+                        " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +
+                        " WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{email});
+    }
+
     // ##################################################################################################################
     // FOR UPDATING AN ACCOUNT RECORD
     public boolean updateAccount(String name, String street, String city, String province, String country,
