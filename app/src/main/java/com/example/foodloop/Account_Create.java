@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Account_Create extends AppCompatActivity {
     private EditText inputName, inputStreet, inputCity, inputProvince, inputPostal,
             inputPhone, inputEmail, inputPassword, inputConfirmPass;
-    private Spinner inputCountry;
+    private Spinner inputCountry, inputAccountType;
     private DatabaseHelper foodLoopDB;
 
     @Override
@@ -44,6 +44,7 @@ public class Account_Create extends AppCompatActivity {
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPass);
         inputConfirmPass = findViewById(R.id.inputConfirmPass);
+        inputAccountType = findViewById(R.id.inputAccountType);
 
         // INITIALIZE DATABASE
         foodLoopDB = new DatabaseHelper(this);
@@ -60,7 +61,9 @@ public class Account_Create extends AppCompatActivity {
             || TextUtils.isEmpty(inputPhone.getText().toString())
             || TextUtils.isEmpty(inputEmail.getText().toString())
             || TextUtils.isEmpty(inputPassword.getText().toString())
-            || TextUtils.isEmpty(inputConfirmPass.getText().toString())) {
+            || TextUtils.isEmpty(inputConfirmPass.getText().toString())
+            || inputCountry.getSelectedItemPosition() == 0
+            || inputAccountType.getSelectedItemPosition() == 0) {
             Toast.makeText(Account_Create.this, "All areas must be filled.", Toast.LENGTH_LONG).show();
         }
         else {
@@ -76,6 +79,9 @@ public class Account_Create extends AppCompatActivity {
             String email = inputEmail.getText().toString();
             String password = inputPassword.getText().toString();
             String confirmPass = inputConfirmPass.getText().toString();
+            String accountType = inputAccountType.getSelectedItem().toString();
+            int accountTypeSpinnerSelection = inputAccountType.getSelectedItemPosition();
+
 
             // MORE ERROR HANDLING
             if (phone.length() != 10) { // MUST BE 10 DIGITS
@@ -90,8 +96,7 @@ public class Account_Create extends AppCompatActivity {
             else {
                 boolean inserted = foodLoopDB.createAccount(
                         name, street, city, province, country, countrySpinnerSelection,
-                        postal, phone, email, password
-                );
+                        postal, phone, email, password, accountType, accountTypeSpinnerSelection);
                 // PROVIDE CONFIRMATION TO THE USER
                 if (inserted)
                     Toast.makeText(this, "Account Created!", Toast.LENGTH_LONG).show();

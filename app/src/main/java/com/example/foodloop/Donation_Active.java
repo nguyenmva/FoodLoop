@@ -69,7 +69,7 @@ public class Donation_Active extends AppCompatActivity {
         }
         donationList.clear();
 
-        Cursor donationCursor = foodLoopDB.getAllDonationsWithRequestors();
+        Cursor donationCursor = foodLoopDB.getAllDonationsFromCurrentUser(savedEmail);
         if (donationCursor != null) {
             while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
                 String donationID = donationCursor.getString(
@@ -110,10 +110,9 @@ public class Donation_Active extends AppCompatActivity {
                         donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD)); // Adapter Index [2]
                 String requestorName = donationCursor.getString(
                         donationCursor.getColumnIndexOrThrow("RequestorName")); // Adapter Index [3]
-                String location = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow("DonorLocation"));
+//                String location = donationCursor.getString(
+//                        donationCursor.getColumnIndexOrThrow("DonorLocation"));
                 donationList.add(new String[]{donationID, status, itemName, requestorName}); // Adapter Indices {0, 1, 2, 3}
-                // Add location to the list one the new adapter is running.
             }
             donationCursor.close();
         }

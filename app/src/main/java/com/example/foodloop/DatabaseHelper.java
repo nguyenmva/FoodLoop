@@ -15,6 +15,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // USER ACCOUNT TABLE
     public static final String USERS_TABLE = "Users";
     public static final String USER_ID_FLD = "UserID";
+    public static final String USER_ACCOUNT_TYPE_FLD = "AccountType";
+    public static final String USER_ACCOUNT_TYPE_SPINNER_FLD = "AccountTypeSpinnerIndex";
     public static final String USER_NAME_FLD = "Name";
     public static final String USER_STREET_FLD = "Street";
     public static final String USER_CITY_FLD = "City";
@@ -49,10 +51,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REQUEST_PICKUP_DATE_FLD = "PickupDate";
     public static final String REQUEST_COLLECTION_TYPE_FLD = "CollectionType";
     public static final String REQUEST_LOCATION_FLD = "Location";
-
-    // MOVE LOCATION FROM THE DONATION_TABLE TO THE REQUEST_TABLE?
-    // MOVE PICKUP TIME FROM THE DONATION_TABLE TO THE REQUEST_TABLE?
-
     // ##################################################################################################################
     // HISTORY TABLE
     public static final String HISTORY_TABLE = "History";
@@ -74,6 +72,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // FOR ACCOUNTS
         db.execSQL("CREATE TABLE " + USERS_TABLE + " (" +
                 USER_ID_FLD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                USER_ACCOUNT_TYPE_FLD + " TEXT, " +
+                USER_ACCOUNT_TYPE_SPINNER_FLD + " INTEGER, " +
                 USER_NAME_FLD + " TEXT, " +
                 USER_STREET_FLD + " TEXT, " +
                 USER_CITY_FLD + " TEXT, " +
@@ -137,8 +137,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR CREATING A NEW ACCOUNT RECORD
-    public boolean createAccount(String name, String street, String city, String province, String country,
-                                 int countrySpinner, String postal, String phone, String email, String password){
+    public boolean createAccount(String name, String street, String city, String province,
+                                 String country, int countrySpinner, String postal, String phone,
+                                 String email, String password, String accountType, int accountTypeSpinner ){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -153,6 +154,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(USER_POSTAL_FLD, postal);
         contentValues.put(USER_EMAIL_FLD, email);
         contentValues.put(USER_PASSWORD_FLD, password);
+        contentValues.put(USER_ACCOUNT_TYPE_FLD, accountType);
+        contentValues.put(USER_ACCOUNT_TYPE_SPINNER_FLD, accountTypeSpinner);
 
         long result = db.insert(USERS_TABLE, null, contentValues);
         return result != -1;
@@ -448,7 +451,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " FROM " + REQUEST_TABLE, null);
     }
 
-    public Cursor getAllDonationsWithRequestors() {
+    public Cursor getAllDonationsFromCurrentUser(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
                 "SELECT D." + DONATION_ID_FLD + ", " +
@@ -457,9 +460,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "U." + USER_NAME_FLD + " AS RequestorName " +
                         "FROM " + DONATION_TABLE + " D " +
                         "LEFT JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
-                        "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD,
-                null
-        );
+                        "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
+                        "LEFT JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
+                        "WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
     }
 
     //NIlesh Test

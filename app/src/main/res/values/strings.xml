@@ -58,12 +58,12 @@
     <string name="btnRequest">Go to Request History Page</string>
 
     <!-- SPINNER ARRAYS -->
-    <string-array name="CountryList">
+    <string-array name="CountryArray">
         <item>Select a Country</item>
         <item>Canada</item>
         <item>USA</item>
     </string-array>
-    <string-array name="UserTypeList">
+    <string-array name="AccountTypeArray">
         <item>Select an Account Type</item>
         <item>Donor</item>
         <item>Requestor</item>

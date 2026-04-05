@@ -5,6 +5,7 @@ LAST UPDATED: 2026/04/05, 1:00 AM.
 
 ## Accounts ##
 TODO: Set up notifications (plus points)
+TODO: Can users change their account type in edit profile?
 
 ## Donations ##
 TODO: Add "send reminders" button function to Active Donations page

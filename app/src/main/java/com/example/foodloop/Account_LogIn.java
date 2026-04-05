@@ -66,19 +66,23 @@ public class Account_LogIn extends AppCompatActivity {
             if (accountResult.getCount() == 0) {
                 foodLoopDB.createAccount("Belle Mercado", "11 West Street", "Vancouver",
                         "BC", "Canada", 1, "1A1A1A",
-                        "6045551111", "belle@mercado.ca", "belle123");
+                        "6045551111", "belle@mercado.ca", "belle123",
+                        "Donor and Requestor", 3);
 
                 foodLoopDB.createAccount("Gia Supetran", "22 South Street", "Surrey",
                         "BC", "Canada", 1, "2B2B2B",
-                        "6045552222", "gia@supetran.ca", "gia123");
+                        "6045552222", "gia@supetran.ca", "gia123",
+                        "Donor and Requestor", 3);
 
                 foodLoopDB.createAccount("Nilesh Kurbet", "33 East Street", "Coquitlam",
                         "BC", "Canada", 1, "3C3C3C",
-                        "6045553333", "nilesh@kurbet.ca", "nilesh123");
+                        "6045553333", "nilesh@kurbet.ca", "nilesh123",
+                        "Donor and Requestor", 3);
 
                 foodLoopDB.createAccount("Michael Nguyen", "44 North Street", "Burnaby",
                         "BC", "Canada", 1, "4D4D4D",
-                        "6045554444", "michael@nguyen.ca", "michael123");
+                        "6045554444", "michael@nguyen.ca", "michael123",
+                        "Donor and Requestor", 3);
             }
             accountResult.close();
         }

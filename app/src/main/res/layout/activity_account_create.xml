@@ -145,7 +145,7 @@
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:background="@color/white"
-        android:entries="@array/CountryList"
+        android:entries="@array/CountryArray"
         android:gravity="center"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -345,12 +345,12 @@
         app:layout_constraintVertical_bias="0.306" />
 
     <Spinner
-        android:id="@+id/inputUserType"
+        android:id="@+id/inputAccountType"
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_marginTop="44dp"
         android:background="@color/white"
-        android:entries="@array/UserTypeList"
+        android:entries="@array/AccountTypeArray"
         android:gravity="center"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
