@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodLoop">
         <activity
-            android:name=".SubmitRequestPage"
+            android:name=".Request_Submit"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
@@ -23,22 +23,22 @@
             </intent-filter>
         </activity> <!-- GIA'S PAGES -->
         <activity
-            android:name=".DonorPage"
+            android:name=".Donation_Home"
             android:exported="false" />
         <activity
-            android:name=".EditDonation"
+            android:name=".Donation_Edit"
             android:exported="false" />
         <activity
-            android:name=".RequestAddItem"
+            android:name=".Request_Select"
             android:exported="false" />
         <activity
-            android:name=".ActiveRequests"
+            android:name=".Request_Active"
             android:exported="false" />
         <activity
-            android:name=".ActiveDonations"
+            android:name=".Donation_Active"
             android:exported="false" /> <!-- NILESH'S PAGES -->
         <activity
-            android:name=".LogInScreen"
+            android:name=".Account_LogIn"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,31 +47,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LogOutScreen"
+            android:name=".Account_LogOut"
             android:exported="false" /> <!-- BELLE'S PAGES -->
         <activity
-            android:name=".Donation_Home_Page"
+            android:name=".App_Home"
             android:exported="false" />
         <activity
-            android:name=".Donation_Add_Page"
+            android:name=".Donation_Add"
             android:exported="false" />
         <activity
-            android:name=".Request_Home_Page"
+            android:name=".Request_Home"
             android:exported="false" /> <!-- MICHAEL'S PAGES -->
         <activity
-            android:name=".CreateAccount"
+            android:name=".Account_Create"
             android:exported="false" />
         <activity
-            android:name=".EditAccount"
+            android:name=".Account_Edit"
             android:exported="false" />
         <activity
-            android:name=".ProfilePage"
+            android:name=".Account_Profile"
             android:exported="false" />
         <activity
-            android:name=".HistoryDonation"
+            android:name=".Donation_History"
             android:exported="false" />
         <activity
-            android:name=".HistoryRequest"
+            android:name=".Request_History"
             android:exported="false" /> <!-- MAIN ACTIVITY -->
         <activity
             android:name=".MainActivity"

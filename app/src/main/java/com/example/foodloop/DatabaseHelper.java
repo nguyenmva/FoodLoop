@@ -372,15 +372,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +            // Who donated it (the one who's logged in)?
                 " WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
         /*
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(
-        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", Requestor." + USER_NAME_FLD + " AS RequestorName " +
-                " FROM " + DONATION_TABLE +
-                " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +      // What got requested?
-                " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + // Who requested it?
-                " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +            // Who donated it (the one who's logged in)?
-                " WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
-
         SELECT Donations.Status, Donations.ItemName, Requestor.Name (Using ALIAS "RequestorName")
         FROM Donations
         JOIN Requests ON Donations.DonationID = Requests.DonationID

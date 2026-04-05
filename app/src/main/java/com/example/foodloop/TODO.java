@@ -1,26 +1,35 @@
 package com.example.foodloop;
-public class TODO {
-}
-/*
+public class TODO {}/*
 Just a project-wide overview to-do stuff and other notes. Attached to nothing. Does nothing.
-Add new ones. Delete finished ones. Or ignore it all.
+LAST UPDATED: 2026/04/05, 1:00 AM.
 
-TODO: Search location on food request
+## Accounts ##
 TODO: Set up notifications (plus points)
+
+## Donations ##
 TODO: Add "send reminders" button function to Active Donations page
-    -- consider the pick up time and ate enumerated in request
-TODO: Add "delivery" option to add donation page -- requestor
-TODO: Finish request pages
-TODO: Make item class
-TODO: Figure out JOIN to simplify the queries.
-TODO: Edit class names for better name cohesion.
-TODO: Add "Complete" button to request status recycler.
+    -- consider the pick up time and date enumerated in request
 TODO: Add "Delete" for donations.
+TODO: Fix calendar in add/edit donation pages
+    -- Bug: Date can be a number of any length when making a new donation.
+
+## Requests ##
+TODO: Move Collection Type, Time Slot to Requestor
+TODO: Update RequestItem adapter class to Universal - Nilesh
+TODO: Search location on RequestItem - Nilesh
+TODO: Finish request pages
+TODO: Connect edit request info
+TODO: Finish edit request info
+TODO: Add "Complete" button to request status recycler.
+
+## Adapter/Recycler ##
 
 
+## DatabaseHelper ##
 
 
-
-
+## General ##
+TODO: Make item class -- do we still need this....
+TODO: Edit class names for better name cohesion.
 
  */

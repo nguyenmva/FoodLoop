@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff6d7"
+    tools:context=".App_Home">
+
+    <Button
+        android:id="@+id/btnDonate"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#ff193b"
+        android:onClick="toDonationAddPage"
+        android:text="@string/btnDonateFood"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+
+    <Button
+        android:id="@+id/btnRequestStatus2"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#35a1d3"
+        android:onClick="toActiveRequestsPage"
+        android:text="@string/btnReqStatus"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.722" />
+
+    <Button
+        android:id="@+id/btnEditRequestInfo2"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#35a1d3"
+        android:text="@string/btnEdtReqInfo"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.654"
+        tools:ignore="TextSizeCheck" />
+
+    <Button
+        android:id="@+id/btnDonate2"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#004aad"
+        android:onClick="toRequestItemPage"
+        android:text="@string/btnReqFd"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.657"
+        tools:ignore="TextSizeCheck" />
+
+    <Button
+        android:id="@+id/btnRHistory2"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#35a1d3"
+        android:onClick="toRequestHistoryPage"
+        android:text="@string/txtRequestHistory"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.722" />
+
+    <Button
+        android:id="@+id/btnRequestStatus"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#AB1212"
+        android:onClick="toActiveDonationsPage"
+        android:text="@string/btnDonationStatus"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.566" />
+
+    <Button
+        android:id="@+id/btnRHistory"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#AB1212"
+        android:onClick="toDonationHistoryPage"
+        android:text="@string/btnDonHistory"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.566" />
+
+    <Button
+        android:id="@+id/btnEditRequestInfo"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#AB1212"
+        android:onClick="toEditDonationPage"
+        android:text="@string/btnEditDetails"
+
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtWelcomeTitle"
+        android:textColor="#0051AD"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.419" />
+
+    <Button
+        android:id="@+id/btnRequestLogOut"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#004aad"
+        android:onClick="toLogoutPage"
+        android:text="@string/btnLogOut1"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <Button
+        android:id="@+id/btnReqViewProfile"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#ff193b"
+        android:onClick="toProfilePage"
+        android:text="@string/btnViewProfile"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.808" />
+
+    <ImageView
+        android:id="@+id/imgFLLogo1"
+        android:layout_width="287dp"
+        android:layout_height="106dp"
+        android:contentDescription="@string/imgLogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029"
+        app:srcCompat="@drawable/foodloop_logo" />
+
+    <ImageView
+        android:id="@+id/imgHeaderDonate"
+        android:layout_width="416dp"
+        android:layout_height="210dp"
+        android:contentDescription="@string/imgHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.162"
+        app:srcCompat="@drawable/foodheader" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
