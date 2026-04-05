@@ -6,12 +6,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -241,7 +237,7 @@ public class LogInScreen extends AppCompatActivity {
 //                    }
 //                    userTypeCursor.close();
 //                }
-                startActivity(new Intent(LogInScreen.this, DonationHomePage.class));
+                startActivity(new Intent(LogInScreen.this, Donation_Home_Page.class));
                 // As of 3/30, updated to Donation Home Page for now -Gia
                 // Change this to the Home page when that's up.
             }

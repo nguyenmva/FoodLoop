@@ -22,8 +22,8 @@ TODO: Remove Donor name, add Location for Active Requests
 TODO: Set up notifications (plus points)
 TODO: Add "send reminders" button function to Active Donations page
     -- consider the pick up time and ate enumerated in request
-TODO: Add "delivery" option to add donation page
-TODO: Fix calendar in add donation page
+TODO: Add "delivery" option to add donation page -- requestor
+TODO: Fix calendar in add donation page -- DONE
 TODO: Finish request pages
 TODO: Make item class
 TODO: Figure out JOIN to simplify the queries.

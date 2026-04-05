@@ -1,10 +1,8 @@
 package com.example.foodloop;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -52,7 +50,7 @@ public class RequestAddItem extends AppCompatActivity {
         });
 
         btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(RequestAddItem.this, DonationHomePage.class));
+            startActivity(new Intent(RequestAddItem.this, Donation_Home_Page.class));
         });
 
         recyclerView.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));

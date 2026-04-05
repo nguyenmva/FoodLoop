@@ -25,6 +25,6 @@ public class HistoryRequest extends AppCompatActivity {
     }
 
     public void toDonorHomePage(View view) {
-        startActivity(new Intent(HistoryRequest.this, DonationHomePage.class));
+        startActivity(new Intent(HistoryRequest.this, Donation_Home_Page.class));
     }
 }

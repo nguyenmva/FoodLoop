@@ -158,7 +158,7 @@ public class EditDonation extends AppCompatActivity {
     }
 
     public void backDonorHomePage(View view) {
-        startActivity(new Intent(EditDonation.this, DonationHomePage.class));
+        startActivity(new Intent(EditDonation.this, Donation_Home_Page.class));
     }
 }
 

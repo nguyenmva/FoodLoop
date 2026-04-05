@@ -39,7 +39,7 @@ public class ActiveRequests extends AppCompatActivity {
         });
         btnHome = findViewById(R.id.btnRTtoHome);
         btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(ActiveRequests.this, DonationHomePage.class));
+            startActivity(new Intent(ActiveRequests.this, Donation_Home_Page.class));
         });
 
         // INITIALIZE DATABASE AND SHARED PREFERENCES

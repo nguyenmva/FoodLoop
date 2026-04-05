@@ -3,7 +3,6 @@ package com.example.foodloop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class DonationHomePage extends AppCompatActivity {
+public class Donation_Home_Page extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,41 +27,41 @@ public class DonationHomePage extends AppCompatActivity {
     // #######################################################################################
     // MICHAEL'S PAGES
     public void toProfilePage(View view) {
-        startActivity(new Intent(DonationHomePage.this, ProfilePage.class));
+        startActivity(new Intent(Donation_Home_Page.this, ProfilePage.class));
     }
     public void toDonationHistoryPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, HistoryDonation.class));
+        startActivity(new Intent(Donation_Home_Page.this, HistoryDonation.class));
     }
     public void toRequestHistoryPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, HistoryRequest.class));
+        startActivity(new Intent(Donation_Home_Page.this, HistoryRequest.class));
     }
 
     // #######################################################################################
     // GIA'S PAGES
     public void toActiveDonationsPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, ActiveDonations.class));
+        startActivity(new Intent(Donation_Home_Page.this, ActiveDonations.class));
     }
     public void toActiveRequestsPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, ActiveRequests.class));
+        startActivity(new Intent(Donation_Home_Page.this, ActiveRequests.class));
     }
     public void toRequestItemPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, RequestAddItem.class));
+        startActivity(new Intent(Donation_Home_Page.this, RequestAddItem.class));
     }
 
     // #######################################################################################
     // NILESH'S PAGES
     public void toLogoutPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, LogOutScreen.class));
+        startActivity(new Intent(Donation_Home_Page.this, LogOutScreen.class));
     }
     // #######################################################################################
     // BELLE'S PAGES
     public void toDonorHomePage(View view) {
-        startActivity(new Intent(DonationHomePage.this, DonationHomePage.class));
+        startActivity(new Intent(Donation_Home_Page.this, Donation_Home_Page.class));
     }
     public void toDonationAddPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, Donation_Add_Page.class));
+        startActivity(new Intent(Donation_Home_Page.this, Donation_Add_Page.class));
     }
     public void toEditDonationPage(View view) {
-        startActivity(new Intent(DonationHomePage.this, EditDonation.class));
+        startActivity(new Intent(Donation_Home_Page.this, EditDonation.class));
     }
 }
