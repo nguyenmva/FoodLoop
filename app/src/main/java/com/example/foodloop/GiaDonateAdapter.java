@@ -29,6 +29,7 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
     public GiaDonateAdapter(List<String[]> data, Context context) {
         this.data = data;
         this.context = context;
+        this.foodLoopDB = new DatabaseHelper(context);
     }
 
     @NonNull
@@ -44,15 +45,15 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
         String[] item = data.get(position);
 
         //Set text views
-        holder.tvStatus.setText(item[0]);
-        holder.tvItem.setText(item[1]);
-        holder.tvRecipient.setText(item[2]);
+        holder.tvStatus.setText(item[1]);
+        holder.tvItem.setText(item[2]);
+        holder.tvRecipient.setText(item[3] == null ? "" : item[3]);
 
         //Start bind
         holder.isBinding = true;
 
         //Condition to show spinner control
-        if (item[2] == null) {
+        if (item[3] == null) {
             //No requestor = no approval/rejection
             holder.spinnerRequest.setVisibility(View.GONE);
         } else {
@@ -66,8 +67,14 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 holder.spinnerRequest.setAdapter(adapter);
             }
-        }
 
+            //Assign spinner selection
+            String status = item[1];
+            int index = 0;
+            if (status.equals("Approved")) index = 1;
+            else if (status.equals("Rejected")) index = 2;
+            holder.spinnerRequest.setSelection(index);
+        }
         //End bind
         holder.isBinding = false;
     }
@@ -99,10 +106,9 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
             btnEdit = itemView.findViewById(R.id.btnEdit);
 
             btnNotify.setOnClickListener(v -> {
-                Toast.makeText(v.getContext(), "Reminder Sent!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(adapter.context, "Reminder Sent!", Toast.LENGTH_SHORT).show();
             });
 
-            /*-- FIX THISSSSS --*/
             btnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -119,13 +125,20 @@ public class GiaDonateAdapter extends RecyclerView.Adapter<GiaDonateAdapter.View
             spinnerRequest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                    if (isBinding) return;
-                    if (pos == 0) return;
+                    if (isBinding) return; //Disable listener
+                    if (pos == 0) return; //Do not accept "Select" as a response
 
-                    int currentPos = getAbsoluteAdapterPosition();
+                    int currentPos = getAbsoluteAdapterPosition(); //Find row of interaction
                     if (currentPos != RecyclerView.NO_POSITION) {
-                        adapter.data.get(currentPos)[0] = options[pos];
-                        adapter.notifyItemChanged(currentPos);
+                        String newStatus = options[pos]; //Get index of option: 0 = select, 1 = approve, 2 = rejecT
+                        String donationID = adapter.data.get(currentPos)[0]; //Get item from data list
+                        adapter.data.get(currentPos)[1] = newStatus; //Update status in array
+                        boolean success = adapter.foodLoopDB.updateDonationStatus(donationID, newStatus); //Save changes to db
+
+                        if (!success) //Notify update success/fail
+                            Toast.makeText(adapter.context, "Failed to update status", Toast.LENGTH_SHORT).show();
+
+                        adapter.notifyItemChanged(currentPos); //Show row post-update
                     }
                 }
 
