@@ -1,11 +1,15 @@
 package com.example.foodloop;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,11 +44,32 @@ public class GiaRequestAdapter extends RecyclerView.Adapter<GiaRequestAdapter.Vi
         holder.tvOfferType.setText(item[4]);
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), SubmitRequestPage.class);
-            intent.putExtra("DONATION_ID", item[0]); // Pass the ID to the next screen
-            intent.putExtra("ITEM_NAME", item[1]);
-            v.getContext().startActivity(intent);
+            showSelectionDialog(v.getContext(), item);
         });
+    }
+
+    private void showSelectionDialog(Context context, String[] item) {
+        View view = LayoutInflater.from(context).inflate(R.layout.dialogbox_delivery_pickup, null);
+        Spinner spinner = view.findViewById(R.id.spinnerMethod);
+
+        new AlertDialog.Builder(context)
+                .setTitle("Request " + item[0]) // item[0] is the Name
+                .setView(view)
+                .setPositiveButton("Confirm Request", (dialog, which) -> {
+                    String selectedMethod = spinner.getSelectedItem().toString();
+                    processRequest(context, item, selectedMethod);
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void processRequest(Context context, String[] item, String method) {
+        SharedPreferences sp = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String userEmail = sp.getString("email", "");
+
+        DatabaseHelper db = new DatabaseHelper(context);
+
+        Toast.makeText(context, "Request sent for " + method, Toast.LENGTH_SHORT).show();
     }
 
     @Override
