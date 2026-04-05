@@ -363,10 +363,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public Cursor getDonationByItemSearch(String itemSearch) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(
-        "SELECT *" +
-                " FROM " + DONATION_TABLE +
-                " WHERE " + DONATION_ITEM_NAME_FLD + " LIKE ?", new String[]{"%" + itemSearch + "%"});
+        // JOIN on EmailAddress because the 'Donor' field stores the user's email
+        String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
+                " FROM " + DONATION_TABLE + " D" +
+                " JOIN " + USERS_TABLE + " U ON D." + DONATION_ID_FLD + " = U." + USER_EMAIL_FLD +
+                " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ?";
+
+        return db.rawQuery(query, new String[]{"%" + itemSearch + "%"});
     }
     public Cursor getDonationByLocationSearch(String locationSearch) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -375,6 +378,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " FROM " + DONATION_TABLE +
                 " WHERE " + REQUEST_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
     }
+
+    //Nilesh -Works
+    public Cursor getDonationsWithDonorInfo(String itemSearch) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
+                " FROM " + DONATION_TABLE + " D" +
+                " JOIN " + USERS_TABLE + " U ON D." + DONOR_ID_FLD + " = U." + USER_ID_FLD +
+                " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ?";
+        return db.rawQuery(query, new String[]{"%" + itemSearch + "%"});
+    }
+
     public Cursor getAllAccounts(){
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
@@ -406,5 +420,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD,
                 null
         );
+    }
+
+    //NIlesh Test
+    // Method to search by name OR category
+    public Cursor searchDonations(String searchText) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        // JOIN with Users table to get Donor name and location
+        String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
+                " FROM " + DONATION_TABLE + " D" +
+                " JOIN " + USERS_TABLE + " U ON D." + DONOR_ID_FLD + " = U." + USER_ID_FLD +
+                " WHERE (D." + DONATION_ITEM_NAME_FLD + " LIKE ? OR D." + DONATION_CATEGORY_FLD + " LIKE ?) " +
+                " AND D." + DONATION_STATUS_FLD + " = 'Available'";
+
+        String wildCard = "%" + searchText + "%";
+        return db.rawQuery(query, new String[]{wildCard, wildCard});
+    }
+
+    // Method to fetch confirmed requests for a specific user
+    public Cursor getConfirmedRequests(String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT D." + DONATION_ITEM_NAME_FLD + ", R." + REQUEST_PICKUP_DATE_FLD + ", R." + REQUEST_LOCATION_FLD +
+                        " FROM " + REQUEST_TABLE + " R" +
+                        " JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
+                        " JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD +
+                        " WHERE U." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
     }
 }

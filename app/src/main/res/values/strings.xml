@@ -88,15 +88,13 @@
     <string name="txtLabelName">Account Name</string>
     <string name="txtLabelAdd">Address </string>
     <string name="txtLabelCNum">Contact Number</string>
-    <string name="txtLabelEmail">E-mail </string>
+    <string name="txtLabelEmail">E-Mail </string>
     <string name="txtLabelPW1">Password</string>
     <string name="txtLabelPW2">Confirm Password</string>
 
     <!-- Profile Page -->
     <string name="txtTitleProfile">Profile Page</string>
     <string name="txtProfileEdit">Edit Profile</string>
-    <string name="txtLabelName2">Name</string>
-    <string name="txtLabelCNum2">Contact No.</string>
 
     <!-- Column Headers -->
     <string name="txtStatus">Status</string>
@@ -110,10 +108,6 @@
     <string name="btnMADAllDon">All Donations</string>
     <string name="btnMADReqDon">Requested Donations</string>
     <string name="btnNotif">Send Notification</string>
-
-    <!-- Item_Donation XML -->
-    <string name="btnEdit">Edit</string>
-    <string name="btnRemove">Delete</string>
 
     <!-- Active Requests Tracking -->
     <string name="txtRTTitleName">Request Tracker</string>
@@ -180,6 +174,8 @@
         <item>Canned Goods</item>
         <item>Dry Goods</item>
     </string-array>
+
+
 
     <!--Edit Donation Page -->
     <string name="txtEditItem">Edit Item</string>
