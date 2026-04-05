@@ -14,6 +14,8 @@ public class WhatWasDone {
 2026/04/04
 -Added filters for ActiveDonations -- all Donations vs Donations with Request
 -Added NOTIF button for ActiveDonations -- still need to code
+-Update GiaDonateAdapter.java to write status updates to the DB.
+-Add "Edit" buttons to donation and request recyclers.
 
 
 

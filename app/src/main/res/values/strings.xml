@@ -96,12 +96,14 @@
     <string name="txtTitleProfile">Profile Page</string>
     <string name="txtProfileEdit">Edit Profile</string>
 
-    <!-- Column Headers -->
+    <!-- Item_Universal XML -->
     <string name="txtStatus">Status</string>
     <string name="txtResponse">Response</string>
     <string name="txtItem">Item</string>
     <string name="txtRequestor">Requestor</string>
     <string name="txtDonor">Donor</string>
+    <string name="txtDateReq">Date Requested</string>
+    <string name="txtLocation">Location</string>">
 
     <!-- Active Donations Tracking -->
     <string name="txtMADTitleName">Manage Active Donations</string>

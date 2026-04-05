@@ -6,10 +6,10 @@ Just a project-wide overview to-do stuff and other notes. Attached to nothing. D
 Add new ones. Delete finished ones. Or ignore it all.
 
 TODO: Recyclers
--HistoryDonation.java (Donation History)
--RequestAddItem.java (Request Food)
--ActiveRequests.java (Request Status)
--HistoryRequest.java (Request History)
+-HistoryDonation.java (Donation History) -- Gia
+-ActiveRequests.java (Request Status) -- Gia
+-HistoryRequest.java (Request History) -- Gia
+-RequestAddItem.java (Request Food) -- Nilesh
 
 TODO: Add search function for request items
 -DatabaseHelper.java
@@ -27,10 +27,8 @@ TODO: Fix calendar in add donation page -- DONE
 TODO: Finish request pages
 TODO: Make item class
 TODO: Figure out JOIN to simplify the queries.
-TODO: Update GiaDonateAdapter.java to write status updates to the DB.
 TODO: Edit class names for better name cohesion.
 TODO: Add "Complete" button to request status recycler.
-TODO: Add "Edit" buttons to donation and request recyclers.
 TODO: Add "Delete" for donations.
 
 

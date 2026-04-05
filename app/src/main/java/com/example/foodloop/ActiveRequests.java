@@ -21,8 +21,7 @@ import java.util.List;
 public class ActiveRequests extends AppCompatActivity {
     Button btnHome;
     RecyclerView rv;
-    //    public static List<String[]> donationList = new ArrayList<>();
-    public static List<String[]> requestList = new ArrayList<>();
+    public static ArrayList<String[]> requestList = new ArrayList<>();
     private DatabaseHelper foodLoopDB;
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
@@ -64,15 +63,15 @@ public class ActiveRequests extends AppCompatActivity {
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD));
 
-                requestList.add(new String[]{status, itemName, location});
-
+                requestList.add(new String[]{itemName, status, location});
             }
             requestCursor.close();
         }
 
         rv = findViewById(R.id.rvActiveRequest);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        GiaRequestAdapter adapter = new GiaRequestAdapter(requestList);
+        UniversalAdapter adapter = new UniversalAdapter(requestList, this, "ActiveRequest");
         rv.setAdapter(adapter);
+
     }
 }
