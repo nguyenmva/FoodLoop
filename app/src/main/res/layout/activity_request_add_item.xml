@@ -5,84 +5,51 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff6d7"
-    tools:context=".RequestAddItem">
-
-    <ImageView
-        android:id="@+id/imgFLLogo"
-        android:layout_width="99dp"
-        android:layout_height="84dp"
-        android:contentDescription="@string/txtLogoDesc"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
-        app:srcCompat="@drawable/foodloop_logo" />
-
-    <TextView
-        android:id="@+id/txtReqItemTitle"
-        android:layout_width="360dp"
-        android:layout_height="88dp"
-        android:gravity="center"
-        android:text="@string/txtReqItemTitle"
-        android:textColor="#ff193b"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.244" />
+    android:background="#fff6d7">
 
     <EditText
         android:id="@+id/inputReqItem"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:background="#ffffff"
-        android:gravity="center"
-        android:hint="@string/txtSearchHint"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColorHint="#004aad"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/white"
+        android:hint="Search name or category..."
+        android:paddingStart="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/imgMagGlass"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <Button
         android:id="@+id/imgMagGlass"
-        android:layout_width="53dp"
-        android:layout_height="47dp"
-        android:contentDescription="@string/btnSearchDesc"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
+        android:background="#ff193b"
+        android:src="@drawable/magnifying_glass"
+        app:layout_constraintBottom_toBottomOf="@+id/inputReqItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.927"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351"
-        app:srcCompat="@drawable/magnifying_glass" />
+        app:layout_constraintTop_toTopOf="@+id/inputReqItem" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tvRecylerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnReqItemToHome"
+        app:layout_constraintTop_toBottomOf="@+id/inputReqItem" />
 
     <Button
         android:id="@+id/btnReqItemToHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="Home"
         android:backgroundTint="#ff193b"
-        android:text="@string/btnHomePage"
-        android:textColor="#fff6d7"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.918"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

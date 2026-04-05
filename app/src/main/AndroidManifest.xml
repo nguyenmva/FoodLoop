@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodLoop">
         <activity
+            android:name=".SubmitRequestPage"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -19,8 +22,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- GIA'S PAGES -->
+        </activity> <!-- GIA'S PAGES -->
         <activity
             android:name=".DonorPage"
             android:exported="false" />

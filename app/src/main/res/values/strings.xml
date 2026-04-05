@@ -176,7 +176,6 @@
     </string-array>
 
 
-
     <!--Edit Donation Page -->
     <string name="txtEditItem">Edit Item</string>
     <string name="btnSaveEdit">Save Edit</string>
@@ -184,7 +183,7 @@
     <string name="btnBackToProfile">Back to Profile</string>
     <!-- =================================================================  -->
 
-<!--  Requestor Collection Options -->
+    <!--  Requestor Collection Options -->
     <string name="txtAvailTime1">Time Slot</string>
     <string name="txtCollection">Collection Type</string>
     <string-array name="Collection_Options">
