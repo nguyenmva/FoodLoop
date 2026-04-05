@@ -225,6 +225,7 @@
         android:layout_width="157dp"
         android:layout_height="72dp"
         android:backgroundTint="#004aad"
+        android:onClick="editDonation"
         android:text="@string/btnSaveEdit"
         android:textSize="24sp"
         android:textStyle="bold"

@@ -22,8 +22,7 @@ public class EditDonation extends AppCompatActivity {
     private Spinner spCategoryEdit;
     private RadioButton rdbFreeEdit, rdbDiscountedEdit;
     private DatabaseHelper foodLoopDB;
-
-    private SharedPreferences savedDonationID;
+    private int donationID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +64,15 @@ public class EditDonation extends AppCompatActivity {
             int quantityFood = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_QUANTITY_FLD));
 //            String categoryName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_CATEGORY_FLD));
             int categorySpinner = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_CATEGORY_SPINNER_FLD)); //Index numbers for spinner
-            String expiryDate = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_CATEGORY_SPINNER_FLD));
             String expireDate = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_EXPIRY_DATE_FLD));
             String offerType = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));
             String price =  cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_PRICE_FLD));
             String donationStatus = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
-            int donorID = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.DONOR_ID_FLD));
+            donationID = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
 
             edtFoodNameEdit.setText(foodName);
             edtQuantityEdit.setText(String.valueOf(quantityFood));
-            edtExpiryDateEdit.setText(expiryDate);
+            edtExpiryDateEdit.setText(expireDate);
             edtPriceEdit.setText(price);
             spCategoryEdit.setSelection(categorySpinner);
             if(offerType.equals("Discounted")){
@@ -98,8 +96,6 @@ public class EditDonation extends AppCompatActivity {
                 edtPriceEdit.setText("");
             }
         });
-
-        //
     }
 
     public void editDonation(View view){
@@ -117,8 +113,7 @@ public class EditDonation extends AppCompatActivity {
                 || (!rdbDiscountedEdit.isChecked() && !rdbFreeEdit.isChecked()) //User must pick or it will throw an error
                 || TextUtils.isEmpty(spCategoryEdit.getSelectedItem().toString())
                 || (!rdbFreeEdit.isChecked() && !rdbDiscountedEdit.isChecked())
-                || (spCategoryEdit.getSelectedItemPosition() == 0))
-        {
+                || (spCategoryEdit.getSelectedItemPosition() == 0)) {
             Toast.makeText(EditDonation.this, "All areas must be filled or selected.", Toast.LENGTH_LONG).show();
         }
         else {
@@ -128,37 +123,29 @@ public class EditDonation extends AppCompatActivity {
             String category = spCategoryEdit.getSelectedItem().toString();
             int categoryIndex = spCategoryEdit.getSelectedItemPosition();
             String expiryDate = edtExpiryDateEdit.getText().toString();
-
-
+            String offerType;
             double price;
             if (rdbFreeEdit.isChecked()) {
+                offerType = "Free";
                 price = 0.0;
             } else {
+                offerType = "Discounted";
                 price = Double.parseDouble(edtPriceEdit.getText().toString());
             }
 
-            String offerType = rdbFreeEdit.isChecked() ? "Free" : "Discounted";
-            String status = "Pending"; // DEFAULT STRING?
-            int donor = 2; // WILL CHANGE IT TO GET FROM DB LATER.
 
-
-//            boolean foodLoopDB.updateDonation()
-//            // NEEDS MORE ERROR HANDLING??
-//            boolean inserted = foodLoopDB.createDonation(
-//                    itemName, quantity, category, categoryIndex,
-//                    expiryDate, offerType, price, status, donor
-//            );
+            // NEEDS MORE ERROR HANDLING??
+            boolean updated = foodLoopDB.editDonation( // UPDATE DONATION
+                    donationID, itemName, quantity, category, categoryIndex,
+                    expiryDate, offerType, price);
             // PROVIDE CONFIRMATION TO THE USER
-//            if (inserted) {
-//                Toast.makeText(this, "Donation Updated", Toast.LENGTH_LONG).show();
-//                startActivity(new Intent(EditDonation.this, DonationHomePage.class));
-//            } else {
-//                Toast.makeText(this, "Error!", Toast.LENGTH_LONG).show();
-//            }
-
-
+            if (updated) {
+                Toast.makeText(this, "Donation Updated", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(EditDonation.this, ActiveDonations.class));
+            } else {
+                Toast.makeText(this, "Error!", Toast.LENGTH_LONG).show();
+            }
         }
-
     }
 
     public void backDonorHomePage(View view) {
