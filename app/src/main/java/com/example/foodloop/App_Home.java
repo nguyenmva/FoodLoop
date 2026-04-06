@@ -1,8 +1,11 @@
 package com.example.foodloop;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +14,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class App_Home extends AppCompatActivity {
+    private DatabaseHelper foodLoopDB;
+    private SharedPreferences sharedPreference;
+    private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,32 @@ public class App_Home extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        String savedEmail = sharedPreference.getString("email", "");
+
+        foodLoopDB = new DatabaseHelper(this);
+
+        Cursor gimmeID = foodLoopDB.getActiveRequests(savedEmail);
+        if (gimmeID != null && gimmeID.moveToNext()) {
+            String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
+            gimmeID.close();
+
+
+            boolean check = foodLoopDB.checkNotifications(savedEmail);
+            if (check) {
+                Toast.makeText(this, "COME GET YOUR STUFF!", Toast.LENGTH_LONG).show();
+
+                boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, "0");
+                if (!gotIt)
+                    Toast.makeText(this, "Failed to clear notification", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
+            if (gimmeID != null) {
+                gimmeID.close();
+            }
+        }
     }
 
     // #######################################################################################
