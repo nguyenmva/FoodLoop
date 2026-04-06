@@ -148,25 +148,32 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
                         return;
                     }
 
-                    boolean success;
-                    if (newStatus.equals("Approved")) {
-                        //Select: APPROVE
-                        success = adapter.foodLoopDB.approveRequest(Integer.parseInt(requestID), Integer.parseInt(donationID));
-                    } else {
-                        //Select: REJECT
+                    boolean success = false;
+                    if (newStatus.equals("Rejected")) {
+                        //Update DB
                         success = adapter.foodLoopDB.rejectRequest(requestID);
+                        //Status: Rejected = Remove
+                        if (success) {
+                            adapter.data.remove(currentPos);
+                            adapter.notifyItemRemoved(currentPos);
+                        }
+                    } else if (newStatus.equals("Approved")){
+                        //Update DB
+                        success = adapter.foodLoopDB.approveRequest(
+                                Integer.parseInt(requestID), Integer.parseInt(donationID));
+
+                        //Status: Approved = update row
+                        if (success) {
+                            adapter.data.get(currentPos)[1] = newStatus;
+                            adapter.notifyItemChanged(currentPos);
+                        }
                     }
 
-                    if (success) {
-                        //Update list: success
-                        adapter.data.get(currentPos)[1] = newStatus;
-                    } else {
+                    if(!success){
                         //Update list: fail
                         Toast.makeText(adapter.context, "Failed to update status", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
-                    adapter.notifyItemChanged(currentPos); //Show row post-update
                 }
 
                 @Override

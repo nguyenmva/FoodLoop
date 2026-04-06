@@ -353,23 +353,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "SELECT D." + DONATION_ID_FLD + ", " +
                         "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
                         "D." + DONATION_ITEM_NAME_FLD + ", " +
-                        "Requestor." + USER_NAME_FLD + " AS RequestorName, " +
+                        "U." + USER_NAME_FLD + " AS RequestorName, " +
                         "R." + REQUEST_ID_FLD + " AS RequestID " +
                         "FROM " + DONATION_TABLE + " D " +
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
-                        "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved') " +
+                        "WHERE R." + REQUEST_ID_FLD + " = (" +
+                        "SELECT MAX(" + REQUEST_ID_FLD + ") " + "FROM " + REQUEST_TABLE + " " +
+                        "WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + ") " +
+                        "AND (R." + REQUEST_STATUS_FLD + " = 'Approved' OR R." + REQUEST_STATUS_FLD + " = '' OR R." + REQUEST_STATUS_FLD + " IS NULL) " +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
                 new String[]{userEmail});
-        /*
-        SELECT Donations.Status, Donations.ItemName, Requestor.Name (Using ALIAS "RequestorName")
-        FROM Donations
-        JOIN Requests ON Donations.DonationID = Requests.DonationID
-        JOIN Users Requestor ON Requests.RequestorID = Requestor.UserID
-        JOIN Users Donor ON Donations.DonorID = Donor.UserID
-        WHERE Donor.EmailAddress = ?
-         */
     }
 
     // GET DONATION HISTORY - Gia
@@ -383,9 +378,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE (R." + REQUEST_STATUS_FLD + " = 'Approved' OR R." + REQUEST_STATUS_FLD + " = 'Rejected') " +
+                        "WHERE (R." + REQUEST_STATUS_FLD + " = 'Rejected' OR " +
+                        "R." + REQUEST_STATUS_FLD + " = 'Completed') " +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
                 new String[]{email});
+
     }
 
     public Cursor getActiveRequests(String userEmail) {
