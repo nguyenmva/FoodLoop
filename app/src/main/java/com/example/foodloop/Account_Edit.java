@@ -21,7 +21,7 @@ import java.util.Objects;
 public class Account_Edit extends AppCompatActivity {
     private EditText inputName, inputStreet, inputCity, inputProvince, inputPostal,
             inputPhone, inputEmail, inputNewPass, inputConfirmNewPass;
-    private Spinner inputCountry;
+    private Spinner inputCountry, inputAccountType;
     private DatabaseHelper foodLoopDB;
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
@@ -48,6 +48,7 @@ public class Account_Edit extends AppCompatActivity {
         inputEmail = findViewById(R.id.inputEmail);
         inputNewPass = findViewById(R.id.inputNewPass);
         inputConfirmNewPass = findViewById(R.id.inputConfirmNewPass);
+        inputAccountType = findViewById(R.id.inputAccountType);
 
         // INITIALIZE DATABASE AND SHARED PREFERENCES
         foodLoopDB = new DatabaseHelper(this);
@@ -68,6 +69,7 @@ public class Account_Edit extends AppCompatActivity {
                 String postal = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_POSTAL_FLD));
                 String phone = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_PHONE_FLD));
                 String email = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_EMAIL_FLD));
+                int accountTypeSpinner = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_ACCOUNT_TYPE_SPINNER_FLD));
 
                 inputName.setText(name);
                 inputStreet.setText(street);
@@ -77,6 +79,7 @@ public class Account_Edit extends AppCompatActivity {
                 inputPostal.setText(postal);
                 inputPhone.setText(phone);
                 inputEmail.setText(email);
+                inputAccountType.setSelection(accountTypeSpinner);
 
                 cursor.close();
             }
@@ -96,7 +99,9 @@ public class Account_Edit extends AppCompatActivity {
                 || TextUtils.isEmpty(inputPhone.getText().toString())
                 || TextUtils.isEmpty(inputEmail.getText().toString())
                 || TextUtils.isEmpty(inputNewPass.getText().toString())
-                || TextUtils.isEmpty(inputConfirmNewPass.getText().toString())) {
+                || TextUtils.isEmpty(inputConfirmNewPass.getText().toString())
+                || inputCountry.getSelectedItemPosition() == 0
+                || inputAccountType.getSelectedItemPosition() == 0) {
             Toast.makeText(Account_Edit.this, "All areas must be filled.", Toast.LENGTH_LONG).show();
         }
         else {
@@ -112,6 +117,8 @@ public class Account_Edit extends AppCompatActivity {
             String email = inputEmail.getText().toString();
             String newPass = inputNewPass.getText().toString();
             String confirmNewPass = inputConfirmNewPass.getText().toString();
+            String accountType = inputAccountType.getSelectedItem().toString();
+            int accountTypeSpinner = inputAccountType.getSelectedItemPosition();
 
             // MORE ERROR HANDLING
             if (phone.length() != 10) { // MUST BE 10 DIGITS
@@ -132,8 +139,8 @@ public class Account_Edit extends AppCompatActivity {
                 }
                 else {
                     boolean updated = foodLoopDB.updateAccount( // UPDATE ACCOUNT
-                            name, street, city, province, country,
-                            countrySpinner, postal, phone, email, newPass
+                            name, street, city, province, country, countrySpinner,
+                            postal, phone, email, newPass//, accountType, accountTypeSpinner TODO: Add accountType and accountTypeSpinner to the updateAccount method.
                     );
                     // PROVIDE CONFIRMATION TO THE USER
                     if (updated)
