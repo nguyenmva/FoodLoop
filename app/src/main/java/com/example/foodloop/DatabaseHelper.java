@@ -284,9 +284,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return true;
     }
+    // ##################################################################################################################
+    // FOR UPDATING A NOTIFICATION FLAG
+    public boolean updateNotificationFlag(String requestID, String notificationFlag) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(REQUEST_NOTIFICATION_FLAG_FLD, notificationFlag);
+
+        int result = db.update(REQUEST_TABLE, values, REQUEST_NOTIFICATION_FLAG_FLD + " = ?", new String[]{requestID});
+        return result > 0;
+    }
 
     // ##################################################################################################################
     // FOR CHECKING STUFF
+    public boolean checkNotifications(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT *" +
+                        " FROM " + USERS_TABLE + " U " +
+                        " JOIN " + REQUEST_TABLE + " R ON U." + USER_ID_FLD + " = R." + REQUESTOR_ID_FLD +
+                        " WHERE " + USER_EMAIL_FLD + " = ? AND " + REQUEST_NOTIFICATION_FLAG_FLD + " = '1'", new String[]{email});
+
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
      public boolean checkEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(

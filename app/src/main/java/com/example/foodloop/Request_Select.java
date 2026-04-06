@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,11 +55,12 @@ public class Request_Select extends AppCompatActivity {
         });
 
         recyclerView.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
+
     }
 
     private void loadItems(String search) {
         List<String[]> donationList = new ArrayList<>();
-        Cursor cursor = foodLoopDB.getDonationsWithDonorInfo(search); // Uses the new JOIN query
+        Cursor cursor = foodLoopDB.getDonationsWithDonorInfo(search);
 
 
         if (cursor != null) {
@@ -70,13 +72,13 @@ public class Request_Select extends AppCompatActivity {
                 String location = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_CITY_FLD));
                 String type = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));;
 
-                // Array order: ID, Name, Expiry, Qty, Donor, Location
                 donationList.add(new String[]{name, expiry, qty, location, type});
             }
             cursor.close();
         } else {
             android.util.Log.d("SEARCH_DEBUG", "Cursor is NULL");
         }
+        Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
         adapter = new Adapter_Request(donationList);
         recyclerView.setAdapter(adapter);
     }
