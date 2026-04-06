@@ -112,9 +112,9 @@
             <EditText
                 android:id="@+id/inputCity"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/edittext_bg"
                 android:hint="@string/hintCity"
                 android:paddingStart="16dp" />
@@ -139,8 +139,8 @@
                 android:id="@+id/inputPostal"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
                 android:layout_marginEnd="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/edittext_bg"
                 android:hint="@string/hintPostalCode"
                 android:paddingStart="16dp" />

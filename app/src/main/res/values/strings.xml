@@ -221,8 +221,9 @@
     <string name="btnSignUp2">Sign Up</string>
     <string name="txtInputReqItem">Search name or category...</string>
     <string name="btnHome">Home</string>
+    <string name="txtAccountType2">Account Type</string>
 
-<!--    //Request Item Page by Nilesh-->
+    <!--    //Request Item Page by Nilesh-->
     <string-array name="method_options">
         <item>Pickup</item>
         <item>Delivery</item>
