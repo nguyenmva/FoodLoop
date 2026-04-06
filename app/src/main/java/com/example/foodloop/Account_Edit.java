@@ -41,14 +41,14 @@ public class Account_Edit extends AppCompatActivity {
         inputName = findViewById(R.id.inputName);
         inputStreet = findViewById(R.id.inputStreet);
         inputCity = findViewById(R.id.inputCity);
-        inputProvince = findViewById(R.id.inputProvince);
+        inputProvince = findViewById(R.id.inputProvince2);
         inputCountry = findViewById(R.id.inputCountry);
         inputPostal = findViewById(R.id.inputPostal);
         inputPhone = findViewById(R.id.inputPhone);
         inputEmail = findViewById(R.id.inputEmail);
         inputNewPass = findViewById(R.id.inputNewPass);
         inputConfirmNewPass = findViewById(R.id.inputConfirmNewPass);
-        inputAccountType = findViewById(R.id.inputAccountType);
+        inputAccountType = findViewById(R.id.inputAccountType2);
 
         // INITIALIZE DATABASE AND SHARED PREFERENCES
         foodLoopDB = new DatabaseHelper(this);
