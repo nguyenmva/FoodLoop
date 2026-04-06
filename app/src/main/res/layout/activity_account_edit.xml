@@ -37,10 +37,11 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="14dp"
+            android:layout_height="31dp"
             android:layout_marginTop="20dp"
             android:text="@string/txtAccountType2"
             android:textColor="#004aad"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Spinner
@@ -236,6 +237,7 @@
             android:inputType="text|textPassword"
             android:paddingStart="16dp"
             android:textColorHint="#757575"
+            android:textSize="18sp"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <LinearLayout
@@ -254,7 +256,7 @@
                 android:backgroundTint="#ff193b"
                 android:onClick="updateAccount"
                 android:text="@string/btnEditAccount"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:cornerRadius="25dp" />
 
             <Button
