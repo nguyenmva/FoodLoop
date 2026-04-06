@@ -32,6 +32,6 @@ TODO: Set up notifications (plus points)
 
 
 ## General ##
-TODO: Make item class -- do we still need this....
+
 
  */

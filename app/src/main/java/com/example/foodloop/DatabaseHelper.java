@@ -276,7 +276,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Reject ONE Request
-    public boolean rejectRequest(String requestID) {
+    public boolean rejectRequest(int requestID) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + REQUEST_TABLE +
                 " SET " + REQUEST_STATUS_FLD + " = 'Rejected' " +

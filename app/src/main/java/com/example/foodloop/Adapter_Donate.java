@@ -151,7 +151,8 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
                     boolean success = false;
                     if (newStatus.equals("Rejected")) {
                         //Update DB
-                        success = adapter.foodLoopDB.rejectRequest(requestID);
+                        success = adapter.foodLoopDB.rejectRequest(Integer.parseInt(requestID));
+
                         //Status: Rejected = Remove
                         if (success) {
                             adapter.data.remove(currentPos);
