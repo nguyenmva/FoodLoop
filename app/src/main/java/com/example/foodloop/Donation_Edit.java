@@ -51,7 +51,7 @@ public class Donation_Edit extends AppCompatActivity {
 //        savedDonationID = getSharedPreferences("savedDonationID", MODE_PRIVATE);
 //        int selectedID = savedDonationID.getInt("id_Donation", 0);
 
-        int selectedID = getIntent().getIntExtra("extraDonationID", -99);
+        int selectedID = getIntent().getIntExtra("extraDonationID", -1);
         // Get the data attached to the keyword
         // Keyword/name must be the same as the one used in the intent.putExtra
         // Default value is set to any impossible value to represent NULL, like -99 but usually just -1
@@ -148,6 +148,17 @@ public class Donation_Edit extends AppCompatActivity {
     public void backDonorHomePage(View view) {
         startActivity(new Intent(Donation_Edit.this, App_Home.class));
     }
+
+    public void deleteItem(View view) {
+        boolean deleted = foodLoopDB.deleteDonation(donationID);
+        if(deleted){
+            Toast.makeText(this, "Donation Deleted!", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(Donation_Edit.this, Donation_Active.class));
+        } else {
+            Toast.makeText(this, "Delete Failed!", Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
 
 

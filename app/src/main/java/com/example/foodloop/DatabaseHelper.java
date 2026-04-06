@@ -219,6 +219,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int result = db.update(USERS_TABLE, contentValues, USER_EMAIL_FLD + " = ?", new String[]{email});
         return result != -1;
     }
+
     // ##################################################################################################################
     // FOR EDITING A DONATION THAT IS ALREADY LISTED
     public boolean editDonation(int donationID, String itemName, int quantity, String category, int categorySpinner,
@@ -239,6 +240,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return result > 0; //This will return true if at least 1 row was edited
     }
+
+    // ##################################################################################################################
+    // Delete an Existing Donation Listing - Gia
+    public boolean deleteDonation(int donationID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(DONATION_TABLE, DONATION_ID_FLD + " = ?", new String[]{String.valueOf(donationID)});
+        return result > 0;
+    }
+
 
     // ##################################################################################################################
     // FOR UPDATING A DONATION'S STATUS
@@ -276,7 +286,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Reject ONE Request
-    public boolean rejectRequest(String requestID) {
+    public boolean rejectRequest(int requestID) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + REQUEST_TABLE +
                 " SET " + REQUEST_STATUS_FLD + " = 'Rejected' " +

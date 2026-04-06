@@ -183,13 +183,13 @@
         <item>Dry Goods</item>
     </string-array>
 
-
-
     <!--Edit Donation Page -->
     <string name="txtEditItem">Edit Item</string>
     <string name="btnSaveEdit">Save Edit</string>
     <string name="btnCancelEdit">Cancel</string>
     <string name="btnBackToProfile">Back to Profile</string>
+    <string name="btnDeleteItem">Delete</string>
+
     <!-- =================================================================  -->
 
 <!--  Requestor Collection Options -->
@@ -222,6 +222,7 @@
     <string name="txtInputReqItem">Search name or category...</string>
     <string name="btnHome">Home</string>
     <string name="txtAccountType2">Account Type</string>
+    <string name="txtFoodReqTitle">Food Request and Search</string>
 
     <!--    //Request Item Page by Nilesh-->
     <string-array name="method_options">

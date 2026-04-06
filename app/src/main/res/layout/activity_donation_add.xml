@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.718">
@@ -27,15 +27,15 @@
             android:layout_width="wrap_content"
             android:layout_height="53dp"
             android:text="@string/rdbFree1"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="601dp" />
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="600dp" />
 
         <RadioButton
             android:id="@+id/rdbDiscounted"
             android:layout_width="166dp"
             android:layout_height="match_parent"
             android:text="@string/rdbDiscount1"
-            tools:layout_editor_absoluteX="91dp"
+            tools:layout_editor_absoluteX="95dp"
             tools:layout_editor_absoluteY="597dp" />
     </RadioGroup>
 
@@ -49,10 +49,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.101"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.653" />
+        app:layout_constraintVertical_bias="0.65" />
 
     <EditText
         android:id="@+id/edtExpiryDate"
@@ -195,10 +195,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.799" />
+        app:layout_constraintVertical_bias="0.795" />
 
     <TextView
         android:id="@+id/txtAddItem"
