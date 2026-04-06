@@ -249,7 +249,7 @@
 
             <Button
                 android:id="@+id/btnCreateAccount"
-                android:layout_width="0dp"
+                android:layout_width="27dp"
                 android:layout_height="55dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
