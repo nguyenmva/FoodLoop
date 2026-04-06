@@ -276,7 +276,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Reject ONE Request
-    public boolean rejectRequest(String requestID) {
+    public boolean rejectRequest(int requestID) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + REQUEST_TABLE +
                 " SET " + REQUEST_STATUS_FLD + " = 'Rejected' " +
@@ -284,9 +284,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return true;
     }
+    // ##################################################################################################################
+    // FOR UPDATING A NOTIFICATION FLAG
+    public boolean updateNotificationFlag(String requestID, String notificationFlag) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(REQUEST_NOTIFICATION_FLAG_FLD, notificationFlag);
+
+        int result = db.update(REQUEST_TABLE, values, REQUEST_NOTIFICATION_FLAG_FLD + " = ?", new String[]{requestID});
+        return result > 0;
+    }
 
     // ##################################################################################################################
     // FOR CHECKING STUFF
+    public boolean checkNotifications(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT *" +
+                        " FROM " + USERS_TABLE + " U " +
+                        " JOIN " + REQUEST_TABLE + " R ON U." + USER_ID_FLD + " = R." + REQUESTOR_ID_FLD +
+                        " WHERE " + USER_EMAIL_FLD + " = ? AND " + REQUEST_NOTIFICATION_FLAG_FLD + " = '1'", new String[]{email});
+
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
      public boolean checkEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
@@ -353,23 +377,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "SELECT D." + DONATION_ID_FLD + ", " +
                         "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
                         "D." + DONATION_ITEM_NAME_FLD + ", " +
-                        "Requestor." + USER_NAME_FLD + " AS RequestorName, " +
+                        "U." + USER_NAME_FLD + " AS RequestorName, " +
                         "R." + REQUEST_ID_FLD + " AS RequestID " +
                         "FROM " + DONATION_TABLE + " D " +
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
-                        "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved') " +
+                        "WHERE R." + REQUEST_ID_FLD + " = (" +
+                        "SELECT MAX(" + REQUEST_ID_FLD + ") " + "FROM " + REQUEST_TABLE + " " +
+                        "WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + ") " +
+                        "AND (R." + REQUEST_STATUS_FLD + " = 'Approved' OR R." + REQUEST_STATUS_FLD + " = '' OR R." + REQUEST_STATUS_FLD + " IS NULL) " +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
                 new String[]{userEmail});
-        /*
-        SELECT Donations.Status, Donations.ItemName, Requestor.Name (Using ALIAS "RequestorName")
-        FROM Donations
-        JOIN Requests ON Donations.DonationID = Requests.DonationID
-        JOIN Users Requestor ON Requests.RequestorID = Requestor.UserID
-        JOIN Users Donor ON Donations.DonorID = Donor.UserID
-        WHERE Donor.EmailAddress = ?
-         */
     }
 
     // GET DONATION HISTORY - Gia
@@ -383,9 +402,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE (R." + REQUEST_STATUS_FLD + " = 'Approved' OR R." + REQUEST_STATUS_FLD + " = 'Rejected') " +
+                        "WHERE (R." + REQUEST_STATUS_FLD + " = 'Rejected' OR " +
+                        "R." + REQUEST_STATUS_FLD + " = 'Completed') " +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
                 new String[]{email});
+
     }
 
     public Cursor getActiveRequests(String userEmail) {

@@ -104,6 +104,16 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
 
             btnNotify.setOnClickListener(v -> {
                 Toast.makeText(adapter.context, "Reminder Sent!", Toast.LENGTH_SHORT).show();
+//                int currentPos = getAbsoluteAdapterPosition();
+//                if (currentPos != RecyclerView.NO_POSITION) {
+//                    String donationID = adapter.data.get(currentPos)[0];
+//                    boolean success = adapter.foodLoopDB.updateNotificationFlag(requestID,"1");
+//
+//                    if (!success) //Notify update success/fail
+//                        Toast.makeText(adapter.context, "Failed to update status", Toast.LENGTH_SHORT).show();
+//
+//                    adapter.notifyItemChanged(currentPos);
+//                }
             });
 
             btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -148,25 +158,33 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
                         return;
                     }
 
-                    boolean success;
-                    if (newStatus.equals("Approved")) {
-                        //Select: APPROVE
-                        success = adapter.foodLoopDB.approveRequest(Integer.parseInt(requestID), Integer.parseInt(donationID));
-                    } else {
-                        //Select: REJECT
-                        success = adapter.foodLoopDB.rejectRequest(requestID);
+                    boolean success = false;
+                    if (newStatus.equals("Rejected")) {
+                        //Update DB
+                        success = adapter.foodLoopDB.rejectRequest(Integer.parseInt(requestID));
+
+                        //Status: Rejected = Remove
+                        if (success) {
+                            adapter.data.remove(currentPos);
+                            adapter.notifyItemRemoved(currentPos);
+                        }
+                    } else if (newStatus.equals("Approved")){
+                        //Update DB
+                        success = adapter.foodLoopDB.approveRequest(
+                                Integer.parseInt(requestID), Integer.parseInt(donationID));
+
+                        //Status: Approved = update row
+                        if (success) {
+                            adapter.data.get(currentPos)[1] = newStatus;
+                            adapter.notifyItemChanged(currentPos);
+                        }
                     }
 
-                    if (success) {
-                        //Update list: success
-                        adapter.data.get(currentPos)[1] = newStatus;
-                    } else {
+                    if(!success){
                         //Update list: fail
                         Toast.makeText(adapter.context, "Failed to update status", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
-                    adapter.notifyItemChanged(currentPos); //Show row post-update
                 }
 
                 @Override
