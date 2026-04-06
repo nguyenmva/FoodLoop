@@ -34,25 +34,26 @@ public class App_Home extends AppCompatActivity {
         foodLoopDB = new DatabaseHelper(this);
 
         Cursor gimmeID = foodLoopDB.getActiveRequests(savedEmail);
-        if (gimmeID != null && gimmeID.moveToNext()) {
-            String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
-            gimmeID.close();
 
+        if (gimmeID != null) {
+            try {
+                while (gimmeID.moveToNext()) {
+                    String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
 
-            boolean check = foodLoopDB.checkNotifications(savedEmail);
-            if (check) {
-                Toast.makeText(this, "COME GET YOUR STUFF!", Toast.LENGTH_LONG).show();
+                    boolean check = foodLoopDB.checkNotifications(savedEmail);
+                    if (check) {
+                        Toast.makeText(this, "COME GET YOUR STUFF! (Request ID: " + requestID + ")", Toast.LENGTH_LONG).show();
 
-                boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, "0");
-                if (!gotIt)
-                    Toast.makeText(this, "Failed to clear notification", Toast.LENGTH_SHORT).show();
+                        boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, "0");
+                        if (!gotIt)
+                            Toast.makeText(this, "Failed to clear notification", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
             }
-        }
-        else {
+        } else {
             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
-            if (gimmeID != null) {
-                gimmeID.close();
-            }
         }
     }
 
