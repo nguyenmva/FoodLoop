@@ -74,15 +74,20 @@ public class Donation_Active extends AppCompatActivity {
             while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
                 String donationID = donationCursor.getString(
                         donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
-                String status = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
+
                 String itemName = donationCursor.getString(
                         donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+
                 String requestorName = donationCursor.getString(
                         donationCursor.getColumnIndexOrThrow("RequestorName"));
-//                String location = donationCursor.getString(
-//                        donationCursor.getColumnIndexOrThrow("DonorLocation"));
-                donationList.add(new String[]{donationID, status, itemName, requestorName});
+
+                String requestStatus = donationCursor.isNull(donationCursor.getColumnIndexOrThrow("RequestStatus"))
+                        ? "" : donationCursor.getString(donationCursor.getColumnIndexOrThrow("RequestStatus"));
+
+                String requestID = donationCursor.isNull(donationCursor.getColumnIndexOrThrow("RequestID"))
+                        ? "" : donationCursor.getString(donationCursor.getColumnIndexOrThrow("RequestID"));
+
+                donationList.add(new String[]{donationID, requestStatus, itemName, requestorName, requestID});
             }
             donationCursor.close();
         }
@@ -105,16 +110,21 @@ public class Donation_Active extends AppCompatActivity {
         if (donationCursor != null) {
             while (donationCursor.moveToNext()) { // WHILE LOOP TO GO THROUGH ALL THE DONATIONS
                 String donationID = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD)); // Adapter Index [0]
-                String status = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD)); // Adapter Index [1]
+                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
+
                 String itemName = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD)); // Adapter Index [2]
+                        donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+
                 String requestorName = donationCursor.getString(
-                        donationCursor.getColumnIndexOrThrow("RequestorName")); // Adapter Index [3]
-//                String location = donationCursor.getString(
-//                        donationCursor.getColumnIndexOrThrow("DonorLocation"));
-                donationList.add(new String[]{donationID, status, itemName, requestorName}); // Adapter Indices {0, 1, 2, 3}
+                        donationCursor.getColumnIndexOrThrow("RequestorName"));
+
+                String requestStatus = donationCursor.isNull(donationCursor.getColumnIndexOrThrow("RequestStatus"))
+                        ? "" : donationCursor.getString(donationCursor.getColumnIndexOrThrow("RequestStatus"));
+
+                String requestID = donationCursor.isNull(donationCursor.getColumnIndexOrThrow("RequestID"))
+                        ? "" : donationCursor.getString(donationCursor.getColumnIndexOrThrow("RequestID"));
+
+                donationList.add(new String[]{donationID, requestStatus, itemName, requestorName, requestID});
             }
             donationCursor.close();
         }
