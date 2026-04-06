@@ -54,6 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REQUEST_LOCATION_FLD = "Location";
     public static final String REQUEST_NOTIFICATION_FLAG_FLD = "NotificationFlag";;
     public static final String REQUEST_NOTIFICATION_TEXT_FLD = "NotificationText";
+    public static final String REQUEST_STATUS_FLD = "Status";
 
     // ##################################################################################################################
     public DatabaseHelper(@Nullable Context context) {
@@ -108,6 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 REQUEST_PICKUP_DATE_FLD + " DATE, " +
                 REQUEST_COLLECTION_TYPE_FLD + " TEXT, " +
                 REQUEST_LOCATION_FLD + " TEXT, " +
+                REQUEST_STATUS_FLD + " TEXT, " +
                 REQUEST_NOTIFICATION_FLAG_FLD + " INTEGER, " +
                 REQUEST_NOTIFICATION_TEXT_FLD + " TEXT, " +
                 "FOREIGN KEY (" + DONATION_ID_FLD + ") REFERENCES " + DONATION_TABLE + "(" + DONATION_ID_FLD + "), " +
@@ -240,15 +242,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR UPDATING A DONATION'S STATUS
-    public boolean updateDonationStatus(String donationID, String status) {
+//    public boolean updateDonationStatus(String donationID, String status) {
+//
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//
+//        values.put(DONATION_STATUS_FLD, status);
+//
+//        int result = db.update(DONATION_TABLE, values, DONATION_ID_FLD + " = ?", new String[]{donationID});
+//        return result > 0;
+//    }
 
+    //Approve Request, Reject the Others, Close Requests
+    public boolean approveRequest(int requestID, int donationID) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        //Update Status: Approved
+        db.execSQL("UPDATE " + REQUEST_TABLE +
+                " SET " + REQUEST_STATUS_FLD + " = 'Approved' " +
+                "WHERE " + REQUEST_ID_FLD + " = " + requestID);
 
-        values.put(DONATION_STATUS_FLD, status);
+        //Update Status: Reject
+        db.execSQL("UPDATE " + REQUEST_TABLE +
+                " SET " + REQUEST_STATUS_FLD + " = 'Rejected' " +
+                "WHERE " + DONATION_ID_FLD + " = " + donationID +
+                " AND " + REQUEST_ID_FLD + " <> " + requestID);
 
-        int result = db.update(DONATION_TABLE, values, DONATION_ID_FLD + " = ?", new String[]{donationID});
-        return result > 0;
+        //Update Requests: Close
+        db.execSQL("UPDATE " + DONATION_TABLE +
+                " SET " + DONATION_STATUS_FLD + " = 'Approved' " +
+                "WHERE " + DONATION_ID_FLD + " = " + donationID);
+
+        return true;
+    }
+
+    //Reject ONE Request
+    public boolean rejectRequest(String requestID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE " + REQUEST_TABLE +
+                " SET " + REQUEST_STATUS_FLD + " = 'Rejected' " +
+                "WHERE " + REQUEST_ID_FLD + " = " + requestID);
+
+        return true;
     }
 
     // ##################################################################################################################
@@ -316,14 +350,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getActiveDonations(String userEmail) { // Shows only donations that have a request.
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT Donations." + DONATION_ID_FLD + ", " + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD +
-                ", Requestor." + USER_NAME_FLD + " AS RequestorName " + ", Donor." + USER_CITY_FLD + " AS DonorLocation" +
-                " FROM " + DONATION_TABLE +
-                " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +      // What got requested?
-                " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + // Who requested it?
-                " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +            // Who donated it (the one who's logged in)?
-                " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Pending' OR Donations." + DONATION_STATUS_FLD + " = 'Approved')" +
-                " AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+                "SELECT D." + DONATION_ID_FLD + ", " +
+                        "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
+                        "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "Requestor." + USER_NAME_FLD + " AS RequestorName, " +
+                        "R." + REQUEST_ID_FLD + " AS RequestID " +
+                        "FROM " + DONATION_TABLE + " D " +
+                        "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
+                        "WHERE (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved') " +
+                        "AND Donor." + USER_EMAIL_FLD + " = ?",
+                new String[]{userEmail});
         /*
         SELECT Donations.Status, Donations.ItemName, Requestor.Name (Using ALIAS "RequestorName")
         FROM Donations
@@ -338,15 +376,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getDonationHistory(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT Donations." + DONATION_STATUS_FLD + ", " +
-                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
-                        "Requestor." + USER_NAME_FLD + " AS RequestorName" +
-                        " FROM " + DONATION_TABLE +
-                        " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +
-                        " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD +
-                        " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +
-                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
-                        " AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{email});
+                "SELECT R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
+                        "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "Requestor." + USER_NAME_FLD + " AS RequestorName " +
+                        "FROM " + DONATION_TABLE + " D " +
+                        "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
+                        "WHERE (R." + REQUEST_STATUS_FLD + " = 'Approved' OR R." + REQUEST_STATUS_FLD + " = 'Rejected') " +
+                        "AND Donor." + USER_EMAIL_FLD + " = ?",
+                new String[]{email});
     }
 
     public Cursor getActiveRequests(String userEmail) {
@@ -437,9 +476,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
                 "SELECT D." + DONATION_ID_FLD + ", " +
-                        "D." + DONATION_STATUS_FLD + ", " +
+                        "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
                         "D." + DONATION_ITEM_NAME_FLD + ", " +
-                        "U." + USER_NAME_FLD + " AS RequestorName " +
+                        "U." + USER_NAME_FLD + " AS RequestorName, " +
+                        "R." + REQUEST_ID_FLD + " AS RequestID " +
                         "FROM " + DONATION_TABLE + " D " +
                         "LEFT JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
