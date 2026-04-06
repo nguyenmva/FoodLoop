@@ -211,7 +211,18 @@
     <string name="txtLabelCNum2">Contact Number</string>
     <string name="txtLabelName2">Name</string>
     <string name="btnEdit">Edit</string>
-    //Request Item Page --Nilesh
+    <string name="txtIWantTo">I want to:</string>
+    <string name="txtPersonalDetails">Personal Details</string>
+    <string name="txtAddress">Address</string>
+    <string name="txtSecurity">Security</string>
+    <string name="btnBack">Back</string>
+
+<!-- Added strings   -->
+    <string name="btnSignUp2">Sign Up</string>
+    <string name="txtInputReqItem">Search name or category...</string>
+    <string name="btnHome">Home</string>
+
+<!--    //Request Item Page by Nilesh-->
     <string-array name="method_options">
         <item>Pickup</item>
         <item>Delivery</item>
