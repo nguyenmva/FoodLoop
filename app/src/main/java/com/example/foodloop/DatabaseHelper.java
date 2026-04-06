@@ -229,7 +229,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " FROM " + REQUEST_TABLE +
                         " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
                         " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                        " WHERE Users." + USER_EMAIL_FLD + " = ?", new String[]{email});
+                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
+                        " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{email});
     }
 
     // GET DONATION HISTORY - Gia
@@ -243,7 +244,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +
                         " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD +
                         " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +
-                        " WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{email});
+                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
+                        " AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{email});
     }
 
     // ##################################################################################################################
@@ -373,7 +375,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +      // What got requested?
                 " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + // Who requested it?
                 " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +            // Who donated it (the one who's logged in)?
-                " WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+                " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Pending' OR Donations." + DONATION_STATUS_FLD + " = 'Approved')" +
+                " AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
         /*
         SELECT Donations.Status, Donations.ItemName, Requestor.Name (Using ALIAS "RequestorName")
         FROM Donations
@@ -383,14 +386,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         WHERE Donor.EmailAddress = ?
          */
     }
-    public Cursor getActiveRequests(String userEmail) { //
+    public Cursor getActiveRequests(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
         "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", " + REQUEST_LOCATION_FLD +
                 " FROM " + REQUEST_TABLE +
                 " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
                 " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                " WHERE Users." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+                " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Pending' OR Donations." + DONATION_STATUS_FLD + " = 'Approved')" +
+                " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
         /*
         SELECT Donations.Status, Donations.ItemName, Donations.Location
         FROM Requests
@@ -462,7 +466,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "LEFT JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
                         "LEFT JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+                        "WHERE (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved') " +
+                        "AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
     }
 
     //NIlesh Test

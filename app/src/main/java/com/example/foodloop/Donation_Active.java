@@ -80,6 +80,8 @@ public class Donation_Active extends AppCompatActivity {
                         donationCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String requestorName = donationCursor.getString(
                         donationCursor.getColumnIndexOrThrow("RequestorName"));
+//                String location = donationCursor.getString(
+//                        donationCursor.getColumnIndexOrThrow("DonorLocation"));
                 donationList.add(new String[]{donationID, status, itemName, requestorName});
             }
             donationCursor.close();
