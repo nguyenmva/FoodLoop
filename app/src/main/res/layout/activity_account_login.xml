@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff6d7"
-    tools:context=".MainActivity">
+    tools:context=".Account_LogIn">
 
     <ImageView
         android:id="@+id/fdLogo"
