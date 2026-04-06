@@ -8,6 +8,19 @@
     android:background="#fff6d7"
     tools:context=".Account_Edit">
 
+    <Spinner
+        android:id="@+id/inputAccountType"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="724dp"
+        android:background="@drawable/edittext_bg"
+        android:entries="@array/AccountTypeArray"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtEmail2"
         android:layout_width="wrap_content"
@@ -309,6 +322,7 @@
         android:id="@+id/btnCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
         android:backgroundTint="#ff193b"
         android:onClick="updateAccount"
         android:text="@string/btnEditAccount"
@@ -317,7 +331,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputAccountType"
         app:layout_constraintVertical_bias="0.975" />
 
     <Button
