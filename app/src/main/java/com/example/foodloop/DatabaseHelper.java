@@ -41,6 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DONATION_PRICE_FLD = "Price";
     public static final String DONATION_STATUS_FLD = "Status";
     public static final String DONOR_ID_FLD = "Donor";
+
     // ##################################################################################################################
     // REQUESTS TABLE
     public static final String REQUEST_TABLE = "Requests";
@@ -51,13 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REQUEST_PICKUP_DATE_FLD = "PickupDate";
     public static final String REQUEST_COLLECTION_TYPE_FLD = "CollectionType";
     public static final String REQUEST_LOCATION_FLD = "Location";
-    // ##################################################################################################################
-    // HISTORY TABLE
-    public static final String HISTORY_TABLE = "History";
-    public static final String HISTORY_ID_FLD = "HistoryID";
-    public static final String HISTORY_DATE_FLD = "Date";
-    public static final String HISTORY_ITEM_NAME_FLD = "ItemName";
-    public static final String HISTORY_LOCATION_FLD = "Location";
+    public static final String REQUEST_NOTIFICATION_FLAG_FLD = "NotificationFlag";;
+    public static final String REQUEST_NOTIFICATION_TEXT_FLD = "NotificationText";
 
     // ##################################################################################################################
     public DatabaseHelper(@Nullable Context context) {
@@ -112,19 +108,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 REQUEST_PICKUP_DATE_FLD + " DATE, " +
                 REQUEST_COLLECTION_TYPE_FLD + " TEXT, " +
                 REQUEST_LOCATION_FLD + " TEXT, " +
+                REQUEST_NOTIFICATION_FLAG_FLD + " INTEGER, " +
+                REQUEST_NOTIFICATION_TEXT_FLD + " TEXT, " +
                 "FOREIGN KEY (" + DONATION_ID_FLD + ") REFERENCES " + DONATION_TABLE + "(" + DONATION_ID_FLD + "), " +
                 "FOREIGN KEY (" + REQUESTOR_ID_FLD + ") REFERENCES " + USERS_TABLE + "(" + USER_ID_FLD + ")" +
                 ")"
         );
-        // #######################################################
-        // FOR HISTORY
-//        db.execSQL("CREATE TABLE " + HISTORY_TABLE + " (" +
-//                HISTORY_ID_FLD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                HISTORY_ITEM_NAME_FLD + " TEXT, " +
-//                HISTORY_DATE_FLD + " TEXT, " +
-//                HISTORY_LOCATION_FLD + " TEXT)"
-//        );
-
     }
 
     @Override
@@ -197,55 +186,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(REQUEST_PICKUP_DATE_FLD, "2026-06-01");
         contentValues.put(REQUEST_COLLECTION_TYPE_FLD, collectionType);
         contentValues.put(REQUEST_LOCATION_FLD, location);
-        // PICKUP = DONOR'S CITY
-        // DELIVERY = RECIPIENT'S CITY
+            // PICKUP = DONOR'S CITY
+            // DELIVERY = RECIPIENT'S CITY
+        contentValues.put(REQUEST_NOTIFICATION_FLAG_FLD, 0);
+        contentValues.put(REQUEST_NOTIFICATION_TEXT_FLD, "No notification.");
 
         long result = db.insert(REQUEST_TABLE, null, contentValues);
         return result != -1;
-    }
-
-    // ##################################################################################################################
-    // FOR CREATING A HISTORY RECORD
-//    public boolean createRequestHistory(String date, String item, String location){
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//
-//        contentValues.put(REQUEST_DATE_FLD, date);
-//        contentValues.put(REQUEST_ITEM_NAME_FLD, item);
-//        contentValues.put(REQUEST_LOCATION_FLD, location);
-//
-//        long result = db.insert(REQUEST_HISTORY_TABLE, null, contentValues);
-//        return result != -1;
-//    }
-
-    // GET REQUEST HISTORY - Gia
-    public Cursor getRequestHistory(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(
-                "SELECT Donations." + DONATION_EXPIRY_DATE_FLD + ", " +
-                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
-                        "Requests." + REQUEST_LOCATION_FLD +
-                        " FROM " + REQUEST_TABLE +
-                        " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
-                        " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
-                        " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{email});
-    }
-
-    // GET DONATION HISTORY - Gia
-    public Cursor getDonationHistory(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(
-                "SELECT Donations." + DONATION_STATUS_FLD + ", " +
-                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
-                        "Requestor." + USER_NAME_FLD + " AS RequestorName" +
-                        " FROM " + DONATION_TABLE +
-                        " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +
-                        " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD +
-                        " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +
-                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
-                        " AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{email});
     }
 
     // ##################################################################################################################
@@ -330,7 +277,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // ##################################################################################################################
-    // FOR FINDING STUFF
+    // GETTERS FOR FINDING STUFF
     public Cursor getUserDataByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
@@ -386,6 +333,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         WHERE Donor.EmailAddress = ?
          */
     }
+
+    // GET DONATION HISTORY - Gia
+    public Cursor getDonationHistory(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT Donations." + DONATION_STATUS_FLD + ", " +
+                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
+                        "Requestor." + USER_NAME_FLD + " AS RequestorName" +
+                        " FROM " + DONATION_TABLE +
+                        " JOIN " + REQUEST_TABLE + " ON Donations." + DONATION_ID_FLD + " = Requests." + DONATION_ID_FLD +
+                        " JOIN " + USERS_TABLE + " Requestor ON Requests." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD +
+                        " JOIN " + USERS_TABLE + " Donor ON Donations." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD +
+                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
+                        " AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{email});
+    }
+
     public Cursor getActiveRequests(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
@@ -408,6 +371,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         And where the UserIDs match on the Requests and the Users Table.
          */
     }
+
+    // GET REQUEST HISTORY - Gia
+    public Cursor getRequestHistory(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT Donations." + DONATION_EXPIRY_DATE_FLD + ", " +
+                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
+                        "Requests." + REQUEST_LOCATION_FLD +
+                        " FROM " + REQUEST_TABLE +
+                        " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
+                        " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
+                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
+                        " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{email});
+    }
+
     public Cursor getDonationByItemSearch(String itemSearch) {
         SQLiteDatabase db = this.getReadableDatabase();
         // JOIN on EmailAddress because the 'Donor' field stores the user's email

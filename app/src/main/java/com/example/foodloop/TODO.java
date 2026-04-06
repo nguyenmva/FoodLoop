@@ -4,7 +4,6 @@ Just a project-wide overview to-do stuff and other notes. Attached to nothing. D
 LAST UPDATED: 2026/04/05, 1:00 AM.
 
 ## Accounts ##
-TODO: Set up notifications (plus points)
 TODO: Can users change their account type in edit profile?
 
 ## Donations ##
@@ -22,6 +21,9 @@ TODO: Finish request pages
 TODO: Connect edit request info
 TODO: Finish edit request info
 TODO: Add "Complete" button to request status recycler.
+TODO: Set up notifications (plus points)
+    -- Column for notification flag and text put into the Requests table - M
+
 
 ## Adapter/Recycler ##
 
@@ -31,6 +33,5 @@ TODO: Add "Complete" button to request status recycler.
 
 ## General ##
 TODO: Make item class -- do we still need this....
-TODO: Edit class names for better name cohesion.
 
  */
