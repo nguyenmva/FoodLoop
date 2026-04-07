@@ -1,6 +1,7 @@
 package com.example.foodloop;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,8 @@ public class Request_Select extends AppCompatActivity {
     private DatabaseHelper foodLoopDB;
     RecyclerView recyclerView;
     Adapter_Request_Add adapter;
+    private SharedPreferences sharedPreference;
+    private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class Request_Select extends AppCompatActivity {
         });
 
         foodLoopDB = new DatabaseHelper(this);
+        sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         inputReqItem = findViewById(R.id.inputReqItem);
         imgMagGlass = findViewById(R.id.imgMagGlass);
@@ -59,8 +63,13 @@ public class Request_Select extends AppCompatActivity {
     }
 
     public void loadAllDonations(View v) {
+        String savedEmail = sharedPreference.getString("email", "");
+        if (savedEmail.isEmpty()) {
+            Toast.makeText(this, "Nothing in the sharedPreference", Toast.LENGTH_SHORT).show();
+            return;
+        }
         donationList.clear();
-        Cursor getAllCursor = foodLoopDB.getAllAvailableDonations();
+        Cursor getAllCursor = foodLoopDB.getAllAvailableDonations(savedEmail);
 
         if (getAllCursor != null) {
             android.util.Log.d("SEARCH_DEBUG", "Items found: " + getAllCursor.getCount());
