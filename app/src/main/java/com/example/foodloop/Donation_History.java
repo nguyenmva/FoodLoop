@@ -72,6 +72,6 @@ public class Donation_History extends AppCompatActivity {
     }
 
     public void toDonorHomePage(View view) {
-        startActivity(new Intent(Donation_History.this, App_Home.class));
+        startActivity(new Intent(Donation_History.this, Donation_Home.class));
     }
 }

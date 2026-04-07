@@ -12,21 +12,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "FoodLoop.DB";
 
     // ##################################################################################################################
-    // USER ACCOUNT TABLE
-    public static final String USERS_TABLE = "Users";
-    public static final String USER_ID_FLD = "UserID";
-    public static final String USER_ACCOUNT_TYPE_FLD = "AccountType";
-    public static final String USER_ACCOUNT_TYPE_SPINNER_FLD = "AccountTypeSpinnerIndex";
-    public static final String USER_NAME_FLD = "Name";
-    public static final String USER_STREET_FLD = "Street";
-    public static final String USER_CITY_FLD = "City";
-    public static final String USER_PROVINCE_FLD = "Province";
-    public static final String USER_COUNTRY_FLD = "Country";
-    public static final String USER_COUNTRY_SPINNER_FLD = "CountrySpinnerIndex";
-    public static final String USER_POSTAL_FLD = "PostalCode";
-    public static final String USER_PHONE_FLD = "ContactNumber";
-    public static final String USER_EMAIL_FLD = "EmailAddress";
-    public static final String USER_PASSWORD_FLD = "Password";
+        // USER ACCOUNT TABLE
+        public static final String USERS_TABLE = "Users";
+        public static final String USER_ID_FLD = "UserID";
+        public static final String USER_ACCOUNT_TYPE_FLD = "AccountType";
+        public static final String USER_ACCOUNT_TYPE_SPINNER_FLD = "AccountTypeSpinnerIndex";
+        public static final String USER_NAME_FLD = "Name";
+        public static final String USER_STREET_FLD = "Street";
+        public static final String USER_CITY_FLD = "City";
+        public static final String USER_PROVINCE_FLD = "Province";
+        public static final String USER_COUNTRY_FLD = "Country";
+        public static final String USER_COUNTRY_SPINNER_FLD = "CountrySpinnerIndex";
+        public static final String USER_POSTAL_FLD = "PostalCode";
+        public static final String USER_PHONE_FLD = "ContactNumber";
+        public static final String USER_EMAIL_FLD = "EmailAddress";
+        public static final String USER_PASSWORD_FLD = "Password";
 
     // ##################################################################################################################
     // DONATIONS TABLE

@@ -49,7 +49,7 @@ public class Donation_Active extends AppCompatActivity {
 
         //Assign Home button function
         btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(Donation_Active.this, App_Home.class));
+            startActivity(new Intent(Donation_Active.this, Donation_Home.class));
         });
 
         // INITIALIZE DATABASE AND SHARED PREFERENCES

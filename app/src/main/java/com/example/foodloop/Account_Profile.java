@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class Account_Profile extends AppCompatActivity {
     private DatabaseHelper foodLoopDB;
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +66,43 @@ public class Account_Profile extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No user logged in.", Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
+
     public void toHomePage(View view) {
-        startActivity(new Intent(Account_Profile.this, App_Home.class)); // Change this to the Home page when that's up.
+//        Cursor userTypeCursor = foodLoopDB.getUserDataByEmail(savedEmail);
+//        if (userTypeCursor != null && userTypeCursor.moveToFirst()) {
+//            String typeStr = userTypeCursor.getString(userTypeCursor.getColumnIndexOrThrow(DatabaseHelper.USER_ACCOUNT_TYPE_FLD));
+//            //Get column number for account type
+//            int type = -1; //Initialize type variable
+//            switch (typeStr) {
+//                case "Donor":
+//                    type = 1;
+//                    break;
+//                case "Requestor":
+//                    type = 2;
+//                    break;
+//                case "Donor and Requestor":
+//                    type = 3;
+//                    break;
+//            }
+//
+//            switch (type) {
+//                case 1:
+//                    startActivity(new Intent(Account_Profile.this, Donation_Home.class));
+//                    break;
+//                case 2:
+//                    startActivity(new Intent(Account_Profile.this, Request_Home.class));
+//                    break;
+//                case 3:
+//                    startActivity(new Intent(Account_Profile.this, MainActivity.class));
+//                    break;
+//            }
+//            userTypeCursor.close();
+//        }
+
+        startActivity(new Intent(Account_Profile.this, App_Home.class));
     }
+
     public void toEditAccount(View view) {
         startActivity(new Intent(Account_Profile.this, Account_Edit.class));
     }
