@@ -37,10 +37,11 @@ public class Adapter_Request extends RecyclerView.Adapter<Adapter_Request.ViewHo
         String[] item = data.get(position);
 
         holder.tvItemName.setText(item[0]);
-        holder.tvExpiryDate.setText("Expires: " + item[1]);
-        holder.tvQuantity.setText("Qty: " + item[2]);
-        holder.tvDonorInfo.setText("Donor Location: " + item[3]);
-        holder.tvOfferType.setText(item[4]);
+        holder.tvCategory.setText("Category: " + item[1]);
+        holder.tvExpiryDate.setText("Expires: " + item[2]);
+        holder.tvQuantity.setText("Qty: " + item[3]);
+        holder.tvDonorInfo.setText("Donor Location: " + item[4]);
+        holder.tvOfferType.setText(item[5]);
 
         holder.itemView.setOnClickListener(v -> {
             showSelectionDialog(v.getContext(), item);
@@ -52,7 +53,7 @@ public class Adapter_Request extends RecyclerView.Adapter<Adapter_Request.ViewHo
         Spinner spinner = view.findViewById(R.id.spinnerMethod);
 
         new AlertDialog.Builder(context)
-                .setTitle("Request " + item[0]) // item[0] is the Name
+                .setTitle("Request " + item     [0]) // item[0] is the Name
                 .setView(view)
                 .setPositiveButton("Confirm Request", (dialog, which) -> {
                     String selectedMethod = spinner.getSelectedItem().toString();
@@ -66,9 +67,16 @@ public class Adapter_Request extends RecyclerView.Adapter<Adapter_Request.ViewHo
         SharedPreferences sp = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String userEmail = sp.getString("email", "");
 
-        DatabaseHelper db = new DatabaseHelper(context);
+        String donationID = item[5];
 
-        Toast.makeText(context, "Request sent for " + method, Toast.LENGTH_SHORT).show();
+        DatabaseHelper db = new DatabaseHelper(context);
+        boolean success = db.submitPickUpRequest(donationID, userEmail, method);
+
+        if (success){
+            Toast.makeText(context, "Request sent for " + method, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Request failed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -78,7 +86,7 @@ public class Adapter_Request extends RecyclerView.Adapter<Adapter_Request.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvItemName, tvExpiryDate, tvQuantity, tvDonorInfo, tvOfferType;
+        TextView tvItemName, tvExpiryDate, tvQuantity, tvDonorInfo, tvOfferType, tvCategory;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +96,7 @@ public class Adapter_Request extends RecyclerView.Adapter<Adapter_Request.ViewHo
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvDonorInfo = itemView.findViewById(R.id.tvDonorInfo);
             tvOfferType = itemView.findViewById(R.id.tvOfferType);
+            tvCategory = itemView.findViewById(R.id.tvCategory);
         }
     }
 }

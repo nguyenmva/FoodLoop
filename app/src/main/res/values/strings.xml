@@ -240,6 +240,9 @@
     <string name="btnHome">Home</string>
     <string name="txtAccountType2">Account Type</string>
     <string name="txtFoodReqTitle">Food Request and Search</string>
+    <string name="txtExpiryDate">Expiry: 2026-05-01</string>
+    <string name="txtDonorLoc">Donor Location: Burnaby, BC</string>
+    <string name="txtOfferType">FREE DONATION</string>
 
     <!--    //Request Item Page by Nilesh-->
     <string-array name="method_options">
