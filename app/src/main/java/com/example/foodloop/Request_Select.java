@@ -74,6 +74,7 @@ public class Request_Select extends AppCompatActivity {
         if (getAllCursor != null) {
             android.util.Log.d("SEARCH_DEBUG", "Items found: " + getAllCursor.getCount());
             while (getAllCursor.moveToNext()) {
+                String id = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
                 String name = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String category = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_CATEGORY_FLD));
                 String expiry = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_EXPIRY_DATE_FLD));
@@ -81,7 +82,7 @@ public class Request_Select extends AppCompatActivity {
                 String location = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.USER_CITY_FLD));
                 String type = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));
 
-                donationList.add(new String[]{name,category, expiry, qty, location, type});
+                donationList.add(new String[]{name,category, expiry, qty, location, type, id});
             }
             getAllCursor.close();
         }

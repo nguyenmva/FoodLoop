@@ -12,21 +12,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "FoodLoop.DB";
 
     // ##################################################################################################################
-        // USER ACCOUNT TABLE
-        public static final String USERS_TABLE = "Users";
-        public static final String USER_ID_FLD = "UserID";
-        public static final String USER_ACCOUNT_TYPE_FLD = "AccountType";
-        public static final String USER_ACCOUNT_TYPE_SPINNER_FLD = "AccountTypeSpinnerIndex";
-        public static final String USER_NAME_FLD = "Name";
-        public static final String USER_STREET_FLD = "Street";
-        public static final String USER_CITY_FLD = "City";
-        public static final String USER_PROVINCE_FLD = "Province";
-        public static final String USER_COUNTRY_FLD = "Country";
-        public static final String USER_COUNTRY_SPINNER_FLD = "CountrySpinnerIndex";
-        public static final String USER_POSTAL_FLD = "PostalCode";
-        public static final String USER_PHONE_FLD = "ContactNumber";
-        public static final String USER_EMAIL_FLD = "EmailAddress";
-        public static final String USER_PASSWORD_FLD = "Password";
+    // USER ACCOUNT TABLE
+    public static final String USERS_TABLE = "Users";
+    public static final String USER_ID_FLD = "UserID";
+    public static final String USER_ACCOUNT_TYPE_FLD = "AccountType";
+    public static final String USER_ACCOUNT_TYPE_SPINNER_FLD = "AccountTypeSpinnerIndex";
+    public static final String USER_NAME_FLD = "Name";
+    public static final String USER_STREET_FLD = "Street";
+    public static final String USER_CITY_FLD = "City";
+    public static final String USER_PROVINCE_FLD = "Province";
+    public static final String USER_COUNTRY_FLD = "Country";
+    public static final String USER_COUNTRY_SPINNER_FLD = "CountrySpinnerIndex";
+    public static final String USER_POSTAL_FLD = "PostalCode";
+    public static final String USER_PHONE_FLD = "ContactNumber";
+    public static final String USER_EMAIL_FLD = "EmailAddress";
+    public static final String USER_PASSWORD_FLD = "Password";
 
     // ##################################################################################################################
     // DONATIONS TABLE
@@ -297,10 +297,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + DONATION_TABLE +
                 " SET " + DONATION_STATUS_FLD + " = 'Complete' " +
                 "WHERE " + DONATION_ID_FLD + " = (" +
-                    "SELECT " + DONATION_ID_FLD +
-                    " FROM " + REQUEST_TABLE +
-                    " WHERE " + REQUEST_ID_FLD + " = " + requestID + ")"
-            );
+                "SELECT " + DONATION_ID_FLD +
+                " FROM " + REQUEST_TABLE +
+                " WHERE " + REQUEST_ID_FLD + " = " + requestID + ")"
+        );
         return true;
     }
 
@@ -568,8 +568,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        int userID = -1;
+        Cursor cursor = db.rawQuery("SELECT " + USER_ID_FLD + " FROM " + USERS_TABLE +
+                " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            userID = cursor.getInt(0);
+            cursor.close();
+        }
+
+        if (userID == -1) {
+            return false;
+        }
+
         values.put(DONATION_ID_FLD, donationID);
-        values.put(REQUESTOR_ID_FLD, userEmail);
+        values.put(REQUESTOR_ID_FLD, userID);
         values.put(REQUEST_COLLECTION_TYPE_FLD, method);
         values.put(REQUEST_STATUS_FLD, "Pending"); //DEFAULT UNTIL APPROVED
         values.put(REQUEST_NOTIFICATION_FLAG_FLD, 0);
@@ -582,7 +595,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
                 "SELECT " +
-                "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "D." + DONATION_ITEM_NAME_FLD + ", " +
                         "D." + DONATION_CATEGORY_FLD + ", " +
                         "D." + DONATION_QUANTITY_FLD + ", " +
                         "D." + DONATION_PRICE_FLD + ", " +

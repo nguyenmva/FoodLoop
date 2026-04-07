@@ -2,6 +2,7 @@ package com.example.foodloop;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,18 +65,19 @@ public class Adapter_Request_Add extends RecyclerView.Adapter<Adapter_Request_Ad
     }
 
     private void processRequest(Context context, String[] item, String method) {
-        SharedPreferences sp = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("LOG_IN_CREDENTIALS", Context.MODE_PRIVATE);
         String userEmail = sp.getString("email", "");
 
-        String donationID = item[5];
+        String donationID = item[6];
 
         DatabaseHelper db = new DatabaseHelper(context);
         boolean success = db.submitPickUpRequest(donationID, userEmail, method);
 
         if (success){
-            Toast.makeText(context, "Request sent for " + method, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Request sent for " + item[0], Toast.LENGTH_SHORT).show();
+            context.startActivity(new Intent(context, Request_Active.class));
         } else {
-            Toast.makeText(context, "Request failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Error: Could not submit request", Toast.LENGTH_SHORT).show();
         }
     }
 
