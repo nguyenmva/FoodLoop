@@ -181,7 +181,7 @@
     <string name="txtExpiryDate1">Expiry Date</string>
     <string name="txtQuantity1">Quantity</string>
     <string name="txtItemName2">Food Item Name</string>
-    <string name="edtExpiryDateInfo">Enter mmyyyy</string>
+    <string name="edtExpiryDateInfo">Enter dd/mm/yyyy</string>
     <string name="rdbFree1">Free</string>
     <string name="rdbDiscount1">Discount</string>
     <string name="txtOfferType1">Offer Type</string>
