@@ -225,20 +225,7 @@ public class Account_LogIn extends AppCompatActivity {
                 Toast.makeText(Account_LogIn.this, "Log in Successful!!!", Toast.LENGTH_SHORT).show();
                 Cursor userTypeCursor = foodLoopDB.getUserDataByEmail(userEmail);
                 if (userTypeCursor != null && userTypeCursor.moveToFirst()) {
-                    String typeStr = userTypeCursor.getString(userTypeCursor.getColumnIndexOrThrow(DatabaseHelper.USER_ACCOUNT_TYPE_FLD));
-                        //Get column number for account type
-                    int type = -1; //Initialize type variable
-                    switch (typeStr) {
-                        case "Donor":
-                            type = 1;
-                            break;
-                        case "Requestor":
-                            type = 2;
-                            break;
-                        case "Donor and Requestor":
-                            type = 3;
-                            break;
-                    }
+                    int type = userTypeCursor.getInt(userTypeCursor.getColumnIndexOrThrow(DatabaseHelper.USER_ACCOUNT_TYPE_SPINNER_FLD));
 
                     switch (type) {
                             case 1:

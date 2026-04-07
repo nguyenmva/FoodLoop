@@ -69,38 +69,24 @@ public class Account_Profile extends AppCompatActivity {
     }
 
     public void toHomePage(View view) {
-//        Cursor userTypeCursor = foodLoopDB.getUserDataByEmail(savedEmail);
-//        if (userTypeCursor != null && userTypeCursor.moveToFirst()) {
-//            String typeStr = userTypeCursor.getString(userTypeCursor.getColumnIndexOrThrow(DatabaseHelper.USER_ACCOUNT_TYPE_FLD));
-//            //Get column number for account type
-//            int type = -1; //Initialize type variable
-//            switch (typeStr) {
-//                case "Donor":
-//                    type = 1;
-//                    break;
-//                case "Requestor":
-//                    type = 2;
-//                    break;
-//                case "Donor and Requestor":
-//                    type = 3;
-//                    break;
-//            }
-//
-//            switch (type) {
-//                case 1:
-//                    startActivity(new Intent(Account_Profile.this, Donation_Home.class));
-//                    break;
-//                case 2:
-//                    startActivity(new Intent(Account_Profile.this, Request_Home.class));
-//                    break;
-//                case 3:
-//                    startActivity(new Intent(Account_Profile.this, MainActivity.class));
-//                    break;
-//            }
-//            userTypeCursor.close();
-//        }
+        String savedEmail = sharedPreference.getString("email", "");
+        Cursor userTypeCursor = foodLoopDB.getUserDataByEmail(savedEmail);
+        if (userTypeCursor != null && userTypeCursor.moveToFirst()) {
+            int type = userTypeCursor.getInt(userTypeCursor.getColumnIndexOrThrow(DatabaseHelper.USER_ACCOUNT_TYPE_SPINNER_FLD));
 
-        startActivity(new Intent(Account_Profile.this, App_Home.class));
+            switch (type) {
+                case 1:
+                    startActivity(new Intent(Account_Profile.this, Donation_Home.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(Account_Profile.this, Request_Home.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(Account_Profile.this, MainActivity.class));
+                    break;
+            }
+            userTypeCursor.close();
+        }
     }
 
     public void toEditAccount(View view) {
