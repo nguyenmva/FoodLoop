@@ -57,11 +57,11 @@ public class Donation_History extends AppCompatActivity {
         if (requestCursor != null) {
             while (requestCursor.moveToNext()) {
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
-                //String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow("RequestStatus"));
+                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow("RequestStatus"));
                 String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD));
                 String requestor = requestCursor.getString(requestCursor.getColumnIndexOrThrow("RequestorName"));
 
-                    donationHistory.add(new String[]{itemName, location, requestor});
+                    donationHistory.add(new String[]{itemName, location, status, requestor});
             }
             requestCursor.close();
         }

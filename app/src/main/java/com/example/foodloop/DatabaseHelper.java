@@ -376,46 +376,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " WHERE " + DONATION_ID_FLD + " = ?", new String[]{String.valueOf(id)});
     }
 
-    public Cursor getActiveDonations(String userEmail) { // Shows only donations that have a request.
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(
-                "SELECT D." + DONATION_ID_FLD + ", " +
-                        "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
-                        "D." + DONATION_ITEM_NAME_FLD + ", " +
-                        "U." + USER_NAME_FLD + " AS RequestorName, " +
-                        "R." + REQUEST_ID_FLD + " AS RequestID " +
-                        "FROM " + DONATION_TABLE + " D " +
-
-                        // Latest NON‑rejected request
-                        "JOIN " + REQUEST_TABLE + " R ON R." + REQUEST_ID_FLD + " = (" +
-                        "   SELECT MAX(" + REQUEST_ID_FLD + ") FROM " + REQUEST_TABLE +
-                        "   WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
-                        "   AND (" + REQUEST_STATUS_FLD + " != 'Rejected' OR " + REQUEST_STATUS_FLD + " IS NULL)" +
-                        ") " +
-
-                        "JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
-                        "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE Donor." + USER_EMAIL_FLD + " = ?",
-                new String[]{userEmail}
-        );
-    }
-
     // GET DONATION HISTORY - Gia
     public Cursor getDonationHistory(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT D." + DONATION_ITEM_NAME_FLD + ", " +         //item [0]
-                        "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " + //status [1]
-                        "R." + REQUEST_LOCATION_FLD + ", " +          //location [2]
-                        "Requestor." + USER_NAME_FLD + " AS RequestorName " + //requestor [3]
+                "SELECT D." + DONATION_ITEM_NAME_FLD + ", " + // item [0]
+                        "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " + // status [1]
+                        "R." + REQUEST_LOCATION_FLD + ", " + // location [2]
+                        "Requestor." + USER_NAME_FLD + " AS RequestorName " + // requestor [3]
                         "FROM " + DONATION_TABLE + " D " +
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE (R." + REQUEST_STATUS_FLD + " IN ('Rejected', 'Completed') " +
-                        "OR D." + DONATION_STATUS_FLD + " IN ('Rejected', 'Completed')) " +
+                        "WHERE R." + REQUEST_STATUS_FLD + " IN ('Rejected', 'Completed') " +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
-                new String[]{email});
+                new String[]{email}
+        );
     }
 
     public Cursor getActiveRequests(String userEmail) {
@@ -528,6 +504,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " FROM " + REQUEST_TABLE, null);
     }
 
+    //All Donations for Logged In User
     public Cursor getAllDonationsFromCurrentUser(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
@@ -538,15 +515,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "R." + REQUEST_ID_FLD + " AS RequestID " +
                         "FROM " + DONATION_TABLE + " D " +
 
-                        "LEFT JOIN " + REQUEST_TABLE + " R ON R." + REQUEST_ID_FLD + " = (" +
-                        "   SELECT MAX(" + REQUEST_ID_FLD + ") FROM " + REQUEST_TABLE +
-                        "   WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
-                        "   AND (" + REQUEST_STATUS_FLD + " != 'Rejected' OR " + REQUEST_STATUS_FLD + " IS NULL)" +
-                        ") " +
-
+                        "LEFT JOIN " + REQUEST_TABLE + " R ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + " " +
                         "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
                         "LEFT JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE Donor." + USER_EMAIL_FLD + " = ?",
+
+                        "WHERE Donor." + USER_EMAIL_FLD + " = ? " +
+                        "AND (R." + REQUEST_STATUS_FLD + " IS NULL OR R." + REQUEST_STATUS_FLD + " != 'Rejected')",
+                new String[]{userEmail}
+        );
+    }
+
+    //Donations with Requests
+    public Cursor getActiveDonations(String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT D." + DONATION_ID_FLD + ", " +
+                        "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
+                        "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "U." + USER_NAME_FLD + " AS RequestorName, " +
+                        "R." + REQUEST_ID_FLD + " AS RequestID " +
+                        "FROM " + DONATION_TABLE + " D " +
+
+                        "JOIN " + REQUEST_TABLE + " R ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
+
+                        "WHERE Donor." + USER_EMAIL_FLD + " = ? " +
+                        "AND (R." + REQUEST_STATUS_FLD + " IS NULL OR R." + REQUEST_STATUS_FLD + " != 'Rejected')",
+
                 new String[]{userEmail}
         );
     }

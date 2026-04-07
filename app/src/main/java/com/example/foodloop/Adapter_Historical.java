@@ -41,21 +41,14 @@ public class Adapter_Historical extends RecyclerView.Adapter<Adapter_Historical.
             case "DonationHistory":
                 holder.tvItem.setText(item[0]);
                 holder.tvLocation.setText(item[1]);
-                holder.tvRequestor.setText(item[2]);
+                holder.tvStatus.setText(item[2]);
+                holder.tvRequestor.setText(item[3]);
 
-                //Show requester row
-                holder.requestorRow.setVisibility(View.VISIBLE);
-
-                //Hide the status row: label + text view
-                holder.statusRow.setVisibility(View.GONE);
                 break;
             case "RequestHistory":
                 holder.tvItem.setText(item[0]);
                 holder.tvStatus.setText(item[1]);
                 holder.tvLocation.setText(item[2]);
-
-                //Show status row
-                holder.statusRow.setVisibility(View.VISIBLE);
 
                 //Hide the requestor row
                 holder.requestorRow.setVisibility(View.GONE);
@@ -69,7 +62,7 @@ public class Adapter_Historical extends RecyclerView.Adapter<Adapter_Historical.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvItem, tvStatus, tvLocation, tvDateRequested, tvRequestor;
+        TextView tvItem, tvStatus, tvLocation, tvRequestor;
         LinearLayout statusRow, requestorRow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,7 +71,7 @@ public class Adapter_Historical extends RecyclerView.Adapter<Adapter_Historical.
             tvLocation = itemView.findViewById(R.id.tvLocation);
             tvRequestor = itemView.findViewById(R.id.tvRequestor);
 
-            statusRow = itemView.findViewById(R.id.statusRow);
+//            statusRow = itemView.findViewById(R.id.statusRow);
             requestorRow = itemView.findViewById(R.id.requestorRow);
         }
     }
