@@ -2,6 +2,7 @@ package com.example.foodloop;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,8 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
             int index = 0;
             if (status.equals("Approved")) index = 1;
             else if (status.equals("Rejected")) index = 2;
-            holder.spinnerRequest.setSelection(index);
+            holder.spinnerRequest.setSelection(index, false); //No listener during bind
+
         }
         //End bind
         holder.isBinding = false;
@@ -143,7 +145,7 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
             spinnerRequest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                    if (isBinding) return; //Disable listener
+                    if (isBinding) return; //Disable events during bining
                     if (pos == 0) return; //Do not accept "Select" as a response
 
                     int currentPos = getAdapterPosition(); //Find row of interaction
@@ -160,6 +162,7 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
 
                     boolean success = false;
                     if (newStatus.equals("Rejected")) {
+                        /*
                         //Update DB
                         success = adapter.foodLoopDB.rejectRequest(Integer.parseInt(requestID));
 
@@ -167,6 +170,14 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
                         if (success) {
                             adapter.data.remove(currentPos);
                             adapter.notifyItemRemoved(currentPos);
+                        }*/
+
+                        success = adapter.foodLoopDB.rejectRequest(Integer.parseInt(requestID));
+
+                        if (success) {
+                            adapter.data.remove(currentPos);
+                            adapter.notifyItemRemoved(currentPos);
+                            adapter.notifyItemRangeChanged(currentPos, adapter.data.size());
                         }
                     } else if (newStatus.equals("Approved")){
                         //Update DB

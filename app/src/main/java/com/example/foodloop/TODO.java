@@ -9,7 +9,6 @@ TODO: Can users change their account type in edit profile?
 ## Donations ##
 TODO: Add "send reminders" button function to Active Donations page
     -- consider the pick up time and date enumerated in request
-TODO: Add "Delete" for donations.
 TODO: Fix calendar in add/edit donation pages
     -- Bug: Date can be a number of any length when making a new donation.
 

@@ -92,6 +92,13 @@ public class Donation_Active extends AppCompatActivity {
             donationCursor.close();
         }
 
+        //Remove any rejected items from list
+        for (int i = donationList.size() - 1; i >= 0; i--) {
+            if ("Rejected".equals(donationList.get(i)[1])) {
+                donationList.remove(i);
+            }
+        }
+
         rv.setLayoutManager(new LinearLayoutManager(this));
         Adapter_Donate adapter = new Adapter_Donate(donationList, this);
         rv.setAdapter(adapter);
@@ -127,6 +134,13 @@ public class Donation_Active extends AppCompatActivity {
                 donationList.add(new String[]{donationID, requestStatus, itemName, requestorName, requestID});
             }
             donationCursor.close();
+        }
+
+        //Remove any rejected items from list
+        for (int i = donationList.size() - 1; i >= 0; i--) {
+            if ("Rejected".equals(donationList.get(i)[1])) {
+                donationList.remove(i);
+            }
         }
 
         rv.setLayoutManager(new LinearLayoutManager(this));
