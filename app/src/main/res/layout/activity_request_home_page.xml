@@ -131,8 +131,8 @@
 
     <ImageView
         android:id="@+id/imgHeaderReq"
-        android:layout_width="454dp"
-        android:layout_height="215dp"
+        android:layout_width="414dp"
+        android:layout_height="217dp"
         android:layout_marginBottom="29dp"
         android:contentDescription="@string/imgHeader"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -141,7 +141,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".208"
-        app:srcCompat="@drawable/foodheader" />
+        app:srcCompat="@drawable/reqheader" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,11 @@
 package com.example.foodloop;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -15,10 +17,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Calendar;
+
 public class Donation_Add extends AppCompatActivity {
     private EditText edtFoodName, edtQuantity, edtExpiryDate, edtPrice;
     private Spinner spCategory;
-//    spAvailTime;
+    //    spAvailTime;
     private RadioButton rdbFree, rdbDiscounted;
     private DatabaseHelper foodLoopDB;
 
@@ -48,16 +52,38 @@ public class Donation_Add extends AppCompatActivity {
         foodLoopDB = new DatabaseHelper(this);
 
         //IF USER PICKS rdbFree, THE PRICE PART WILL BE HIDDEN
-        rdbFree.setOnClickListener(view ->{
-            if(rdbFree.isChecked()){
+        rdbFree.setOnClickListener(view -> {
+            if (rdbFree.isChecked()) {
                 edtPrice.setVisibility(View.GONE);
                 edtPrice.setText("0");
             }
         });
-        rdbDiscounted.setOnClickListener(view ->{
-            if(rdbDiscounted.isChecked()){
+        rdbDiscounted.setOnClickListener(view -> {
+            if (rdbDiscounted.isChecked()) {
                 edtPrice.setVisibility(View.VISIBLE);
                 edtPrice.setText("");
+            }
+        });
+
+
+        edtExpiryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePicker = new DatePickerDialog(
+                        Donation_Add.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                edtExpiryDate.setText(day + "/" + (month + 1) + "/" + year);
+                            }
+                        },
+                        year, month, day);
+                datePicker.show();
             }
         });
 
@@ -73,7 +99,6 @@ public class Donation_Add extends AppCompatActivity {
         // ERROR HANDLING, NO EMPTY FIELDS.
         if (TextUtils.isEmpty(edtFoodName.getText().toString())
                 || TextUtils.isEmpty(edtQuantity.getText().toString())
-                || TextUtils.isEmpty(edtExpiryDate.getText().toString())
 //                || TextUtils.isEmpty(edtPrice.getText().toString())
                 || (withPrice && emptyPrice) //Throws an error if Discounted is chosen and there is no price indicated
                 || (!rdbDiscounted.isChecked() && !rdbFree.isChecked()) //User must pick or it will throw an error
@@ -84,8 +109,7 @@ public class Donation_Add extends AppCompatActivity {
 //                || (spAvailTime.getSelectedItemPosition() == 0))
         {
             Toast.makeText(Donation_Add.this, "All areas must be filled or selected.", Toast.LENGTH_LONG).show();
-        }
-        else {
+        } else {
             // INITIALIZE DONATION INFO VARIABLES
             String itemName = edtFoodName.getText().toString();
             int quantity = Integer.parseInt(edtQuantity.getText().toString());
@@ -97,7 +121,7 @@ public class Donation_Add extends AppCompatActivity {
 
             double price;
             if (rdbFree.isChecked()) {
-               price = 0.0;
+                price = 0.0;
             } else {
                 price = Double.parseDouble(edtPrice.getText().toString());
             }
@@ -122,7 +146,6 @@ public class Donation_Add extends AppCompatActivity {
 
 
         }
-
     }
 
     public void toDonorHomePage(View view) {
