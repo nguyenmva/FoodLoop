@@ -42,6 +42,7 @@ public class Adapter_Request_Active extends RecyclerView.Adapter<Adapter_Request
         //View Button
         holder.btnView.setOnClickListener(v -> {
             Intent intent = new Intent(context, Request_View.class);
+            intent.putExtra("REQUEST_ID", item[4]);
             context.startActivity(intent);
         });
     }
