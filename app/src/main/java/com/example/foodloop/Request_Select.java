@@ -3,6 +3,7 @@ package com.example.foodloop;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -56,6 +58,33 @@ public class Request_Select extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
 
+        loadAllDonations(recyclerView);
+    }
+
+    public void loadAllDonations(View v) {
+        donationList.clear();
+        Cursor getAllCursor = foodLoopDB.getAllAvailableDonations();
+
+        if (getAllCursor != null) {
+            android.util.Log.d("SEARCH_DEBUG", "Items found: " + getAllCursor.getCount());
+            while (getAllCursor.moveToNext()) {
+                String name = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                String expiry = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_EXPIRY_DATE_FLD));
+                String qty = String.valueOf(getAllCursor.getInt(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_QUANTITY_FLD)));
+                String location = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.USER_CITY_FLD));
+                String type = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));;
+
+                donationList.add(new String[]{name, expiry, qty, location, type});
+            }
+            getAllCursor.close();
+        }
+        else {
+            android.util.Log.d("SEARCH_DEBUG", "Cursor is NULL");
+        }
+
+        Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
+        adapter = new Adapter_Request(donationList);
+        recyclerView.setAdapter(adapter);
     }
 
     private void loadItems(String search) {
@@ -75,7 +104,8 @@ public class Request_Select extends AppCompatActivity {
                 donationList.add(new String[]{name, expiry, qty, location, type});
             }
             cursor.close();
-        } else {
+        }
+        else {
             android.util.Log.d("SEARCH_DEBUG", "Cursor is NULL");
         }
         Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
