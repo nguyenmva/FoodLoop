@@ -468,10 +468,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
                 " FROM " + DONATION_TABLE + " D" +
                 " JOIN " + USERS_TABLE + " U ON D." + DONOR_ID_FLD + " = U." + USER_ID_FLD +
-                " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ?";
-        return db.rawQuery(query, new String[]{"%" + itemSearch + "%"});
+                " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ? OR U." + USER_CITY_FLD + " LIKE ? OR D." + DONATION_CATEGORY_FLD + " LIKE ?";
+        return db.rawQuery(query, new String[]{"%" + itemSearch + "%", "%" + itemSearch + "%", "%" + itemSearch + "%"});
     }
-
     public Cursor getAllAccounts(){
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
