@@ -405,8 +405,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE (R." + REQUEST_STATUS_FLD + " = 'Rejected' OR " +
-                        "R." + REQUEST_STATUS_FLD + " = 'Completed') " +
+                        "WHERE (R." + REQUEST_STATUS_FLD + " IN ('Rejected', 'Completed') " +
+                        "OR D." + DONATION_STATUS_FLD + " IN ('Rejected', 'Completed'))" +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
                 new String[]{email});
 
@@ -419,7 +419,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " FROM " + REQUEST_TABLE +
                 " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
                 " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                " WHERE (Donations." + DONATION_STATUS_FLD + " <> 'Rejected' OR Donations." + DONATION_STATUS_FLD + " <> 'Completed')" +
+                " WHERE Donations." + DONATION_STATUS_FLD + " IN ('Pending','Approved')" +
+                " AND Requests." + REQUEST_STATUS_FLD + " IN ('Pending', 'Approved')" +
                 " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
         /*
         SELECT Donations.Status, Donations.ItemName, Donations.Location
@@ -473,10 +474,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
                 " FROM " + DONATION_TABLE + " D" +
                 " JOIN " + USERS_TABLE + " U ON D." + DONOR_ID_FLD + " = U." + USER_ID_FLD +
-                " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ?";
-        return db.rawQuery(query, new String[]{"%" + itemSearch + "%"});
+                " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ? OR U." + USER_CITY_FLD + " LIKE ? OR D." + DONATION_CATEGORY_FLD + " LIKE ?";
+        return db.rawQuery(query, new String[]{"%" + itemSearch + "%", "%" + itemSearch + "%", "%" + itemSearch + "%"});
     }
-
     public Cursor getAllAccounts(){
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(

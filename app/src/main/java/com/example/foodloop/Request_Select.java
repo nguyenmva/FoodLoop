@@ -107,8 +107,8 @@ public class Request_Select extends AppCompatActivity {
         }
         else {
             android.util.Log.d("SEARCH_DEBUG", "Cursor is NULL");
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
         adapter = new Adapter_Request(donationList);
         recyclerView.setAdapter(adapter);
     }
