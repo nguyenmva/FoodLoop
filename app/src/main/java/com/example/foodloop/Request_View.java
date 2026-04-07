@@ -71,7 +71,7 @@ public class Request_View extends AppCompatActivity {
 
     public void confirmReceipt(View view) {
         Toast.makeText(this, "Confirmed Receipt of Item!", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(Request_View.this, App_Home.class));
+        startActivity(new Intent(Request_View.this, Request_Home.class));
     }
 
     public void toRequestHomePage(View view) {

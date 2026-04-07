@@ -9,6 +9,22 @@
     tools:context=".Donation_Home">
 
     <Button
+        android:id="@+id/btnDonate3"
+        android:layout_width="385dp"
+        android:layout_height="75dp"
+        android:backgroundTint="#AB1212"
+        android:onClick="toDonationAddPage"
+        android:text="@string/btnDonateFood"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.552"
+        tools:ignore="TextSizeCheck" />
+
+    <Button
         android:id="@+id/btnRHistory3"
         android:layout_width="180dp"
         android:layout_height="70dp"
@@ -21,22 +37,7 @@
         app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633" />
-
-    <Button
-        android:id="@+id/btnDonorViewProf"
-        android:layout_width="180dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#AB1212"
-        android:onClick="toProfilePage"
-        android:text="@string/btnViewProfile"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734" />
+        app:layout_constraintVertical_bias="0.651" />
 
     <Button
         android:id="@+id/btnDonorHomeLogOut"
@@ -51,41 +52,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.807" />
-
-    <Button
-        android:id="@+id/btnEditRequestInfo3"
-        android:layout_width="180dp"
-        android:layout_height="70dp"
-        android:backgroundTint="#ff193b"
-        android:onClick="toEditDonationPage"
-        android:text="@string/btnEditDetails"
-
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537"
-        tools:ignore="TextSizeCheck" />
-
-    <Button
-        android:id="@+id/btnDonate3"
-        android:layout_width="180dp"
-        android:layout_height="70dp"
-        android:backgroundTint="#AB1212"
-        android:onClick="toDonationAddPage"
-        android:text="@string/btnDonateFood"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537"
-        tools:ignore="TextSizeCheck" />
+        app:layout_constraintVertical_bias="0.824" />
 
     <Button
         android:id="@+id/btnRequestStatus3"
@@ -100,7 +67,7 @@
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633" />
+        app:layout_constraintVertical_bias="0.651" />
 
     <TextView
         android:id="@+id/txtDonorWelcome"
@@ -108,14 +75,29 @@
         android:layout_height="wrap_content"
         android:text="@string/txtWelcomeTitle"
         android:textColor="#0051AD"
-        android:textSize="35sp"
+        android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.443" />
+        app:layout_constraintVertical_bias="0.46" />
+
+    <Button
+        android:id="@+id/btnDonorViewProf"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#AB1212"
+        android:onClick="toProfilePage"
+        android:text="@string/btnViewProfile"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.751" />
 
     <ImageView
         android:id="@+id/imgLogo"
