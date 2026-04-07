@@ -51,7 +51,7 @@ public class App_Home extends AppCompatActivity {
                     int notificationFlag = gimmeID.getInt(flagColIndex);
 
                     if (notificationFlag == 1) {
-                        Toast.makeText(this, "Come get " + itemName + "!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Do not forget: " + itemName + "!", Toast.LENGTH_LONG).show();
 
                         boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, 0);
                         if (!gotIt) {

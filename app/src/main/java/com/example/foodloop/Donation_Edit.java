@@ -58,6 +58,16 @@ public class Donation_Edit extends AppCompatActivity {
 
         Cursor cursor = foodLoopDB.getDonationByDonationID(selectedID); // selectedID is that data that i got from intent.putExtra/intent.getExtra
 
+        //Cursor Safety Check
+        if (cursor == null || cursor.getCount() == 0) {
+            Toast.makeText(this, "Error loading donation", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        cursor.moveToFirst();
+
+
+
         if(cursor != null && cursor.moveToFirst()){
             String foodName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
             int quantityFood = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_QUANTITY_FLD));
