@@ -59,7 +59,7 @@ public class Request_Active extends AppCompatActivity {
         if (requestCursor != null) {
             while (requestCursor.moveToNext()) {
 
-                String id = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
+                String id = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
 //                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
                 String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_STATUS_FLD));
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));

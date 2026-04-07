@@ -200,8 +200,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR UPDATING AN ACCOUNT RECORD
-    public boolean updateAccount(String name, String street, String city, String province, String country,
-                                 int countrySpinner, String postal, String phone, String email, String password) {
+    public boolean updateAccount(String name, String street, String city, String province, String country, int countrySpinner,
+                                 String postal, String phone, String email, String password, String accountType, int accountTypeSpinner) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -216,6 +216,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(USER_POSTAL_FLD, postal);
         contentValues.put(USER_EMAIL_FLD, email);
         contentValues.put(USER_PASSWORD_FLD, password);
+        contentValues.put(USER_ACCOUNT_TYPE_FLD, accountType);
+        contentValues.put(USER_ACCOUNT_TYPE_SPINNER_FLD, accountTypeSpinner);
+
 
         int result = db.update(USERS_TABLE, contentValues, USER_EMAIL_FLD + " = ?", new String[]{email});
         return result != -1;
