@@ -127,6 +127,7 @@
     <string name="txtViewReqTitle">View Request Information</string>
     <string name="txtVwRqItem">Item Requested</string>
     <string name="txtVwRqDonor">Donor</string>
+    <string name="txtVwRqStatus">Status</string>
     <string name="txtVwRqCat">Category</string>
     <string name="txtVwRqQty">Quantity</string>
     <string name="txtVwRqLoc">Location</string>
