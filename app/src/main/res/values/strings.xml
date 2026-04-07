@@ -102,6 +102,11 @@
     <string name="txtTitleProfile">Profile Page</string>
     <string name="txtProfileEdit">Edit Profile</string>
 
+    <!-- Log In Options Split -->
+    <string name="txtIdentity">Who are you today?</string>
+    <string name="btnImADonor">I am a donor!</string>
+    <string name="btnImARequestor">I am a requestor!</string>
+
     <!-- Item_Universal XML -->
     <string name="txtStatus">Status</string>
     <string name="txtResponse">Response</string>
