@@ -1,6 +1,8 @@
 package com.example.foodloop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,29 @@ public class Donation_Home extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void toProfilePage(View view) {
+        startActivity(new Intent(Donation_Home.this, Account_Profile.class));
+    }
+
+    public void toLogoutPage(View view) {
+        startActivity(new Intent(Donation_Home.this, Account_LogOut.class));
+    }
+
+    public void toDonationAddPage(View view) {
+        startActivity(new Intent(Donation_Home.this, Donation_Add.class));
+    }
+
+    public void toActiveDonationsPage(View view) {
+        startActivity(new Intent(Donation_Home.this, Donation_Active.class));
+    }
+
+    public void toEditDonationPage(View view) {
+        startActivity(new Intent(Donation_Home.this, Donation_Edit.class));
+    }
+
+    public void toDonationHistoryPage(View view) {
+        startActivity(new Intent(Donation_Home.this, Donation_History.class));
+    }
+
 }

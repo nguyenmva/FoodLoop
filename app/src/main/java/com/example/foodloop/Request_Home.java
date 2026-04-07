@@ -24,20 +24,24 @@ public class Request_Home extends AppCompatActivity {
         });
     }
 
-    public void toActiveRequestsPage(View view) {
-        startActivity(new Intent(Request_Home.this, Request_Active.class));
-    }
-
-    public void toRequestItemPage(View view) {
-        startActivity(new Intent(Request_Home.this, Request_Select.class));
+    public void toProfilePage(View view) {
+        startActivity(new Intent(Request_Home.this, Account_Profile.class));
     }
 
     public void toLogoutPage(View view) {
         startActivity(new Intent(Request_Home.this, Account_LogOut.class));
     }
 
-    public void toProfilePage(View view) {
-        startActivity(new Intent(Request_Home.this, Account_Profile.class));
+    public void toRequestItemPage(View view) {
+        startActivity(new Intent(Request_Home.this, Request_Select.class));
+    }
+
+    public void toActiveRequestsPage(View view) {
+        startActivity(new Intent(Request_Home.this, Request_Active.class));
+    }
+
+    public void toViewRequestPage(View view) {
+        startActivity(new Intent(Request_Home.this, Request_View.class));
     }
 
     public void toRequestHistoryPage(View view) {

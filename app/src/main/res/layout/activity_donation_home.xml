@@ -8,114 +8,139 @@
     android:background="#fff6d7"
     tools:context=".Donation_Home">
 
-    <ImageView
-        android:id="@+id/btnDonorLogo"
-        android:layout_width="86dp"
-        android:layout_height="78dp"
-        android:contentDescription="@string/imgFoodLoopLogo"
+    <Button
+        android:id="@+id/btnRHistory3"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#ff193b"
+        android:onClick="toDonationHistoryPage"
+        android:text="@string/btnDonHistory"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
-        app:srcCompat="@drawable/foodloop_logo" />
-
-    <TextView
-        android:id="@+id/txtActiveDonorPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txtActiveDonations"
-        android:textColor="#014BAD"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.451" />
-
-    <TextView
-        android:id="@+id/txtDonorPage2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txtDPTitle"
-        android:textColor="#ff193b"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.633" />
 
     <Button
-        android:id="@+id/btnActive"
-        android:layout_width="175dp"
+        android:id="@+id/btnDonorViewProf"
+        android:layout_width="180dp"
         android:layout_height="55dp"
-        android:backgroundTint="#ff193b"
-        android:text="@string/btnActive1"
-        android:textSize="24sp"
+        android:backgroundTint="#AB1212"
+        android:onClick="toProfilePage"
+        android:text="@string/btnViewProfile"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177" />
+        app:layout_constraintVertical_bias="0.734" />
 
     <Button
-        android:id="@+id/btnHomeDonorPage"
-        android:layout_width="128dp"
+        android:id="@+id/btnDonorHomeLogOut"
+        android:layout_width="180dp"
         android:layout_height="55dp"
+        android:backgroundTint="#555555"
+        android:onClick="toLogoutPage"
+        android:text="@string/btnLogOut1"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.807" />
+
+    <Button
+        android:id="@+id/btnEditRequestInfo3"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
         android:backgroundTint="#ff193b"
-        android:text="@string/btnHomeDonorPage"
+        android:onClick="toEditDonationPage"
+        android:text="@string/btnEditDetails"
+
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537"
+        tools:ignore="TextSizeCheck" />
+
+    <Button
+        android:id="@+id/btnDonate3"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#AB1212"
+        android:onClick="toDonationAddPage"
+        android:text="@string/btnDonateFood"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.537"
+        tools:ignore="TextSizeCheck" />
 
     <Button
-        android:id="@+id/btnAddItem"
-        android:layout_width="278dp"
-        android:layout_height="56dp"
-        android:backgroundTint="#35a1d3"
-        android:text="@string/btnAddItem"
-        android:textSize="24sp"
+        android:id="@+id/btnRequestStatus3"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#ff193b"
+        android:onClick="toActiveDonationsPage"
+        android:text="@string/btnDonationStatus"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
+
+    <TextView
+        android:id="@+id/txtDonorWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtWelcomeTitle"
+        android:textColor="#0051AD"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.443" />
 
-    <Button
-        android:id="@+id/btnCompleted"
-        android:layout_width="175dp"
-        android:layout_height="56dp"
-        android:backgroundTint="#014BAD"
-        android:text="@string/btnCompleted1"
-        android:textSize="24sp"
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="287dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/imgFoodLoopLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/foodloop_logo" />
+
+    <ImageView
+        android:id="@+id/imgHeaderReq2"
+        android:layout_width="454dp"
+        android:layout_height="215dp"
+        android:layout_marginBottom="29dp"
+        android:contentDescription="@string/imgHeader"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.886"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvActDonations"
-        android:layout_width="355dp"
-        android:layout_height="284dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.823" />
+        app:layout_constraintVertical_bias=".208"
+        app:srcCompat="@drawable/foodheader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

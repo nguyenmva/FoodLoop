@@ -226,17 +226,17 @@ public class Account_LogIn extends AppCompatActivity {
                 Cursor userTypeCursor = foodLoopDB.getUserDataByEmail(userEmail);
 //                if (userTypeCursor != null) {
 //                    if (userTypeCursor.moveToFirst()) {
-//                        int type = userType.getInt(userTypeCursor.getColumnIndexOrThrow // TODO: Add a user entry in the CreateAccount page.
-//                                (DatabaseHelper.USER_TYPE_FLD)); // TODO: Add a user type column to the User table in the DatabaseHelper.
+//                        int type = userType.getInt(userTypeCursor.getColumnIndexOrThrow
+//                                (DatabaseHelper.USER_TYPE_FLD));
 //                        switch (type) {
 //                            case 1:
-//                                startActivity(new Intent(LogInScreen.this, DonationHomePage.class));
+//                                startActivity(new Intent(Account_Login.this, Donation_Home.class));
 //                                break;
 //                            case 2:
-//                                startActivity(new Intent(LogInScreen.this, Request_Home_Page.class));
+//                                startActivity(new Intent(Account_Login.this, Request_Home_Page.class));
 //                                break;
 //                            case 3:
-//                                startActivity(new Intent(LogInScreen.this, Both_Pages.class)); // TODO: Make this page.
+//                                startActivity(new Intent(Account_Login.this, MainActivity.class));
 //                                break;
 //                            default:
 //                                break;
