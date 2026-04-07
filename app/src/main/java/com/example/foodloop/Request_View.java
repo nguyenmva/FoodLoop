@@ -43,7 +43,15 @@ public class Request_View extends AppCompatActivity {
         tvVRStat = findViewById(R.id.tvVRStat);
 
         db = new DatabaseHelper(this);
-        requestID = Integer.parseInt(getIntent().getStringExtra("REQUEST_ID"));
+//        requestID = Integer.parseInt(getIntent().getStringExtra("REQUEST_ID"));
+
+        String idStr = getIntent().getStringExtra("REQUEST_ID");
+        if (idStr != null && !idStr.isEmpty()) {
+            requestID = Integer.parseInt(idStr);
+        }
+        else {
+            requestID = -1;
+        }
         loadRequestDetails(String.valueOf(requestID));
     }
 
@@ -69,7 +77,7 @@ public class Request_View extends AppCompatActivity {
     }
 
     public void confirmReceipt(View view) {
-        if (currentStatus.equals("Approved")) {
+        if (currentStatus != null && currentStatus.equals("Approved")) {
             boolean updated = db.completeRequest(requestID);
             if (updated) {
                 Toast.makeText(this, "Request marked as COMPLETE", Toast.LENGTH_SHORT).show();

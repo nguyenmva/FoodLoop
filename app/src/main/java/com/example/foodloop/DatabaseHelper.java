@@ -200,8 +200,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR UPDATING AN ACCOUNT RECORD
-    public boolean updateAccount(String name, String street, String city, String province, String country,
-                                 int countrySpinner, String postal, String phone, String email, String password) {
+    public boolean updateAccount(String name, String street, String city, String province, String country, int countrySpinner,
+                                 String postal, String phone, String email, String password, String accountType, int accountTypeSpinner) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -216,6 +216,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(USER_POSTAL_FLD, postal);
         contentValues.put(USER_EMAIL_FLD, email);
         contentValues.put(USER_PASSWORD_FLD, password);
+        contentValues.put(USER_ACCOUNT_TYPE_FLD, accountType);
+        contentValues.put(USER_ACCOUNT_TYPE_SPINNER_FLD, accountTypeSpinner);
 
         int result = db.update(USERS_TABLE, contentValues, USER_EMAIL_FLD + " = ?", new String[]{email});
         return result != -1;
@@ -240,6 +242,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.update(DONATION_TABLE, contentValues, DONATION_ID_FLD + " = ? ", new String[]{String.valueOf(donationID)});
 
         return result > 0; //This will return true if at least 1 row was edited
+    }
+    public boolean completeRequest(int requestID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(REQUEST_STATUS_FLD, "Complete");
+
+        long result = db.update(REQUEST_TABLE, values, REQUEST_ID_FLD + " = ?", new String[]{String.valueOf(requestID)});
+        return result > 0;
+
+//        db.execSQL("UPDATE " + REQUEST_TABLE +
+//                " SET " + REQUEST_STATUS_FLD + " = 'Complete' " +
+//                "WHERE " + REQUEST_ID_FLD + " = " + requestID);
+//        return true;
     }
 
     // ##################################################################################################################
@@ -280,15 +295,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + REQUEST_TABLE +
                 " SET " + REQUEST_STATUS_FLD + " = 'Rejected' " +
-                "WHERE " + REQUEST_ID_FLD + " = " + requestID);
-        return true;
-    }
-
-    //Complete Request
-    public boolean completeRequest(int requestID) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE " + REQUEST_TABLE +
-                " SET " + REQUEST_STATUS_FLD + " = 'Complete' " +
                 "WHERE " + REQUEST_ID_FLD + " = " + requestID);
         return true;
     }

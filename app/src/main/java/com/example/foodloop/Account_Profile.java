@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Account_Profile extends AppCompatActivity {
-    private TextView tvName, tvAddress, tvPhone, tvEmail;
     private DatabaseHelper foodLoopDB;
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
@@ -38,10 +36,10 @@ public class Account_Profile extends AppCompatActivity {
         sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         // INITIALIZE INTERFACE VARIABLES
-        tvName = findViewById(R.id.tvName);
-        tvAddress = findViewById(R.id.tvAddress);
-        tvPhone = findViewById(R.id.tvPhone);
-        tvEmail = findViewById(R.id.tvEmail);
+        TextView tvName = findViewById(R.id.tvName);
+        TextView tvAddress = findViewById(R.id.tvAddress);
+        TextView tvPhone = findViewById(R.id.tvPhone);
+        TextView tvEmail = findViewById(R.id.tvEmail);
 
         // POPULATE FIELDS WITH EXISTING ACCOUNT INFO
         String savedEmail = sharedPreference.getString("email", "");

@@ -36,9 +36,6 @@ public class App_Home extends AppCompatActivity {
         Cursor gimmeID = foodLoopDB.getActiveRequests(savedEmail);
 
         if (gimmeID != null) {
-//            String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
-//            int notificationFlag = gimmeID.getInt(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_NOTIFICATION_FLAG_FLD));
-
             int idColIndex = gimmeID.getColumnIndex(DatabaseHelper.REQUEST_ID_FLD);
             int flagColIndex = gimmeID.getColumnIndex(DatabaseHelper.REQUEST_NOTIFICATION_FLAG_FLD);
             int itemNameColIndex = gimmeID.getColumnIndex(DatabaseHelper.DONATION_ITEM_NAME_FLD);
@@ -67,24 +64,6 @@ public class App_Home extends AppCompatActivity {
             gimmeID.close();
         }
     }
-//            while (gimmeID.moveToNext()) {
-//                String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
-//
-//                boolean check = foodLoopDB.checkNotifications(savedEmail);
-//                if (check) {
-//                    Toast.makeText(this, "COME GET YOUR STUFF! (Request ID: " + requestID + ")", Toast.LENGTH_LONG).show();
-//
-//                    boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, "0");
-//                    if (!gotIt)
-//                        Toast.makeText(this, "Failed to clear notification", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            gimmeID.close();
-//        }
-//        else {
-//            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
-//        }
-//    }
 
     // #######################################################################################
     // MICHAEL'S PAGES

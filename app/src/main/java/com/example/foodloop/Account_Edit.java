@@ -133,14 +133,14 @@ public class Account_Edit extends AppCompatActivity {
             else {
                 boolean emailExists = foodLoopDB.checkEmailExists(email);
 
-                if (!emailExists) { // CHECK FOR EXISTING ACCOUNT, NOT NECESSARY ONCE LOGIN CREDENTIALS ARE LINKED
+                if (!emailExists) { // CHECK FOR EXISTING ACCOUNT
                     inputEmail.setError("This email isn't in the database.");
                     Toast.makeText(this, "Account not found.", Toast.LENGTH_LONG).show();
                 }
                 else {
                     boolean updated = foodLoopDB.updateAccount( // UPDATE ACCOUNT
                             name, street, city, province, country, countrySpinner,
-                            postal, phone, email, newPass//, accountType, accountTypeSpinner TODO: Add accountType and accountTypeSpinner to the updateAccount method.
+                            postal, phone, email, newPass, accountType, accountTypeSpinner
                     );
                     // PROVIDE CONFIRMATION TO THE USER
                     if (updated)

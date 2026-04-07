@@ -27,8 +27,6 @@ public class Donation_Active extends AppCompatActivity {
     private DatabaseHelper foodLoopDB;
     private SharedPreferences sharedPreference;
     private static final String SHARED_PREF_NAME = "LOG_IN_CREDENTIALS";
-    String userID, requestorName;
-    Cursor emailCursor, donationCursor, requestorCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

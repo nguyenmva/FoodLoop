@@ -37,6 +37,8 @@ public class Adapter_Request_Active extends RecyclerView.Adapter<Adapter_Request
         holder.tvItem.setText(item[0]);
         holder.tvStatus.setText(item[1]);
         holder.tvLocation.setText(item[2]);
+        holder.tvRequestID.setText(item[3]);
+
 
         //View Button
         holder.btnView.setOnClickListener(v -> {
@@ -52,7 +54,7 @@ public class Adapter_Request_Active extends RecyclerView.Adapter<Adapter_Request
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvItem, tvStatus, tvLocation, tvDonor;
+        TextView tvItem, tvStatus, tvLocation, tvRequestID;
         Button btnView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -60,6 +62,7 @@ public class Adapter_Request_Active extends RecyclerView.Adapter<Adapter_Request
             tvItem = itemView.findViewById(R.id.tvItem);
             tvStatus = itemView.findViewById(R.id.tvStatus);
             tvLocation = itemView.findViewById(R.id.tvLocation);
+            tvRequestID = itemView.findViewById(R.id.tvRequestID);
             btnView = itemView.findViewById(R.id.btnView);
         }
     }
