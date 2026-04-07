@@ -36,8 +36,7 @@ public class Adapter_Request_Active extends RecyclerView.Adapter<Adapter_Request
         //Text Values: Item, Status, Donor, Location
         holder.tvItem.setText(item[0]);
         holder.tvStatus.setText(item[1]);
-        holder.tvDonor.setText(item[2]);
-        holder.tvLocation.setText(item[3]);
+        holder.tvLocation.setText(item[2]);
 
         //View Button
         holder.btnView.setOnClickListener(v -> {
@@ -61,7 +60,6 @@ public class Adapter_Request_Active extends RecyclerView.Adapter<Adapter_Request
             tvItem = itemView.findViewById(R.id.tvItem);
             tvStatus = itemView.findViewById(R.id.tvStatus);
             tvLocation = itemView.findViewById(R.id.tvLocation);
-            tvDonor = itemView.findViewById(R.id.tvDonor);
             btnView = itemView.findViewById(R.id.btnView);
         }
     }

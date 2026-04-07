@@ -422,13 +422,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
                 "SELECT " +
-                        "R." + REQUEST_ID_FLD + ", " +         // Added for logic
-                        "D." + DONATION_ID_FLD + ", " +        // This was missing!
+                        "R." + REQUEST_ID_FLD + ", " +
+                        "D." + DONATION_ID_FLD + ", " +
                         "D." + DONATION_STATUS_FLD + ", " +
                         "D." + DONATION_ITEM_NAME_FLD + ", " +
-                        "D." + DONATION_CATEGORY_FLD + ", " +  // Added for View page
-                        "D." + DONATION_QUANTITY_FLD + ", " +  // Added for View page
-                        "D." + DONATION_PRICE_FLD + ", " +     // Added for View page
+                        "D." + DONATION_CATEGORY_FLD + ", " +
+                        "D." + DONATION_QUANTITY_FLD + ", " +
+                        "D." + DONATION_PRICE_FLD + ", " +
                         "U." + USER_NAME_FLD + ", " +
                         "R." + REQUEST_LOCATION_FLD + " " +
                         "FROM " + REQUEST_TABLE + " R " +
