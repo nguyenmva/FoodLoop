@@ -265,7 +265,7 @@
         android:layout_width="129dp"
         android:layout_height="53dp"
         android:backgroundTint="#35a1d3"
-        android:onClick="toDonorHomePage"
+        android:onClick="toRequestHomePage"
         android:text="@string/btnHomePage"
         android:textSize="20sp"
         android:textStyle="bold"

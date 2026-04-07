@@ -70,7 +70,7 @@ public class Request_History extends AppCompatActivity {
 
     }
 
-    public void toDonorHomePage(View view) {
-        startActivity(new Intent(Request_History.this, App_Home.class));
+    public void toRequestHomePage(View view) {
+        startActivity(new Intent(Request_History.this, Request_Home.class));
     }
 }

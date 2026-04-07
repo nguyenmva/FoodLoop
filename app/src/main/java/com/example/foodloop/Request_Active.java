@@ -37,7 +37,7 @@ public class Request_Active extends AppCompatActivity {
         });
         btnHome = findViewById(R.id.btnRTtoHome);
         btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(Request_Active.this, App_Home.class));
+            startActivity(new Intent(Request_Active.this, Request_Home.class));
         });
 
         // INITIALIZE DATABASE AND SHARED PREFERENCES

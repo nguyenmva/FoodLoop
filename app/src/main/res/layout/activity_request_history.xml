@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#004aad"
-        android:onClick="toDonorHomePage"
+        android:onClick="toRequestHomePage"
         android:text="@string/btnHomePage"
         android:textColor="#fff6d7"
         android:textSize="20sp"

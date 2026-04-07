@@ -415,13 +415,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getActiveRequests(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + REQUEST_TABLE +
-                " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
-                " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                " WHERE Donations." + DONATION_STATUS_FLD + " IN ('Pending','Approved')" +
-                " AND Requests." + REQUEST_STATUS_FLD + " IN ('Pending', 'Approved')" +
-                " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+                "SELECT " +
+                        "D." + DONATION_STATUS_FLD + ", " +
+                        "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "R." + REQUEST_LOCATION_FLD + " " +
+                        "FROM " + REQUEST_TABLE + " R " +
+                        "JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
+                        "WHERE U." + USER_EMAIL_FLD + " = ? " +
+                        "AND (R." + REQUEST_STATUS_FLD + " != 'Rejected' OR R." + REQUEST_STATUS_FLD + " IS NULL) " +
+                        "AND (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved')",
+                new String[]{userEmail}
+        );
         /*
         SELECT Donations.Status, Donations.ItemName, Donations.Location
         FROM Requests

@@ -30,7 +30,7 @@ public class Request_View extends AppCompatActivity {
         startActivity(new Intent(Request_View.this, App_Home.class));
     }
 
-    public void toDonorHomePage(View view) {
-        startActivity(new Intent(Request_View.this, App_Home.class));
+    public void toRequestHomePage(View view) {
+        startActivity(new Intent(Request_View.this, Request_Home.class));
     }
 }
