@@ -51,9 +51,10 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
         holder.isBinding = true;
 
         //Condition to show spinner control
-        if (item[3] == null) {
-            //No requestor = no approval/rejection
+        if (item[3] == null || item[1] == null) {
+            //No requestor = no approval/rejection, no notify
             holder.spinnerRequest.setVisibility(View.GONE);
+            holder.btnNotify.setVisibility(View.GONE);
         } else {
             //Requestor = can approve/reject
             holder.spinnerRequest.setVisibility(View.VISIBLE);
