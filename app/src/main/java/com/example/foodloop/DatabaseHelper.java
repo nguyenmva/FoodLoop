@@ -296,31 +296,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     // ##################################################################################################################
     // FOR UPDATING A NOTIFICATION FLAG
-    public boolean updateNotificationFlag(String requestID, String notificationFlag) {
+    public boolean updateNotificationFlag(String requestID, int notificationFlag) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(REQUEST_NOTIFICATION_FLAG_FLD, notificationFlag);
 
-        int result = db.update(REQUEST_TABLE, values, REQUEST_NOTIFICATION_FLAG_FLD + " = ?", new String[]{requestID});
+        int result = db.update(REQUEST_TABLE, values, REQUEST_ID_FLD + " = ?", new String[]{requestID});
         return result > 0;
     }
 
     // ##################################################################################################################
     // FOR CHECKING STUFF
-    public boolean checkNotifications(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(
-                "SELECT *" +
-                        " FROM " + USERS_TABLE + " U " +
-                        " JOIN " + REQUEST_TABLE + " R ON U." + USER_ID_FLD + " = R." + REQUESTOR_ID_FLD +
-                        " WHERE " + USER_EMAIL_FLD + " = ? AND " + REQUEST_NOTIFICATION_FLAG_FLD + " = '1'", new String[]{email});
-
-        boolean exists = (cursor.getCount() > 0);
-        cursor.close();
-        return exists;
-    }
      public boolean checkEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
@@ -422,11 +410,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getActiveRequests(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT Donations." + DONATION_STATUS_FLD + ", Donations." + DONATION_ITEM_NAME_FLD + ", " + REQUEST_LOCATION_FLD +
+        "SELECT *" +
                 " FROM " + REQUEST_TABLE +
                 " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
                 " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Pending' OR Donations." + DONATION_STATUS_FLD + " = 'Approved')" +
+                " WHERE (Donations." + DONATION_STATUS_FLD + " <> 'Rejected' OR Donations." + DONATION_STATUS_FLD + " <> 'Completed')" +
                 " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
         /*
         SELECT Donations.Status, Donations.ItemName, Donations.Location

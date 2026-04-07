@@ -36,35 +36,66 @@ public class App_Home extends AppCompatActivity {
         Cursor gimmeID = foodLoopDB.getActiveRequests(savedEmail);
 
         if (gimmeID != null) {
-            try {
-                while (gimmeID.moveToNext()) {
-                    String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
+//            String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
+//            int notificationFlag = gimmeID.getInt(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_NOTIFICATION_FLAG_FLD));
 
-                    boolean check = foodLoopDB.checkNotifications(savedEmail);
-                    if (check) {
-                        Toast.makeText(this, "COME GET YOUR STUFF! (Request ID: " + requestID + ")", Toast.LENGTH_LONG).show();
+            int idColIndex = gimmeID.getColumnIndex(DatabaseHelper.REQUEST_ID_FLD);
+            int flagColIndex = gimmeID.getColumnIndex(DatabaseHelper.REQUEST_NOTIFICATION_FLAG_FLD);
+            int itemNameColIndex = gimmeID.getColumnIndex(DatabaseHelper.DONATION_ITEM_NAME_FLD);
 
-                        boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, "0");
-                        if (!gotIt)
+
+            while (gimmeID.moveToNext()) {
+                if (idColIndex != -1 && flagColIndex != -1) {
+                    String requestID = gimmeID.getString(idColIndex);
+                    String itemName = gimmeID.getString(itemNameColIndex);
+                    int notificationFlag = gimmeID.getInt(flagColIndex);
+
+                    if (notificationFlag == 1) {
+                        Toast.makeText(this, "Come get " + itemName + "!", Toast.LENGTH_LONG).show();
+
+                        boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, 0);
+                        if (!gotIt) {
                             Toast.makeText(this, "Failed to clear notification", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
-            } catch (Exception e) {
-                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error fetching data", Toast.LENGTH_LONG).show();
+        }
+        if (gimmeID != null) {
+            gimmeID.close();
         }
     }
+//            while (gimmeID.moveToNext()) {
+//                String requestID = gimmeID.getString(gimmeID.getColumnIndexOrThrow(DatabaseHelper.REQUEST_ID_FLD));
+//
+//                boolean check = foodLoopDB.checkNotifications(savedEmail);
+//                if (check) {
+//                    Toast.makeText(this, "COME GET YOUR STUFF! (Request ID: " + requestID + ")", Toast.LENGTH_LONG).show();
+//
+//                    boolean gotIt = foodLoopDB.updateNotificationFlag(requestID, "0");
+//                    if (!gotIt)
+//                        Toast.makeText(this, "Failed to clear notification", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            gimmeID.close();
+//        }
+//        else {
+//            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
     // #######################################################################################
     // MICHAEL'S PAGES
     public void toProfilePage(View view) {
         startActivity(new Intent(App_Home.this, Account_Profile.class));
     }
+
     public void toDonationHistoryPage(View view) {
         startActivity(new Intent(App_Home.this, Donation_History.class));
     }
+
     public void toRequestHistoryPage(View view) {
         startActivity(new Intent(App_Home.this, Request_History.class));
     }
@@ -74,9 +105,11 @@ public class App_Home extends AppCompatActivity {
     public void toActiveDonationsPage(View view) {
         startActivity(new Intent(App_Home.this, Donation_Active.class));
     }
+
     public void toActiveRequestsPage(View view) {
         startActivity(new Intent(App_Home.this, Request_Active.class));
     }
+
     public void toRequestItemPage(View view) {
         startActivity(new Intent(App_Home.this, Request_Select.class));
     }
@@ -86,14 +119,17 @@ public class App_Home extends AppCompatActivity {
     public void toLogoutPage(View view) {
         startActivity(new Intent(App_Home.this, Account_LogOut.class));
     }
+
     // #######################################################################################
     // BELLE'S PAGES
     public void toDonorHomePage(View view) {
         startActivity(new Intent(App_Home.this, App_Home.class));
     }
+
     public void toDonationAddPage(View view) {
         startActivity(new Intent(App_Home.this, Donation_Add.class));
     }
+
     public void toEditDonationPage(View view) {
         startActivity(new Intent(App_Home.this, Donation_Edit.class));
     }
