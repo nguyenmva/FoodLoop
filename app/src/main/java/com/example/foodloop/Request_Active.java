@@ -60,8 +60,8 @@ public class Request_Active extends AppCompatActivity {
             while (requestCursor.moveToNext()) {
 
                 String id = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
-                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
-//                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_STATUS_FLD));
+//                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
+                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_STATUS_FLD));
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD));
 
@@ -74,6 +74,5 @@ public class Request_Active extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         Adapter_Request_Active adapter = new Adapter_Request_Active(requestList, this);
         rv.setAdapter(adapter);
-
     }
 }

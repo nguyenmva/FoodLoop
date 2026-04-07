@@ -284,12 +284,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    //Complete Request
+    //Complete Request & Update Status (Request & Donation)
     public boolean completeRequest(int requestID) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + REQUEST_TABLE +
                 " SET " + REQUEST_STATUS_FLD + " = 'Complete' " +
                 "WHERE " + REQUEST_ID_FLD + " = " + requestID);
+
+        db.execSQL("UPDATE " + DONATION_TABLE +
+                " SET " + DONATION_STATUS_FLD + " = 'Complete' " +
+                "WHERE " + DONATION_ID_FLD + " = (" +
+                    "SELECT " + DONATION_ID_FLD +
+                    " FROM " + REQUEST_TABLE +
+                    " WHERE " + REQUEST_ID_FLD + " = " + requestID + ")"
+            );
         return true;
     }
 
@@ -396,21 +404,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
                 "SELECT " +
-                        "R." + REQUEST_ID_FLD + ", " +
-                        "D." + DONATION_ID_FLD + ", " +
-                        "D." + DONATION_STATUS_FLD + ", " +
-                        "D." + DONATION_ITEM_NAME_FLD + ", " +
-                        "D." + DONATION_CATEGORY_FLD + ", " +
-                        "D." + DONATION_QUANTITY_FLD + ", " +
-                        "D." + DONATION_PRICE_FLD + ", " +
-                        "U." + USER_NAME_FLD + ", " +
-                        "R." + REQUEST_LOCATION_FLD + " " +
-                        "FROM " + REQUEST_TABLE + " R " +
-                        "JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + " " +
-                        "JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
-                        "WHERE U." + USER_EMAIL_FLD + " = ? " +
-                        "AND (R." + REQUEST_STATUS_FLD + " != 'Rejected' OR R." + REQUEST_STATUS_FLD + " IS NULL) " +
-                        "AND (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved')",
+                        "R." + REQUEST_ID_FLD + ", " + "D." + DONATION_ID_FLD + ", " +
+                        "R." + REQUEST_STATUS_FLD + ", " + "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "D." + DONATION_CATEGORY_FLD + ", " + "D." + DONATION_QUANTITY_FLD + ", " +
+                        "D." + DONATION_PRICE_FLD + ", " + "U." + USER_NAME_FLD + ", " + "R." + REQUEST_LOCATION_FLD +
+                        " FROM " + REQUEST_TABLE + " R " +
+                        " JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
+                        " JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD +
+                        " WHERE U." + USER_EMAIL_FLD + " = ? " +
+                        " AND (R." + REQUEST_STATUS_FLD + " IS NULL OR LOWER(R." + REQUEST_STATUS_FLD + ") != 'complete')",
                 new String[]{userEmail}
         );
     }
@@ -425,7 +427,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " FROM " + REQUEST_TABLE + " AS R" +
                         " JOIN " + DONATION_TABLE + " AS D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
                         " JOIN " + USERS_TABLE + " AS U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD +
-                        " WHERE (D." + DONATION_STATUS_FLD + " = 'Completed' OR D." + DONATION_STATUS_FLD + " = 'Rejected')" +
+                        " WHERE LOWER(R." + REQUEST_STATUS_FLD + ") = 'complete' " +
                         " AND U." + USER_EMAIL_FLD + " = ?",
                 new String[]{email}
         );
@@ -526,7 +528,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
 
                         "WHERE Donor." + USER_EMAIL_FLD + " = ? " +
-                        "AND (R." + REQUEST_STATUS_FLD + " IS NULL OR R." + REQUEST_STATUS_FLD + " != 'Rejected')",
+                        "AND (R." + REQUEST_STATUS_FLD + " IS NULL OR LOWER(R." + REQUEST_STATUS_FLD + ") IN ('pending','approved'))",
 
                 new String[]{userEmail}
         );

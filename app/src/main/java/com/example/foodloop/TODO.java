@@ -8,16 +8,11 @@ LAST UPDATED: 2026/04/05, 1:00 AM.
 ## Donations ##
 
 ## Requests ##
-TODO: Add "Complete" button to request status recycler.
-
 
 ## Adapter/Recycler ##
 
-
 ## DatabaseHelper ##
 
-
 ## General ##
-
 
  */
