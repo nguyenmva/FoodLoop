@@ -12,8 +12,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnActDonations;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,52 +22,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btnActDonations = findViewById(R.id.btnToManageDonations);
     }
 
-    // #######################################################################################
-    // MICHAEL'S PAGES
-    public void toCreatePage(View view) {
-        startActivity(new Intent(MainActivity.this, Account_Create.class));
-    }
-    public void toProfilePage(View view) {
-        startActivity(new Intent(MainActivity.this, Account_Profile.class));
-    }
-    public void toEditPage(View view) {
-        startActivity(new Intent(MainActivity.this, Account_Edit.class));
-    }
-    public void toDonationHistoryPage(View view) {
-        startActivity(new Intent(MainActivity.this, Donation_History.class));
-    }
-    public void toRequestHistoryPage(View view) {
-        startActivity(new Intent(MainActivity.this, Request_History.class));
-    }
-    // #######################################################################################
-    // GIA'S PAGES
-    public void toActiveDonationsPage(View view) {
-        startActivity(new Intent(MainActivity.this, Donation_Active.class));
-    }
-    public void toActiveRequestsPage(View view) {
-        startActivity(new Intent(MainActivity.this, Request_Active.class));
-    }
-    // #######################################################################################
-    // NILESH'S PAGES
-    public void toLoginPage(View view) {
-        startActivity(new Intent(MainActivity.this, Account_LogIn.class));
-    }
-    public void toLogoutPage(View view) {
-        startActivity(new Intent(MainActivity.this, Account_LogOut.class));
-    }
-    // #######################################################################################
-    // BELLE'S PAGES
     public void toDonorHomePage(View view) {
-        startActivity(new Intent(MainActivity.this, App_Home.class));
-    }
-    public void toDonationAddPage(View view) {
-        startActivity(new Intent(MainActivity.this, Donation_Add.class));
+        startActivity(new Intent(MainActivity.this, Donation_Home.class));
     }
     public void toRequestHomePage(View view) {
         startActivity(new Intent(MainActivity.this, Request_Home.class));
+    }
+    public void toLogoutPage(View view) {
+        startActivity(new Intent(MainActivity.this, Account_LogOut.class));
     }
 
 }
