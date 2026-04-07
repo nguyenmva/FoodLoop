@@ -253,16 +253,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR UPDATING A DONATION'S STATUS
-//    public boolean updateDonationStatus(String donationID, String status) {
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//
-//        values.put(DONATION_STATUS_FLD, status);
-//
-//        int result = db.update(DONATION_TABLE, values, DONATION_ID_FLD + " = ?", new String[]{donationID});
-//        return result > 0;
-//    }
 
     //Approve Request, Reject the Others, Close Requests
     public boolean approveRequest(int requestID, int donationID) {
@@ -282,7 +272,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + DONATION_TABLE +
                 " SET " + DONATION_STATUS_FLD + " = 'Approved' " +
                 "WHERE " + DONATION_ID_FLD + " = " + donationID);
-
         return true;
     }
 
@@ -292,9 +281,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + REQUEST_TABLE +
                 " SET " + REQUEST_STATUS_FLD + " = 'Rejected' " +
                 "WHERE " + REQUEST_ID_FLD + " = " + requestID);
-
         return true;
     }
+
+    //Complete Request
+    public boolean completeRequest(int requestID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE " + REQUEST_TABLE +
+                " SET " + REQUEST_STATUS_FLD + " = 'Complete' " +
+                "WHERE " + REQUEST_ID_FLD + " = " + requestID);
+        return true;
+    }
+
 
     // ##################################################################################################################
     // FOR UPDATING A NOTIFICATION FLAG
@@ -415,18 +413,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "AND (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved')",
                 new String[]{userEmail}
         );
-        /*
-        SELECT Donations.Status, Donations.ItemName, Donations.Location
-        FROM Requests
-        JOIN Donations ON Requests.DonationID = Donations.DonationID
-        JOIN Users ON Requests.RequestorID = Users.UserID
-        WHERE Users.EmailAddress = ?
-
-        WHERE the email in the Users table matches the input string (from sharedPreferences),
-        Get the selected columns from selected tables (SELECT table1.columnC, table2.columnA)
-        Where UserIDs match on the Requests and Donation tables.
-        And where the UserIDs match on the Requests and the Users Table.
-         */
     }
 
     // GET REQUEST HISTORY - Gia
@@ -464,7 +450,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " WHERE " + REQUEST_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
     }
 
-    //Nilesh -Works
     public Cursor getDonationsWithDonorInfo(String itemSearch) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +

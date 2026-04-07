@@ -16,8 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 public class Request_View extends AppCompatActivity {
 
     TextView tvVRReqItem, tvVRDonor, tvVRCat, tvVRLoc, tvVRPrice, tvVRQty, tvVRStat;
-
     DatabaseHelper db;
+    int requestID;
+    String currentStatus;
+
 
 
     @Override
@@ -41,12 +43,8 @@ public class Request_View extends AppCompatActivity {
         tvVRStat = findViewById(R.id.tvVRStat);
 
         db = new DatabaseHelper(this);
-
-        String requestID = getIntent().getStringExtra("REQUEST_ID");
-
-        if (requestID != null) {
-            loadRequestDetails(requestID);
-        }
+        requestID = Integer.parseInt(getIntent().getStringExtra("REQUEST_ID"));
+        loadRequestDetails(String.valueOf(requestID));
     }
 
     private void loadRequestDetails(String requestID) {
@@ -59,17 +57,26 @@ public class Request_View extends AppCompatActivity {
             tvVRLoc.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD)));
             tvVRPrice.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_PRICE_FLD)));
             tvVRQty.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_QUANTITY_FLD)));
-            tvVRStat.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD)));
+//            tvVRStat.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD)));
+
+            currentStatus = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_STATUS_FLD));
+            tvVRStat.setText(currentStatus);
         }
 
         if (cursor != null) {
             cursor.close();
         }
-
-
     }
 
     public void confirmReceipt(View view) {
+        if (currentStatus.equals("Approved")) {
+            boolean updated = db.completeRequest(requestID);
+            if (updated) {
+                Toast.makeText(this, "Request marked as COMPLETE", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+
         Toast.makeText(this, "Confirmed Receipt of Item!", Toast.LENGTH_LONG).show();
         startActivity(new Intent(Request_View.this, Request_Home.class));
     }
