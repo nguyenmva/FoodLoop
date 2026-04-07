@@ -52,7 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REQUEST_PICKUP_DATE_FLD = "PickupDate";
     public static final String REQUEST_COLLECTION_TYPE_FLD = "CollectionType";
     public static final String REQUEST_LOCATION_FLD = "Location";
-    public static final String REQUEST_NOTIFICATION_FLAG_FLD = "NotificationFlag";;
+    public static final String REQUEST_NOTIFICATION_FLAG_FLD = "NotificationFlag";
+    ;
     public static final String REQUEST_NOTIFICATION_TEXT_FLD = "NotificationText";
     public static final String REQUEST_STATUS_FLD = "Status";
 
@@ -64,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ##################################################################################################################
     // CREATE THE TABLE ("SQL COMMAND " + TABLE_NAME + " (" + FIELD1_NAME DATATYPE," + "FIELD2_NAME DATATYPE)"
     @Override
-    public void onCreate(SQLiteDatabase db){
+    public void onCreate(SQLiteDatabase db) {
         // #######################################################
         // FOR ACCOUNTS
         db.execSQL("CREATE TABLE " + USERS_TABLE + " (" +
@@ -119,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + USERS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + DONATION_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + REQUEST_TABLE);
@@ -130,7 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // FOR CREATING A NEW ACCOUNT RECORD
     public boolean createAccount(String name, String street, String city, String province,
                                  String country, int countrySpinner, String postal, String phone,
-                                 String email, String password, String accountType, int accountTypeSpinner ){
+                                 String email, String password, String accountType, int accountTypeSpinner) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -155,7 +156,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ##################################################################################################################
     // FOR CREATING A DONATION RECORD
     public boolean createDonation(String itemName, int quantity, String category, int categorySpinner,
-                                  String expiryDate, String offerType, double price, String status, int donor){
+                                  String expiryDate, String offerType, double price, String status, int donor) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -176,7 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR CREATING A REQUEST RECORD
-    public boolean createRequest(int donationID, int requestorID, String pickupTime, int pickupTimeSpinner, String collectionType,String location){
+    public boolean createRequest(int donationID, int requestorID, String pickupTime, int pickupTimeSpinner, String collectionType, String location) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -188,8 +189,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(REQUEST_PICKUP_DATE_FLD, "2026-06-01");
         contentValues.put(REQUEST_COLLECTION_TYPE_FLD, collectionType);
         contentValues.put(REQUEST_LOCATION_FLD, location);
-            // PICKUP = DONOR'S CITY
-            // DELIVERY = RECIPIENT'S CITY
+        // PICKUP = DONOR'S CITY
+        // DELIVERY = RECIPIENT'S CITY
         contentValues.put(REQUEST_NOTIFICATION_FLAG_FLD, 0);
         contentValues.put(REQUEST_NOTIFICATION_TEXT_FLD, "No notification.");
 
@@ -200,7 +201,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ##################################################################################################################
     // FOR UPDATING AN ACCOUNT RECORD
     public boolean updateAccount(String name, String street, String city, String province, String country,
-                                 int countrySpinner, String postal, String phone, String email, String password){
+                                 int countrySpinner, String postal, String phone, String email, String password) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -223,7 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ##################################################################################################################
     // FOR EDITING A DONATION THAT IS ALREADY LISTED
     public boolean editDonation(int donationID, String itemName, int quantity, String category, int categorySpinner,
-                                String expiryDate, String offerType, double price){
+                                String expiryDate, String offerType, double price) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -294,6 +295,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return true;
     }
+
     // ##################################################################################################################
     // FOR UPDATING A NOTIFICATION FLAG
     public boolean updateNotificationFlag(String requestID, int notificationFlag) {
@@ -309,12 +311,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     // FOR CHECKING STUFF
-     public boolean checkEmailExists(String email) {
+    public boolean checkEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-        "SELECT *" +
-                " FROM " + USERS_TABLE +
-                " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
+                "SELECT *" +
+                        " FROM " + USERS_TABLE +
+                        " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
 
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
@@ -324,9 +326,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean checkLoginCredentials(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-        "SELECT *" +
-                " FROM " + USERS_TABLE +
-                " WHERE " + USER_EMAIL_FLD + "=? AND " + USER_PASSWORD_FLD + "=?", new String[]{email, password});
+                "SELECT *" +
+                        " FROM " + USERS_TABLE +
+                        " WHERE " + USER_EMAIL_FLD + "=? AND " + USER_PASSWORD_FLD + "=?", new String[]{email, password});
         boolean success = cursor.getCount() > 0;
         cursor.close();
         return success;
@@ -337,37 +339,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getUserDataByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + USERS_TABLE +
-                " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
+                "SELECT *" +
+                        " FROM " + USERS_TABLE +
+                        " WHERE " + USER_EMAIL_FLD + " = ?", new String[]{email});
     }
+
     public Cursor getUserDataByUserID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + USERS_TABLE +
-                " WHERE " + USER_ID_FLD + " = ?", new String[]{id});
+                "SELECT *" +
+                        " FROM " + USERS_TABLE +
+                        " WHERE " + USER_ID_FLD + " = ?", new String[]{id});
     }
+
     public Cursor getDonationByDonorID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + DONATION_TABLE +
-                " WHERE " + DONOR_ID_FLD + " = ?", new String[]{id});
+                "SELECT *" +
+                        " FROM " + DONATION_TABLE +
+                        " WHERE " + DONOR_ID_FLD + " = ?", new String[]{id});
     }
+
     public Cursor getDonationByRequestorID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + REQUEST_TABLE +
-                " WHERE " + REQUESTOR_ID_FLD + " = ?", new String[]{id});
+                "SELECT *" +
+                        " FROM " + REQUEST_TABLE +
+                        " WHERE " + REQUESTOR_ID_FLD + " = ?", new String[]{id});
     }
+
     public Cursor getDonationByDonationID(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + DONATION_TABLE +
-                " WHERE " + DONATION_ID_FLD + " = ?", new String[]{String.valueOf(id)});
+                "SELECT *" +
+                        " FROM " + DONATION_TABLE +
+                        " WHERE " + DONATION_ID_FLD + " = ?", new String[]{String.valueOf(id)});
     }
 
     public Cursor getActiveDonations(String userEmail) { // Shows only donations that have a request.
@@ -416,8 +422,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
                 "SELECT " +
+                        "R." + REQUEST_ID_FLD + ", " +         // Added for logic
+                        "D." + DONATION_ID_FLD + ", " +        // This was missing!
                         "D." + DONATION_STATUS_FLD + ", " +
-                        "D." + DONATION_ITEM_NAME_FLD + ", U." + USER_NAME_FLD + ", " +
+                        "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "D." + DONATION_CATEGORY_FLD + ", " +  // Added for View page
+                        "D." + DONATION_QUANTITY_FLD + ", " +  // Added for View page
+                        "D." + DONATION_PRICE_FLD + ", " +     // Added for View page
+                        "U." + USER_NAME_FLD + ", " +
                         "R." + REQUEST_LOCATION_FLD + " " +
                         "FROM " + REQUEST_TABLE + " R " +
                         "JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + " " +
@@ -465,12 +477,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return db.rawQuery(query, new String[]{"%" + itemSearch + "%"});
     }
+
     public Cursor getDonationByLocationSearch(String locationSearch) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + DONATION_TABLE +
-                " WHERE " + REQUEST_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
+                "SELECT *" +
+                        " FROM " + DONATION_TABLE +
+                        " WHERE " + REQUEST_LOCATION_FLD + " LIKE ?", new String[]{"%" + locationSearch + "%"});
     }
 
     //Nilesh -Works
@@ -482,19 +495,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ? OR U." + USER_CITY_FLD + " LIKE ? OR D." + DONATION_CATEGORY_FLD + " LIKE ?";
         return db.rawQuery(query, new String[]{"%" + itemSearch + "%", "%" + itemSearch + "%", "%" + itemSearch + "%"});
     }
-    public Cursor getAllAccounts(){
+
+    public Cursor getAllAccounts() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + USERS_TABLE, null);
+                "SELECT *" +
+                        " FROM " + USERS_TABLE, null);
     }
-    public Cursor getAllDonations(){
+
+    public Cursor getAllDonations() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + DONATION_TABLE, null);
+                "SELECT *" +
+                        " FROM " + DONATION_TABLE, null);
     }
-    public Cursor getAllAvailableDonations(){
+
+    public Cursor getAllAvailableDonations() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
                 " FROM " + DONATION_TABLE + " D" +
@@ -502,11 +518,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " WHERE D." + DONATION_STATUS_FLD + " IN ('Available', 'Pending', NULL)";
         return db.rawQuery(query, null);
     }
-    public Cursor getAllRequests(){
+
+    public Cursor getAllRequests() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-        "SELECT *" +
-                " FROM " + REQUEST_TABLE, null);
+                "SELECT *" +
+                        " FROM " + REQUEST_TABLE, null);
     }
 
     public Cursor getAllDonationsFromCurrentUser(String userEmail) {
@@ -571,5 +588,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert(REQUEST_TABLE, null, values);
         return result != -1;
+    }
+
+    public Cursor getRequestDetailsById(String requestID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT " +
+                "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "D." + DONATION_CATEGORY_FLD + ", " +
+                        "D." + DONATION_QUANTITY_FLD + ", " +
+                        "D." + DONATION_PRICE_FLD + ", " +
+                        "D." + DONATION_STATUS_FLD + ", " +
+                        "R." + REQUEST_LOCATION_FLD + ", " +
+                        "U." + USER_NAME_FLD + " AS DonorName " +
+                        "FROM " + REQUEST_TABLE + " R " +
+                        "JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + " " +
+                        "JOIN " + USERS_TABLE + " U ON D." + DONOR_ID_FLD + " = U." + USER_ID_FLD + " " +
+                        "WHERE R." + REQUEST_ID_FLD + " = ?",
+                new String[]{requestID});
     }
 }
