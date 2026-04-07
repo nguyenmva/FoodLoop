@@ -104,16 +104,16 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
 
             btnNotify.setOnClickListener(v -> {
                 Toast.makeText(adapter.context, "Reminder Sent!", Toast.LENGTH_SHORT).show();
-//                int currentPos = getAbsoluteAdapterPosition();
-//                if (currentPos != RecyclerView.NO_POSITION) {
-//                    String donationID = adapter.data.get(currentPos)[0];
-//                    boolean success = adapter.foodLoopDB.updateNotificationFlag(requestID,"1");
-//
-//                    if (!success) //Notify update success/fail
-//                        Toast.makeText(adapter.context, "Failed to update status", Toast.LENGTH_SHORT).show();
-//
-//                    adapter.notifyItemChanged(currentPos);
-//                }
+                int currentPos = getAbsoluteAdapterPosition();
+                if (currentPos != RecyclerView.NO_POSITION) {
+                    String requestID = adapter.data.get(currentPos)[4];
+                    boolean success = adapter.foodLoopDB.updateNotificationFlag(requestID,1);
+
+                    if (!success) //Notify update success/fail
+                        Toast.makeText(adapter.context, "Failed to update status", Toast.LENGTH_SHORT).show();
+
+                    adapter.notifyItemChanged(currentPos);
+                }
             });
 
             btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -133,12 +133,6 @@ public class Adapter_Donate extends RecyclerView.Adapter<Adapter_Donate.ViewHold
                     }
                 }
             });
-
-
-//                    SharedPreferences preferences = adapter.context.getSharedPreferences("savedDonationID", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = preferences.edit();
-//                    editor.putInt("id_Donation", 1); //Edit Donations page
-//                    editor.apply();
 
             spinnerRequest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
