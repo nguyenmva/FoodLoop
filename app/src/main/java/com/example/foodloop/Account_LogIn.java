@@ -222,7 +222,7 @@ public class Account_LogIn extends AppCompatActivity {
                 }
                 editorRememberMe.apply();
 
-                Toast.makeText(Account_LogIn.this, "Log in Successful!!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(Account_LogIn.this, "Log in Successful!!!", Toast.LENGTH_SHORT).show();
                 Cursor userTypeCursor = foodLoopDB.getUserDataByEmail(userEmail);
 //                if (userTypeCursor != null) {
 //                    if (userTypeCursor.moveToFirst()) {

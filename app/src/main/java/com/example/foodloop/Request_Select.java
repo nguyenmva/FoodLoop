@@ -52,9 +52,7 @@ public class Request_Select extends AppCompatActivity {
             loadItems(query);
         });
 
-        btnHome.setOnClickListener(v -> {
-            startActivity(new Intent(Request_Select.this, App_Home.class));
-        });
+        btnHome.setOnClickListener(v -> startActivity(new Intent(Request_Select.this, App_Home.class)));
 
         recyclerView.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
 
@@ -69,20 +67,20 @@ public class Request_Select extends AppCompatActivity {
             android.util.Log.d("SEARCH_DEBUG", "Items found: " + getAllCursor.getCount());
             while (getAllCursor.moveToNext()) {
                 String name = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                String category = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_CATEGORY_FLD));
                 String expiry = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_EXPIRY_DATE_FLD));
                 String qty = String.valueOf(getAllCursor.getInt(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_QUANTITY_FLD)));
                 String location = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.USER_CITY_FLD));
-                String type = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));;
+                String type = getAllCursor.getString(getAllCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));
 
-                donationList.add(new String[]{name, expiry, qty, location, type});
+                donationList.add(new String[]{name,category, expiry, qty, location, type});
             }
             getAllCursor.close();
         }
         else {
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
             android.util.Log.d("SEARCH_DEBUG", "Cursor is NULL");
         }
-
-        Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
         adapter = new Adapter_Request(donationList);
         recyclerView.setAdapter(adapter);
     }
@@ -99,9 +97,11 @@ public class Request_Select extends AppCompatActivity {
                 String expiry = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_EXPIRY_DATE_FLD));
                 String qty = String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_QUANTITY_FLD)));
                 String location = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.USER_CITY_FLD));
-                String type = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));;
+                String type = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_OFFER_TYPE_FLD));
+                String id = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ID_FLD));
 
-                donationList.add(new String[]{name, expiry, qty, location, type});
+
+                donationList.add(new String[]{name, expiry, qty, location, type, id});
             }
             cursor.close();
         }

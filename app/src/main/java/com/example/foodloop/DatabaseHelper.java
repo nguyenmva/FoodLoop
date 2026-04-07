@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ##################################################################################################################
     public DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     // ##################################################################################################################
@@ -552,5 +552,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
                         " JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD +
                         " WHERE U." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+    }
+
+    public boolean submitPickUpRequest(String donationID, String userEmail, String method) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(DONATION_ID_FLD, donationID);
+        values.put(REQUESTOR_ID_FLD, userEmail);
+        values.put(REQUEST_COLLECTION_TYPE_FLD, method);
+        values.put(REQUEST_STATUS_FLD, "Pending"); //DEFAULT UNTIL APPROVED
+        values.put(REQUEST_NOTIFICATION_FLAG_FLD, 0);
+
+        long result = db.insert(REQUEST_TABLE, null, values);
+        return result != -1;
     }
 }
