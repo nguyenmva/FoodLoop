@@ -9,17 +9,17 @@
     tools:context=".SplashScreen">
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/imgSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="64dp"
         android:contentDescription="@string/imgDesc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/splash2" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/imgLogoSplash"
         android:layout_width="199dp"
         android:layout_height="187dp"
         android:layout_gravity="center"
