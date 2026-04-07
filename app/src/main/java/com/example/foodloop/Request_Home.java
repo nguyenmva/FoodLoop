@@ -1,6 +1,8 @@
 package com.example.foodloop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,25 @@ public class Request_Home extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void toActiveRequestsPage(View view) {
+        startActivity(new Intent(Request_Home.this, Request_Active.class));
+    }
+
+    public void toRequestItemPage(View view) {
+        startActivity(new Intent(Request_Home.this, Request_Select.class));
+    }
+
+    public void toLogoutPage(View view) {
+        startActivity(new Intent(Request_Home.this, Account_LogOut.class));
+    }
+
+    public void toProfilePage(View view) {
+        startActivity(new Intent(Request_Home.this, Account_Profile.class));
+    }
+
+    public void toRequestHistoryPage(View view) {
+        startActivity(new Intent(Request_Home.this, Request_History.class));
+    }
+
 }
