@@ -460,8 +460,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
                 " FROM " + DONATION_TABLE + " D" +
                 " JOIN " + USERS_TABLE + " U ON D." + DONOR_ID_FLD + " = U." + USER_ID_FLD +
-                " WHERE D." + DONATION_ITEM_NAME_FLD + " LIKE ? OR U." + USER_CITY_FLD + " LIKE ? OR D." + DONATION_CATEGORY_FLD + " LIKE ?";
-        return db.rawQuery(query, new String[]{"%" + itemSearch + "%", "%" + itemSearch + "%", "%" + itemSearch + "%"});
+                " WHERE (D." + DONATION_STATUS_FLD + " IS NULL OR D." + DONATION_STATUS_FLD + " = 'Pending')" +
+                " AND (D." + DONATION_ITEM_NAME_FLD + " LIKE ? OR U." + USER_CITY_FLD + " LIKE ? OR D." + DONATION_CATEGORY_FLD + " LIKE ?)";
+
+        String wildCard = "%" + itemSearch + "%";
+        return db.rawQuery(query, new String[]{wildCard, wildCard, wildCard});
     }
 
     public Cursor getAllAccounts() {
@@ -480,10 +483,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllAvailableDonations(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT D.*, U." + USER_NAME_FLD + ", U." + USER_CITY_FLD +
+        String query = "SELECT D.*, U." + USER_CITY_FLD +
                 " FROM " + DONATION_TABLE + " D" +
                 " JOIN " + USERS_TABLE + " U ON D." + DONOR_ID_FLD + " = U." + USER_ID_FLD +
-                " WHERE D." + DONATION_STATUS_FLD + " IN ('Available', 'Pending', NULL)" +
+                " WHERE (D." + DONATION_STATUS_FLD + " IS NULL OR D." + DONATION_STATUS_FLD + " = 'Pending')" +
                 " AND U." + USER_EMAIL_FLD + " != ?";
         return db.rawQuery(query, new String[]{email});
     }
