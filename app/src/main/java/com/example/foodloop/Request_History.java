@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -57,6 +58,8 @@ public class Request_History extends AppCompatActivity {
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
                 String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow("Status"));
                 String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD));
+
+                Log.d("DEBUG", "Request Status = " + status);
 
                 requestHistory.add(new String[]{itemName, status, location});
             }
