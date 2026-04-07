@@ -65,7 +65,7 @@ public class Request_History extends AppCompatActivity {
 
         rv = findViewById(R.id.rvReqHistTrack);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        Adapter_Universal adapter = new Adapter_Universal(requestHistory, this, "RequestHistory");
+        Adapter_Historical adapter = new Adapter_Historical(requestHistory, this, "RequestHistory");
         rv.setAdapter(adapter);
 
     }

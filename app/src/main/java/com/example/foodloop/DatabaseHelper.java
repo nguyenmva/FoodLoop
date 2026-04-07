@@ -417,7 +417,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(
                 "SELECT " +
                         "D." + DONATION_STATUS_FLD + ", " +
-                        "D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "D." + DONATION_ITEM_NAME_FLD + ", U." + USER_NAME_FLD + ", " +
                         "R." + REQUEST_LOCATION_FLD + " " +
                         "FROM " + REQUEST_TABLE + " R " +
                         "JOIN " + DONATION_TABLE + " D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + " " +

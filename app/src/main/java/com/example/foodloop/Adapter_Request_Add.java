@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class Adapter_Request extends RecyclerView.Adapter<Adapter_Request.ViewHolder> {
+public class Adapter_Request_Add extends RecyclerView.Adapter<Adapter_Request_Add.ViewHolder> {
 
     final List<String[]> data;
     private static final String[] options = {"Pickups", "Deliveries"};
 
-    public Adapter_Request(List<String[]> data) {
+    public Adapter_Request_Add(List<String[]> data) {
         this.data = data;
     }
 

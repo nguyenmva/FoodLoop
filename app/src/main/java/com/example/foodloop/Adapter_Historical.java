@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.*;
 
-public class Adapter_Universal extends RecyclerView.Adapter<Adapter_Universal.ViewHolder> {
+public class Adapter_Historical extends RecyclerView.Adapter<Adapter_Historical.ViewHolder> {
 
     private ArrayList<String[]> data;
     String mode;
     Context context;
     DatabaseHelper foodLoopDB;
 
-    public Adapter_Universal(ArrayList<String[]> data, Context context, String mode) {
+    public Adapter_Historical(ArrayList<String[]> data, Context context, String mode) {
         this.data = data;
         this.context = context;
         this.mode = mode;
@@ -27,25 +27,16 @@ public class Adapter_Universal extends RecyclerView.Adapter<Adapter_Universal.Vi
 
     @NonNull
     @Override
-    public Adapter_Universal.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Adapter_Historical.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.item_universal, parent, false);
-        return new Adapter_Universal.ViewHolder(v);
+        View v = layoutInflater.inflate(R.layout.item_historical, parent, false);
+        return new Adapter_Historical.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_Universal.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adapter_Historical.ViewHolder holder, int position) {
         String[] item = data.get(position);
         switch (mode) {
-            case "ActiveRequest":
-                //Values: Item, Status, Location
-                holder.tvItem.setText(item[0]);
-                holder.tvStatus.setText(item[1]);
-                holder.tvLocation.setText(item[2]);
-
-                holder.tvDateRequested.setVisibility(View.GONE);
-                holder.tvRequestor.setVisibility(View.GONE);
-                break;
             case "RequestHistory":
                 //Values: Date Requested, Item, Location
                 holder.tvDateRequested.setText(item[0]);

@@ -67,7 +67,7 @@ public class Donation_History extends AppCompatActivity {
 
         rv = findViewById(R.id.rvDonHistTrack);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        Adapter_Universal adapter = new Adapter_Universal(donationHistory, this, "DonationHistory");
+        Adapter_Historical adapter = new Adapter_Historical(donationHistory, this, "DonationHistory");
         rv.setAdapter(adapter);
     }
 

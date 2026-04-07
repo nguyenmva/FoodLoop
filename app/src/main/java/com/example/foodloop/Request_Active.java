@@ -60,16 +60,17 @@ public class Request_Active extends AppCompatActivity {
             while (requestCursor.moveToNext()) {
                 String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_STATUS_FLD));
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                String donor = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.USER_NAME_FLD));
                 String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD));
 
-                requestList.add(new String[]{itemName, status, location});
+                requestList.add(new String[]{itemName, status, donor, location});
             }
             requestCursor.close();
         }
 
         rv = findViewById(R.id.rvActiveRequest);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        Adapter_Universal adapter = new Adapter_Universal(requestList, this, "ActiveRequest");
+        Adapter_Request_Active adapter = new Adapter_Request_Active(requestList, this);
         rv.setAdapter(adapter);
 
     }

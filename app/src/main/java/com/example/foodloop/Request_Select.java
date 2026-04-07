@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class Request_Select extends AppCompatActivity {
     static List<String[]> donationList = new ArrayList<>();
     private DatabaseHelper foodLoopDB;
     RecyclerView recyclerView;
-    Adapter_Request adapter;
+    Adapter_Request_Add adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +80,7 @@ public class Request_Select extends AppCompatActivity {
             Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
             android.util.Log.d("SEARCH_DEBUG", "Cursor is NULL");
         }
-        adapter = new Adapter_Request(donationList);
+        adapter = new Adapter_Request_Add(donationList);
         recyclerView.setAdapter(adapter);
     }
 
@@ -109,7 +108,7 @@ public class Request_Select extends AppCompatActivity {
             android.util.Log.d("SEARCH_DEBUG", "Cursor is NULL");
             Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
         }
-        adapter = new Adapter_Request(donationList);
+        adapter = new Adapter_Request_Add(donationList);
         recyclerView.setAdapter(adapter);
     }
 
