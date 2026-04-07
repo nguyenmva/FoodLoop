@@ -4,25 +4,19 @@ Just a project-wide overview to-do stuff and other notes. Attached to nothing. D
 LAST UPDATED: 2026/04/05, 1:00 AM.
 
 ## Accounts ##
-TODO: Can users change their account type in edit profile?
 
 ## Donations ##
-TODO: Add "send reminders" button function to Active Donations page
-    -- consider the pick up time and date enumerated in request
 TODO: Fix calendar in add/edit donation pages
     -- Bug: Date can be a number of any length when making a new donation.
 
 ## Requests ##
-TODO: Move Collection Type, Time Slot to Requestor
 TODO: Update RequestItem adapter class to Universal - Nilesh
-TODO: Search location on RequestItem - Nilesh
 TODO: Finish request pages
-TODO: Connect edit request info
-TODO: Finish edit request info
 TODO: Add "Complete" button to request status recycler.
-TODO: Set up notifications (plus points)
-    -- Column for notification flag and text put into the Requests table - M
 
+SCRAPPED?
+    TODO: Connect edit request info
+    TODO: Finish edit request info
 
 ## Adapter/Recycler ##
 
