@@ -369,6 +369,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " FROM " + DONATION_TABLE +
                 " WHERE " + DONATION_ID_FLD + " = ?", new String[]{String.valueOf(id)});
     }
+
     public Cursor getActiveDonations(String userEmail) { // Shows only donations that have a request.
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
@@ -378,15 +379,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "U." + USER_NAME_FLD + " AS RequestorName, " +
                         "R." + REQUEST_ID_FLD + " AS RequestID " +
                         "FROM " + DONATION_TABLE + " D " +
-                        "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
+
+                        // Latest NON‑rejected request
+                        "JOIN " + REQUEST_TABLE + " R ON R." + REQUEST_ID_FLD + " = (" +
+                        "   SELECT MAX(" + REQUEST_ID_FLD + ") FROM " + REQUEST_TABLE +
+                        "   WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
+                        "   AND (" + REQUEST_STATUS_FLD + " != 'Rejected' OR " + REQUEST_STATUS_FLD + " IS NULL)" +
+                        ") " +
+
                         "JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE R." + REQUEST_ID_FLD + " = (" +
-                        "SELECT MAX(" + REQUEST_ID_FLD + ") " + "FROM " + REQUEST_TABLE + " " +
-                        "WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD + ") " +
-                        "AND (R." + REQUEST_STATUS_FLD + " = 'Approved' OR R." + REQUEST_STATUS_FLD + " = '' OR R." + REQUEST_STATUS_FLD + " IS NULL) " +
-                        "AND Donor." + USER_EMAIL_FLD + " = ?",
-                new String[]{userEmail});
+                        "WHERE Donor." + USER_EMAIL_FLD + " = ?",
+                new String[]{userEmail}
+        );
     }
 
     // GET DONATION HISTORY - Gia
@@ -508,11 +513,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "U." + USER_NAME_FLD + " AS RequestorName, " +
                         "R." + REQUEST_ID_FLD + " AS RequestID " +
                         "FROM " + DONATION_TABLE + " D " +
-                        "LEFT JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
+
+                        // Latest NON‑rejected request
+                        "LEFT JOIN " + REQUEST_TABLE + " R ON R." + REQUEST_ID_FLD + " = (" +
+                        "   SELECT MAX(" + REQUEST_ID_FLD + ") FROM " + REQUEST_TABLE +
+                        "   WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
+                        "   AND (" + REQUEST_STATUS_FLD + " != 'Rejected' OR " + REQUEST_STATUS_FLD + " IS NULL)" +
+                        ") " +
+
                         "LEFT JOIN " + USERS_TABLE + " U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD + " " +
                         "LEFT JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE (D." + DONATION_STATUS_FLD + " = 'Pending' OR D." + DONATION_STATUS_FLD + " = 'Approved') " +
-                        "AND Donor." + USER_EMAIL_FLD + " = ?", new String[]{userEmail});
+                        "WHERE Donor." + USER_EMAIL_FLD + " = ?",
+                new String[]{userEmail}
+        );
     }
 
     //NIlesh Test
