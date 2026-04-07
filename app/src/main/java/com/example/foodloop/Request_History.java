@@ -54,11 +54,11 @@ public class Request_History extends AppCompatActivity {
         Cursor requestCursor = foodLoopDB.getRequestHistory(savedEmail);
         if (requestCursor != null) {
             while (requestCursor.moveToNext()) {
-                String dateRequested = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_EXPIRY_DATE_FLD));
                 String itemName = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.DONATION_ITEM_NAME_FLD));
+                String status = requestCursor.getString(requestCursor.getColumnIndexOrThrow("Status"));
                 String location = requestCursor.getString(requestCursor.getColumnIndexOrThrow(DatabaseHelper.REQUEST_LOCATION_FLD));
 
-                requestHistory.add(new String[]{dateRequested, itemName, location});
+                requestHistory.add(new String[]{itemName, status, location});
             }
             requestCursor.close();
         }

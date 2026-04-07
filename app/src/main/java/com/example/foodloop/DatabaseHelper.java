@@ -404,18 +404,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getDonationHistory(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT R." + REQUEST_STATUS_FLD + " AS RequestStatus, " +
-                        "D." + DONATION_ITEM_NAME_FLD + ", " +
-                        "Requestor." + USER_NAME_FLD + " AS RequestorName " +
+                "SELECT D." + DONATION_ITEM_NAME_FLD + ", " +         //item [0]
+                        "R." + REQUEST_STATUS_FLD + " AS RequestStatus, " + //status [1]
+                        "R." + REQUEST_LOCATION_FLD + ", " +          //location [2]
+                        "Requestor." + USER_NAME_FLD + " AS RequestorName " + //requestor [3]
                         "FROM " + DONATION_TABLE + " D " +
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
                         "WHERE (R." + REQUEST_STATUS_FLD + " IN ('Rejected', 'Completed') " +
-                        "OR D." + DONATION_STATUS_FLD + " IN ('Rejected', 'Completed'))" +
+                        "OR D." + DONATION_STATUS_FLD + " IN ('Rejected', 'Completed')) " +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
                 new String[]{email});
-
     }
 
     public Cursor getActiveRequests(String userEmail) {
@@ -457,14 +457,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getRequestHistory(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
-                "SELECT Donations." + DONATION_EXPIRY_DATE_FLD + ", " +
-                        "Donations." + DONATION_ITEM_NAME_FLD + ", " +
-                        "Requests." + REQUEST_LOCATION_FLD +
-                        " FROM " + REQUEST_TABLE +
-                        " JOIN " + DONATION_TABLE + " ON Requests." + DONATION_ID_FLD + " = Donations." + DONATION_ID_FLD +
-                        " JOIN " + USERS_TABLE + " ON Requests." + REQUESTOR_ID_FLD + " = Users." + USER_ID_FLD +
-                        " WHERE (Donations." + DONATION_STATUS_FLD + " = 'Completed' OR Donations." + DONATION_STATUS_FLD + " = 'Rejected')" +
-                        " AND Users." + USER_EMAIL_FLD + " = ?", new String[]{email});
+                "SELECT D." + DONATION_ITEM_NAME_FLD + ", " +
+                        "R." + REQUEST_STATUS_FLD + ", " +
+                        "R." + REQUEST_LOCATION_FLD +
+                        " FROM " + REQUEST_TABLE + " AS R" +
+                        " JOIN " + DONATION_TABLE + " AS D ON R." + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
+                        " JOIN " + USERS_TABLE + " AS U ON R." + REQUESTOR_ID_FLD + " = U." + USER_ID_FLD +
+                        " WHERE (D." + DONATION_STATUS_FLD + " = 'Completed' OR D." + DONATION_STATUS_FLD + " = 'Rejected')" +
+                        " AND U." + USER_EMAIL_FLD + " = ?",
+                new String[]{email}
+        );
     }
 
     public Cursor getDonationByItemSearch(String itemSearch) {
@@ -536,7 +538,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "R." + REQUEST_ID_FLD + " AS RequestID " +
                         "FROM " + DONATION_TABLE + " D " +
 
-                        // Latest NON‑rejected request
                         "LEFT JOIN " + REQUEST_TABLE + " R ON R." + REQUEST_ID_FLD + " = (" +
                         "   SELECT MAX(" + REQUEST_ID_FLD + ") FROM " + REQUEST_TABLE +
                         "   WHERE " + DONATION_ID_FLD + " = D." + DONATION_ID_FLD +
