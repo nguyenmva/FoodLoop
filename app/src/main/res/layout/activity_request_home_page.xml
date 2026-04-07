@@ -90,7 +90,7 @@
         android:layout_width="180dp"
         android:layout_height="70dp"
         android:backgroundTint="#35a1d3"
-        android:text="@string/btnEdtReqInfo"
+        android:text="@string/btnViewReqInfo"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

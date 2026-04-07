@@ -114,6 +114,10 @@ public class App_Home extends AppCompatActivity {
         startActivity(new Intent(App_Home.this, Request_Select.class));
     }
 
+    public void toViewRequestPage(View view) {
+        startActivity(new Intent(App_Home.this, Request_View.class));
+    }
+
     // #######################################################################################
     // NILESH'S PAGES
     public void toLogoutPage(View view) {

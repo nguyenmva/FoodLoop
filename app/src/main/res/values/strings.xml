@@ -123,6 +123,17 @@
     <!-- Add Request Item -->
     <string name="txtReqItemTitle">Food Request and Search</string>
 
+    <!-- View Request Item -->
+    <string name="txtViewReqTitle">View Request Information</string>
+    <string name="txtVwRqItem">Item Requested</string>
+    <string name="txtVwRqDonor">Donor</string>
+    <string name="txtVwRqCat">Category</string>
+    <string name="txtVwRqQty">Quantity</string>
+    <string name="txtVwRqLoc">Location</string>
+    <string name="txtVwRqPrc">Price</string>
+    <string name="txtVwRqDeliveryMethod">Has your item been delivered or picked up?</string>
+    <string name="btnReceived">Received</string>">
+
     <!-- =================================================================  -->
     <!-- BELLE   -->
     <!-- =================================================================  -->
@@ -142,7 +153,7 @@
     <!-- Request Home Page -->
     <string name="btnReqFd">REQUEST FOOD</string>
     <string name="btnReqDetails">Request Details</string>
-    <string name="btnEdtReqInfo">Edit Request Info</string>
+    <string name="btnViewReqInfo">View Request Info</string>
     <string name="btnReqStatus">Request Status</string>
     <string name="btnReqHist">Request History</string>
     <string name="btnReqVP">View Profile</string>
@@ -192,7 +203,7 @@
 
     <!-- =================================================================  -->
 
-<!--  Requestor Collection Options -->
+    <!--  Requestor Collection Options -->
     <string name="txtAvailTime1">Time Slot</string>
     <string name="txtCollection">Collection Type</string>
     <string-array name="Collection_Options">
@@ -217,7 +228,7 @@
     <string name="txtSecurity">Security</string>
     <string name="btnBack">Back</string>
 
-<!-- Added strings   -->
+    <!-- Added strings   -->
     <string name="btnSignUp2">Sign Up</string>
     <string name="txtInputReqItem">Search name or category...</string>
     <string name="btnHome">Home</string>
