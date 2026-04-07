@@ -397,7 +397,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "JOIN " + REQUEST_TABLE + " R ON D." + DONATION_ID_FLD + " = R." + DONATION_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Requestor ON R." + REQUESTOR_ID_FLD + " = Requestor." + USER_ID_FLD + " " +
                         "JOIN " + USERS_TABLE + " Donor ON D." + DONOR_ID_FLD + " = Donor." + USER_ID_FLD + " " +
-                        "WHERE R." + REQUEST_STATUS_FLD + " IN ('Rejected', 'Completed') " +
+                        "WHERE R." + REQUEST_STATUS_FLD + " IN ('Rejected', 'Complete') " +
                         "AND Donor." + USER_EMAIL_FLD + " = ?",
                 new String[]{email}
         );
